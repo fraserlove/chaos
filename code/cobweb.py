@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size': 16})
 rc('text', usetex=True)
 # Figure dpi
-dpi = 72
+dpi = 60
 
 def plot_cobweb(f, r, x0, nmax=40):
     """Make a cobweb plot.
@@ -16,7 +16,7 @@ def plot_cobweb(f, r, x0, nmax=40):
 
     """
     x = np.linspace(0, 1, 500)
-    fig = plt.figure(figsize=(450/dpi, 450/dpi), dpi=dpi)
+    fig = plt.figure(figsize=(300/dpi, 300/dpi), dpi=dpi)
     ax = fig.add_subplot(111)
 
     # Plot y = f(x) and y = x
@@ -33,18 +33,18 @@ def plot_cobweb(f, r, x0, nmax=40):
         py[n+1] = py[n]
 
     # Plot the path traced out by the iteration.
-    ax.plot(px, py, c='b', alpha=0.7)
+    ax.plot(px, py, c='r', alpha=0.4, lw=2)
 
     # Annotate and tidy the plot.
-    ax.minorticks_on()
-    ax.grid(which='minor', alpha=0.5)
-    ax.grid(which='major', alpha=0.5)
+    #ax.minorticks_on()
+    #ax.grid(which='minor', alpha=0.5)
+    #ax.grid(which='major', alpha=0.5)
     ax.set_aspect('equal')
     ax.set_xlabel('$x$')
-    ax.set_ylabel(f.latex_label)
+    ax.set_ylabel('$y$')
     ax.set_title('$x_0 = {:.1}, r = {:.2}$'.format(x0, r))
 
-    plt.savefig('./images/cobweb_{:.1}_{:.2}.png'.format(x0, r), dpi=dpi * 10)
+    plt.savefig('./images/cobweb_{:.1}_{:.2}.png'.format(x0, r), dpi=dpi * 10, bbox_inches='tight')
 
 class AnnotatedFunction:
     """A small class representing a mathematical function.
@@ -64,4 +64,4 @@ class AnnotatedFunction:
 # The logistic map, f(x) = rx(1-x).
 func = AnnotatedFunction(lambda x,r: r*x*(1-x), r'$rx(1-x)$')
 
-plot_cobweb(func, 2.0, 0.2)
+plot_cobweb(func, 2.0, 0.1)
