@@ -64,4 +64,4 @@ class AnnotatedFunction:
 # The logistic map, f(x) = rx(1-x).
 func = AnnotatedFunction(lambda x,r: r*x*(1-x), r'$rx(1-x)$')
 
-plot_cobweb(func, 2.0, 0.1)
+plot_cobweb(func, 3.2, 0.7)
