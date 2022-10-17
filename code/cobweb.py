@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size': 16})
 rc('text', usetex=True)
 # Figure dpi
-dpi = 60
+dpi = 70
 
-def plot_cobweb(f, r, x0, nmax=40):
+def plot_cobweb(f, r, x0, nmax=200):
     """Make a cobweb plot.
 
     Plot y = f(x; r) and y = x for 0 <= x <= 1, and illustrate the behaviour of
@@ -20,8 +20,8 @@ def plot_cobweb(f, r, x0, nmax=40):
     ax = fig.add_subplot(111)
 
     # Plot y = f(x) and y = x
-    ax.plot(x, f(x, r), c='#444444', lw=2)
-    ax.plot(x, x, c='#444444', lw=2)
+    ax.plot(x, f(x, r), c='#444444', alpha=0.6, lw=1)
+    ax.plot(x, x, c='#444444', alpha=0.6, lw=1)
 
     # Iterate x = f(x) for nmax steps, starting at (x0, 0).
     px, py = np.empty((2,nmax+1,2))
@@ -29,22 +29,26 @@ def plot_cobweb(f, r, x0, nmax=40):
     for n in range(1, nmax, 2):
         px[n] = px[n-1]
         py[n] = f(px[n-1], r)
+        ax.plot([px[n-1], px[n]], [py[n-1], py[n]], c='k', alpha=0.25, lw=1)
         px[n+1] = py[n]
         py[n+1] = py[n]
+        ax.plot([px[n], px[n+1]], [py[n], py[n+1]], c='k', alpha=0.25, lw=1)
 
     # Plot the path traced out by the iteration.
-    ax.plot(px, py, c='r', alpha=0.4, lw=2)
+    #ax.plot(px, py, c='k', alpha=0.5, lw=1)
 
     # Annotate and tidy the plot.
     #ax.minorticks_on()
     #ax.grid(which='minor', alpha=0.5)
     #ax.grid(which='major', alpha=0.5)
+    ax.set_xticks(np.arange(0, 1.2, 0.2))
+    ax.set_xticks(np.arange(0, 1.2, 0.2))
     ax.set_aspect('equal')
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
-    ax.set_title('$x_0 = {:.1}, r = {:.2}$'.format(x0, r))
+    #ax.set_title('$x_0 = {:.1}, r = {:.2}$'.format(x0, r))
 
-    plt.savefig('./images/cobweb_{:.1}_{:.2}.png'.format(x0, r), dpi=dpi * 10, bbox_inches='tight')
+    plt.savefig('./images/cobweb_{:.1}_{:.2}.pdf'.format(x0, r), dpi=dpi * 10, bbox_inches='tight')
 
 class AnnotatedFunction:
     """A small class representing a mathematical function.
@@ -64,4 +68,4 @@ class AnnotatedFunction:
 # The logistic map, f(x) = rx(1-x).
 func = AnnotatedFunction(lambda x,r: r*x*(1-x), r'$rx(1-x)$')
 
-plot_cobweb(func, 3.2, 0.7)
+plot_cobweb(func, 3.9, 0.1)
