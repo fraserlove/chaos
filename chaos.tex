@@ -95,10 +95,10 @@ Discrete dynamical systems are eveywhere in Mathematics. A discrete dynamical sy
 \end{exmp}
 
 \section{Orbits and Periodicity}
-Here we will introduce some elementary definitions that are central to our exploration into chaos in discrete dynamical systems. We will then apply these definitions to the simplest of discrete systems we have just introduced. The following definitions are adapted from Ruette, Section 1.2 \cite{ruette}.
+Here we will introduce some elementary definitions that are central to our exploration into chaos in discrete dynamical systems. We will then apply these definitions to the simplest of discrete systems we have just introduced. The following definitions are adapted from Ruette \cite[Section 1.2]{ruette}.
 
 \begin{defn}
-    Let $f: I \to I$ be a map. The \emph{orbit} or \emph{forward orbit} of $x$ under $f$ is the set $\mathcal{O}_f(x) = \mathcal{O}^+_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \cdots \rbrace$ of iterates of $x$ under $f$. If the map $f$ is invertible with $f^{-1}$ continuous then the \emph{backward orbit} of $x$ under $f$ is similarly defined as $\mathcal{O}^-_f(x) = \lbrace f^n(x) : n \leq 0 \rbrace = \lbrace x, f^{-1}(x), f^{-2}(x), \cdots \rbrace$.
+    Let $f: I \to I$ be a map. The \emph{orbit}, \emph{cycle} or \emph{forward orbit} of $x$ under $f$ is the set $\mathcal{O}_f(x) = \mathcal{O}^+_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \cdots \rbrace$ of iterates of $x$ under $f$. If the map $f$ is invertible with $f^{-1}$ continuous then the \emph{backward orbit} of $x$ under $f$ is similarly defined as $\mathcal{O}^-_f(x) = \lbrace f^n(x) : n \leq 0 \rbrace = \lbrace x, f^{-1}(x), f^{-2}(x), \cdots \rbrace$.
 \end{defn}
 
 \begin{defn}
@@ -114,7 +114,7 @@ Here we will introduce some elementary definitions that are central to our explo
 \end{defn}
 
 \begin{defn}
-    Let $f: I \to I$ be a map. A point $x \in I$ is \emph{periodic} if $f^n(x) = x$ for some $n \in \mathbb{N}$. The \emph{period} of a point $x$ is the least positive integer $p$ such that $f^p(x) = x$. If $x$ has a period of $p$ we say that $x$ is a period-$p$ point. Moreover, $f^n(x) = x \iff n = kp$ for some $k \in \mathbb{N}$ (i.e. $n$ is a multiple of $p$). Hence $\mathcal{O}_f(x) = \lbrace x, f(x), \cdots, f^{p-1}(x) \rbrace$ is a finite set of unique points.
+    Let $f: I \to I$ be a map. A point $x \in I$ is \emph{periodic} if $f^n(x) = x$ for some $n \in \mathbb{N}$. The \emph{period} of a point $x$ is the least positive integer $p$ such that $f^p(x) = x$. If $x$ has a period of $p$ we say that $x$ is a \emph{period-$p$} point. Moreover, $f^n(x) = x \iff n = kp$ for some $k \in \mathbb{N}$ (i.e. $n$ is a multiple of $p$). Hence $\mathcal{O}_f(x) = \lbrace x, f(x), \cdots, f^{p-1}(x) \rbrace$ is a finite set of unique points, called a \emph{p-cycle}.
 
 \end{defn}
 
@@ -158,7 +158,7 @@ These next two definitions will allow us to define the behaviour of a larger cla
 \end{exmp}
 
 \section{Stability of Periodic Points}
-The stability of periodic points is integral to the emergence of chaos in a discrete dynamical system. Periodic points that are stable attract nearby points and the system settles into a steady state. Unstable periodic points however cause nearby points to diverge and small pertubations can cascade into large differences. Here, we will define what it means for periodic points to be stable or unstable. The following results are adapted from Devaney, Section 1.4 \cite{devaney}.
+The stability of periodic points is integral to the emergence of chaos in a discrete dynamical system. Periodic points that are stable attract nearby points and the system settles into a steady state. Unstable periodic points however cause nearby points to diverge and small pertubations can cascade into large differences. Here, we will define what it means for periodic points to be stable or unstable. The following results are adapted from Devaney \cite[Section 1.4]{devaney}.
 
 \begin{defn}
     Let $x \in I$ be a periodic point with period $k$. The point $x$ is said to be \emph{hyperbolic} if $|(f^k)'(x)| \neq 1$.
@@ -219,7 +219,7 @@ Furthermore, we can similarly define the set of points that are repelled from an
 \end{exmp}
 
 \section{The Family of Logistic Maps} \label{sec:logistic_maps}
-Chaos can arise in the simplest of discrete systems. The family of logisitic maps given by $F_\mu(x) = \mu x(1-x)$ is a family of non-linear discrete systems which exibits chaotic phenomena contrary to its simplistic discrete character. Using the definitions and theorems we have developed above we can characterise the behaviour of this class of systems to identify how this chaotic behaviour arises. This section follows analysis performed by Devaney, Section 1.5 \cite{devaney} into the behaviour of these systems.
+Chaos can arise in the simplest of discrete systems. The family of logisitic maps given by $F_\mu(x) = \mu x(1-x)$ is a family of non-linear discrete systems which exibits chaotic phenomena contrary to its simplistic discrete character. Using the definitions and theorems we have developed above we can characterise the behaviour of this class of systems to identify how this chaotic behaviour arises. This section follows analysis performed by Devaney \cite[Section 1.5]{devaney} into the behaviour of these systems.
 
 \begin{prop} Let $F_\mu(x) = \mu x(1-x)$. \label{prop:logistic1}
     \begin{itemize}
@@ -293,7 +293,7 @@ Here the attracting fixed point at $x = x_\mu$ decays into a repellor and a peri
     \label{fig:cobweb_3.5_3.9}
 \end{figure}
 
-\section{Sharkovsky's Theorem and Type}
+\section{Sharkovsky's Theorem and Type}\label{sec:sharkovsky}
 Sharkovsky's theorem \cite{sharkovsky} is an hugely important theorem to chaotic dynamical systems. It states that in continous maps on the real numbers periodic points of all periods can occur and that the presense of a periodic point of given period implies the existence of other periods by a total ordering called \emph{Sharkovsky's Order}. First we will introduce a theorem that proves the existence of fixed points on closed intervals of the real numbers. This theorem is a simplified version of \emph{Brouwer's fixed-point theorem} \cite{brouwer}. The full theorem is used to prove the existence of fixed points when a continuous map is applied to compact, convex sets.
 \begin{thm} \label{thm:fixed-points}
     Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: I \to I$ is continuous. Then $f$ has a fixed point.
@@ -311,7 +311,7 @@ A similar fixed-point theorem that we shall use in a later is as follows. This p
     \end{proof}
 \end{thm}
 
-First we will prove a special case of Sharkovsky's theorem. This theorem was discovered by Li and Yorke in their paper \emph{'Period Three Implies Chaos'} \cite{li-yorke}. Now we can start to prove this special case of Sharkovsky's theorem by Li and Yorke. The proof below is adapted from work by Devaney, Chapter 1.10 \cite{devaney}.
+First we will prove a special case of Sharkovsky's theorem. This theorem was discovered by Li and Yorke in their paper \emph{'Period Three Implies Chaos'} \cite{li-yorke}, this was the first paper to use the term \emph{chaos} in a mathematical context. Now we can start to prove this special case of Sharkovsky's theorem by Li and Yorke. The proof below is adapted from work by Devaney \cite[Chapter 1.10]{devaney}.
 
 \begin{thm}\label{thm:period3chaos}
     Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: I \to I$ is continuous. If $f$ has a point of period three then $f$ has periodic points of all other periods.
@@ -336,7 +336,7 @@ This consequences of this theorem are remarkable. If you can find a point of per
     Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: I \to I$ is continuous. If $f$ has a periodic point of period $k$ then for all integers $l \rhd k$, $f$ has periodic points of period $l$.
 \end{thm}
 
-The proof of this theorem will be ommited since it is outwith the scope of this paper, however can be found here \cite{sharkovsky}. Hence from above and noticing the Sharkovsky ordering it can be seen that if $f$ has a periodic point whose period is not a power of two, then $f$ has infinitely many many periodic points. The converse statement also holds. If $f$ has finitely many periodic points then they all must have periods that are powers of two. This sort of behaviour was present in the logistic family with the period doubling bifurcations in Section \ref{sec:logistic_maps}. Furthermore the logistic maps perodicity follows the Sharkovsky's ordering in reverse. Furthermore when all periods are present and we have reached the end of Sharkovsky's ordering the system becomes chaotic. It can be seen that this theorem is a generalised of Theorem \ref{thm:period3chaos} discovered by Li and Yorke \cite{li-yorke} as period three is the greatest period in Sharkovsky's ordering hence its presense implies the existence of all other periods. It can be useful to catagorise maps defined on a closed interval based on their periods. This leads us to the next definition which is based on work by Ruette, Section 3.3 \cite{ruette}.
+The proof of this theorem will be ommited since it is outwith the scope of this paper, however can be found here \cite{sharkovsky}. Hence from above and noticing the Sharkovsky ordering it can be seen that if $f$ has a periodic point whose period is not a power of two, then $f$ has infinitely many many periodic points. The converse statement also holds. If $f$ has finitely many periodic points then they all must have periods that are powers of two. This sort of behaviour was present in the logistic family with the period doubling bifurcations in Section \ref{sec:logistic_maps}. Furthermore the logistic maps perodicity follows the Sharkovsky's ordering in reverse. Furthermore when all periods are present and we have reached the end of Sharkovsky's ordering the system becomes chaotic. It can be seen that this theorem is a generalised of Theorem \ref{thm:period3chaos} discovered by Li and Yorke \cite{li-yorke} as period three is the greatest period in Sharkovsky's ordering hence its presense implies the existence of all other periods. It can be useful to catagorise maps defined on a closed interval based on their periods. This leads us to the next definition which is based on work by Ruette, \cite[Section 3.3]{ruette}.
 
 \begin{defn} \label{def:type}
     Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: I \to I$ is continuous. Let $n \in \mathbb{N} \cup \left\lbrace 2^{\infty} \right\rbrace$. An interval map is of \emph{type} $n$ if the periods of periodic points of $f$ are the set $\left\lbrace m \in \mathbb{N} : m \unrhd n \right\rbrace$, where $\left\lbrace m \in \mathbb{N} : m \unrhd 2^\infty \right\rbrace$ means $\left\lbrace 2^k : k > 0 \right\rbrace$.
@@ -354,13 +354,35 @@ The proof of this theorem will be ommited since it is outwith the scope of this 
 
 \end{exmp}
 
-Sharkovsky subsequently proved that continous maps defined on intervals of the reals can constructed to be of any type \cite{sharkovsky} \cite{sharkovsky2}. In his proof he constructs orbits for odd periods, even periods then periods that conside of powers of two separately. However the construction to prove that continous interval maps of any odd type can be created is similar to a more general version of Example \ref{exmp:piecewise_sharkovsky}. This theorem is termed Sharkovsky's Realisation Theorem and is stated below. This theorem uses an elegant proof discovered by Alseda, Llibre, and Misiurewicz \cite{alm} and outlined by Burns and Hasselblatt here \cite{burns-hasselblatt} using a family of continous maps called the trunctated tent maps.
+Sharkovsky subsequently proved that continous maps defined on intervals of the reals can constructed to be of any type \cite{sharkovsky} \cite{sharkovsky2}. In his proof he constructs orbits for odd periods, even periods then periods that conside of powers of two separately. The construction to prove that continous interval maps of any odd type can be created is similar to a more general version of Example \ref{exmp:piecewise_sharkovsky}. This theorem is termed Sharkovsky's Realisation Theorem and is stated below. An elegant proof of this theorem will is also outlined below. This proof was discovered by Alseda, Llibre, and Misiurewicz \cite[Section 2.2]{alm} and outlined by Burns and Hasselblatt \cite[Section 7]{burns-hasselblatt} using a family of continous maps called the trunctated tent maps.
 
 \begin{thm}
     Every tail of the Sharkovsky order is the set of periods for some continuous map of an interval into itself.
     \begin{proof}
-        Let $T_h: [0, 1] \to [0, 1]$ where $T_h(x) = min(h, 1-2|x-1/2|)$ be the family of truncated tent maps with $0 \leq h < 1$.
+        Let $T_h: [0, 1] \to [0, 1]$ where $T_h(x) = \min(h, 1-2|x-1/2|)$ be the family of truncated tent maps with $h \in [0, 1]$ show in Figure \ref{fig:truncated_tent}. It is clear that $T_0$ has only one periodic point, a fixed point at $x = 0$, however $T_1$ has the period-3 orbit $\left\lbrace \frac{2}{7}, \frac{4}{7}, \frac{6}{7} \right\rbrace$ and hence has a periodic point for every period in the positive integers by Sharkovsky's Theorem. Hence,
+        \begin{enumerate}[(i)]
+            \item Any orbit $\mathcal{O}_{T_h} \subseteq [0, h)$ is also an orbit for $\mathcal O_{T_1}$ and any orbit $\mathcal{O}_{T_1} \subseteq [0, h]$ is also an orbit for $\mathcal{O}_{T_h}$.
+        \end{enumerate}
+        Now let $h(m) = \min \left\lbrace \max \mathcal{O}_{T_1} : \mathcal{O}_{T_1} \ \text{is a period-$m$ orbit} \right\rbrace$. From this we can obtain that,
+        
+        \begin{enumerate}[(i)]\setcounter{enumi}{1}
+            \item $T_h$ has the period-$l$ orbit $\mathcal{O}_{T_h} \in [0, h)$ if and only if $h(l) < h$.
+            \item The orbit $\mathcal{O}_{T_{h(m)}}$ is of period $m$ for $T_{h(m)}$, and all other orbits $\mathcal{O}_{T_{h(m)}}$ are contained within $[0, h(m))$
+        \end{enumerate}
+        Using Sharkovsky's Theorem it is clear that if $l \lhd m$ then $T_{h(m)}$ has a period-$l$ orbit that lies in $[0, h(m))$ and hence by (ii) $h(l) < h(m)$. Now by symmetry,
+        \begin{enumerate}[(i)]\setcounter{enumi}{3}
+            \item $h(l) < h(m)$ if and only if $l \lhd m$
+        \end{enumerate}
+        By (ii), (iii) and (iv) we can see that for any positive integer $m$ the periodic points of $T_{h(m)}$ is the tail of the Sharkovsky order from $m$ and for $l \lhd m$.
+
     \end{proof}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=5cm]{truncated_tent}
+        \caption{The truncated tent map $T_h(x)$.}
+        \label{fig:truncated_tent}
+    \end{figure}
 \end{thm}
 
 \section{Topological Conjugacy}
@@ -371,7 +393,7 @@ The term \emph{chaos} in Mathematics is vauge and has multiple definitions. The 
 \begin{defn}
     A map $f: I \to I$ is \emph{topologically transitive} if for every pair of non-empty open sets $U, V \subseteq I$ there exists $k > 0$ such that $f^k(U) \cap V \neq \emptyset$.
 \end{defn}
-Stated another way, in a topologically transitive map, points in an arbitraily small neighbourhood can be mapped to any other arbitrary neighbourhood under repeated a number of applications of the mapping. 
+Stated another way, in a topologically transitive map, points in an arbitraily small neighbourhood can be mapped to any other arbitrary neighbourhood under repeated a number of applications of the mapping.
 
 \begin{prop} \label{prop:dense-transitive}
     Let $f: I \to I$ be a map with $x \in I$. If $\mathcal{O}(x)$ is dense then $f$ is topologically transitive.
@@ -394,12 +416,12 @@ In other words there exist points arbitrary close to $x$ that eventually get map
 
 This next example fufills our first definition of being topologically transitive, however is not sensitive to initial conditions. To understand this next example however, we will need to introduce the following theorem.
 
-\begin{thm} \label{thm:s1irrational}
+\begin{lem} \label{thm:s1irrational}
     Let $\lambda \in \mathbb{R}$ and $T_\lambda(\theta) = \theta + 2\pi \lambda$. Each orbit of $T_\lambda$ is dense in $S^1$ if $\lambda$ is irrational.
     \begin{proof}
         Let $\theta \in S^1$ and suppose $\lambda$ is irrational. If $T_\lambda^n(\theta) = T_\lambda^m(\theta)$ then $(n - m)\theta \in \mathbb{Z}$ and so $n = m$. Since $S^1$ is compact every infinite subset of points on $S^1$ must have a limit. Hence if $\varepsilon > 0$ then there exists $n, m \in \mathbb{Z}$ such that $\left\lvert T_\lambda^n(\theta) - T_\lambda^m(\theta) \right\rvert < \varepsilon$. Let $k = m - n$, then $\left\lvert T_\lambda^k(\theta) - \theta \right\rvert < \varepsilon$. By definition $T_\lambda$ preserves distance in $S^1$ and since $T_\lambda^k$ maps the arc connecting $\theta$ and $T_\lambda^k(\theta)$ to the arc connecting $T_\lambda^k(\theta)$ and $T_\lambda^k(2 \theta)$ with length also less than $\varepsilon$. Therefore $\left\lbrace \theta, T_\lambda^k(\theta), T_\lambda^k(2 \theta), \cdots \right\rbrace$ partition $S^1$ into arcs of length less than $\varepsilon$ Hence this orbit is dense.
     \end{proof}
-\end{thm}
+\end{lem}
 
 Now using this theorem we can prove the following example.
 \begin{exmp}
@@ -410,12 +432,34 @@ Now using this theorem we can prove the following example.
 The map in Example \ref{exmp:2x} is clearly a map we would never consider to be chaotic as the dynamics of this system are easily explained. Hence our definition of chaos must include more than just a sensitive dependence on initial conditions. Using these definitions we have established we can finally give an exact definition of chaos in a discrete dynamical system.
 
 \begin{defn}
-    A map $f: I \to I$ is \emph{chaotic} on the set $I$ if all of the following hold:
+    A map $f: I \to I$ is \emph{chaotic in the sense of Devaney} on the set $I$ if all of the following hold:
     \begin{itemize}
         \item[(i)]$f$ has sensitive dependence on initial conditions.
         \item[(ii)]$f$ is topologically transitive.
         \item[(iii)]periodic points of $f$ are dense in $I$.
     \end{itemize}
+\end{defn}
+
+As mentioned in the Section \ref{sec:sharkovsky}, the paper \emph{'Period Three Implies Chaos'} by Li and Yorke \cite{li-yorke} first introduced the term \emph{chaos} in a mathematical context. However in this paper the did not formally define what chaos is. It turns out that the dynamical systems they termed \emph{chaotic} had two properties they were looking at, namely \emph{sensitivity to initial conditions} and \emph{infinitely many periodic orbits of different periods}. This leads us to a basic definition of \emph{Li-Yorke Chaos} which we will build upon.
+
+\begin{defn}
+    A map $f: I \to I$ is \emph{chaotic in the sense of Li-Yorke} if $f$ has a period \emph{three} orbit.
+\end{defn}
+
+We know from Sharkovsky's Theorem that if a function has a period-3 orbit then it has a periodic orbit of every period in the positive integers. It turns out that dynamical systems will this feature also follow other behaviors which we will define below and can lead us to a more robust definition of \emph{Li-Yorke Chaos}. First we need to set up some preliminary definitions. These are based on work by Ruette \cite[Section 5.1]{ruette}.
+
+\begin{defn}
+    Let $f: I \to I$ be a map with $x, y \in I$ and $\delta > 0$. The pair $(x, y)$ is a \emph{Li-Yorke pair} if $\lim_{n \to \infty}\sup \left\lvert f^n(x) - f^n(y) \right\rvert \geq \delta$ and $\lim_{n\to\infty}\inf \left\lvert f^n(x) - f^n(y) \right\rvert = 0$.
+\end{defn}
+
+\begin{defn}
+    A set $J \subseteq I$ is \emph{scrambled} if for all distinct $x, y \in J$, $(x, y)$ is a Li-Yorke pair.
+\end{defn}
+
+This leads us to a more concrete definition of Li-Yorke chaos.
+
+\begin{defn}
+    A map $f: I \to I$ is \emph{chaotic in the sense of Li-Yorke} if there exists and uncountable scrambled set $J \subseteq I$.
 \end{defn}
 
 \chapter{Higher-Dimensional Dynamical Systems}
