@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{tikz}
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[
@@ -15,6 +16,9 @@
     %linkcolor=blue, urlcolor=blue, citecolor=blue % pdf
     linkcolor=black, urlcolor=black, citecolor=black % print
 ]{hyperref}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
 
 % Set correct spacing between lines
 \OnehalfSpacing
@@ -39,6 +43,8 @@
 % Example numbers are dependent on theorem numbers
 \newtheorem{exmp}[thm]{Example}
 
+\newcommand{\mmod}[1]{\ (\mathrm{mod}\ #1)}
+
 \begin{document}
 
 % -------------- TITLE PAGE --------------
@@ -47,7 +53,7 @@
         \vspace*{3cm}
  
         \Huge
-        \textbf{Chaos in Discrete Dynamical Systems}
+        \textbf{The Topology of Chaos in Discrete Dynamical Systems}
              
         \vspace{1.5cm}
         
@@ -83,7 +89,7 @@
 Discrete dynamical systems are eveywhere in Mathematics. A discrete dynamical system is defined as a set and a continuous function from this set to itself whereby points in this set are \emph{mapped} to other points in the same set by the application of this function. We will find out later how such systems can exhibit dynamical, complex irregular that we shall define as \emph{chaotic} and explore how this behaviour arises. Initially we will be working with discrete systems that are defined by one-dimensional functions, also called \emph{maps} or \emph{mappings}. However, in later chapters we shall explore higher dimensional dynamical systems. We shall start with defining what a discrete dynamical system is and look at some basic examples.
 
 \begin{defn}
-    Let $I$ be a non-empty compact set. A \emph{discrete dynamical system} is given by a continous map $f: I \to I$. The system starts at a point $x$ and evolves through iterative applications of the map $f$ on points in $I$. After $n$ iterations of $f$ the system can be described by $f^n := f \circ f \circ \cdots \circ f$ where $n \in \mathbb{N}$. By convention we take $f^0$ to be the identity map. Any point $x_n \in I$ in the system can be described by the application of $f$ on its previous points as follows: $x_n = f(x_{n-1})$.
+    Let $I$ be a non-empty compact set. A \emph{discrete dynamical system} is given by a continuous map $f: I \to I$. The system starts at a point $x$ and evolves through iterative applications of the map $f$ on points in $I$. After $n$ iterations of $f$ the system can be described by $f^n := f \circ f \circ \cdots \circ f$ where $n \in \mathbb{N}$. By convention we take $f^0$ to be the identity map. Any point $x_n \in I$ in the system can be described by the application of $f$ on its previous points as follows: $x_n = f(x_{n-1})$.
 \end{defn}
 
 \begin{exmp}
@@ -293,8 +299,150 @@ Here the attracting fixed point at $x = x_\mu$ decays into a repellor and a peri
     \label{fig:cobweb_3.5_3.9}
 \end{figure}
 
+\section{Topological Conjugacy}
+Topological conjugacy defines when two maps exhibit the same topolgical behaviour and can be considered equivalent. If two maps are topologically conjugate properties we have proved for one map can be applied to the other.
+
+\begin{defn}
+    Let $f: X \to X$ and $g: Y \to Y$ be continuous maps. A continuous map $\varphi: X \to Y$ is a \emph{semi-conjugacy} from $f$ to $g$ if $\varphi \circ f = g \circ \varphi$. Furthermore, the map $\varphi$ is a \emph{topological conjugacy} if $\varphi$ is also a homeomorphism i.e. $\varphi$ is a bijection with $h$ and $h^{-1}$ both continuous. If a topological conjugacy $\varphi$ exists then the system $g$ is \emph{topologically conjugate} to $f$.
+\end{defn}
+
+\begin{center}
+\begin{tikzpicture}
+    \node(lt) {$X$};
+    \node(rt) [right=of lt] {$X$};
+    \node(lb) [below=of lt] {$Y$};
+    \node(rb) [below=of rt] {$Y$};
+
+    \draw[->] (lt.east) -- node[above] {$f$} (rt.west);
+    \draw[->] (lb.east) -- node[above] {$g$} (rb.west);
+    \draw[->] (lt.south) -- node[left] {$\varphi$} (lb.north);
+    \draw[->] (rt.south) -- node[right] {$\varphi$} (rb.north);
+\end{tikzpicture}
+\end{center}
+
+Topological conjugacy can be used for infering properties of one topological system from another. For instance if maps $f$ and $g$ are topologically conjugate through some map $\varphi$ then if $x$ is a fixed point of $f$, $\varphi(x)$ is a fixed point of $g$. This can be seen mathematically as $\varphi(x) = \varphi \circ f(x) = g \circ \varphi(x)$. This leads us directly into the following lemma.
+
+\begin{prop}
+    Let $f: X \to X$ and $g: Y \to Y$ be topologically conjugate maps via the conjugacy $\varphi: X \to Y$. If $x$ is a period-$k$ point in of $f$ then $\varphi(x)$ is a period-$k$ point of $g$.
+    \begin{proof}
+        Suppose $f^k(x) = x$, then by induction $\varphi(x) = \varphi \circ f^k(x) = g^k \circ \varphi (x)$. Since $\varphi$ is invertible $f^k(x) = \varphi \circ f^k \circ \varphi^{-1}(x)$. Now suppose $g^k(\varphi(x)) = \varphi(x)$, then $x = \varphi \circ \varphi^{-1}(x) = g^k \circ \varphi \circ \varphi(x)^{-1} = \varphi \circ f^k \circ \varphi^{-1}(x) = f^k(x)$.
+    \end{proof}
+\end{prop}
+
+Hence to understand the periodic points of one dynamical system we can analyse the the periodic points of another system which is topologically conjugate to it. This becomes useful when dealing with dynamical sytems which have particularly complex behaviour such as the logistic maps. This next example will show how the logistic maps $F_\mu(x) = \mu x(1-x)$ are topologically conjugate the quadratic map of the form $Q_c(x) = x^2 + c$ for some $c$.
+
+\begin{exmp} \label{exmp:logisticquadratic}
+    Let $\mu > 0$. Suppose the conjugacy is of the form $\varphi = \alpha x + \beta$. Now $\varphi \circ F_\mu = Q_c \circ \varphi \iff \alpha(\mu x(1-x)) + \beta = (\alpha x + \beta)^2 + c \iff -\mu \alpha x^2 + \alpha \mu x + \beta = \alpha ^ 2 x^2 + 2\alpha\beta x+ \beta ^ 2 + c$. Collecting terms $-\mu \alpha = \alpha ^ 2 \implies -\mu = \alpha, \ \alpha\mu = 2\alpha\beta \implies \mu = 2\beta$ and $\beta = \beta^2 + c$. Hence $\varphi = -\mu x + \frac{\mu}{2}$ is the topological conjugacy when $c = \frac{\mu}{2} - (\frac{\mu}{2})^2$.
+\end{exmp}
+
+Now we can use the fact that these maps are topologically conjugate to go back and prove that point $\mu = 1 + 2\sqrt{2}$ is a period-$3$ point for the logistic maps $F_\mu(x) = \mu x(1-x)$.
+
+\begin{exmp}
+    Let $Q(x) = x^2 + c$. Then $Q^3(x) = Q^2(x^2 + c) = Q((x^2 + c)^2 + c) = Q(x^4 + 2cx^2 + c^2 + c) = (x^4 + 2cx^2 +c^2 + c)^2 + c = x^8 + 4cx^6 + (6c^2 + 2c)x^4 + 4c(c^2 + c)x^2 + c^4 + 2c^3 + c^2 + c$. To find period-$3$ points we set $Q^3(x) = x$. Now solving this by dividing by a factor of $x^2 -x + c$ we obtain the following solution \[x^6 + x^5 + (3c + 1)x^4 + (2c + 1)^3 + (3c^2 + 3c + 1)x^2 + (c^2 + 2c + 1)x + (c^3 + 2c^2 + c) = 0\] It can be shown that when $c = -7/4$ we can complete the square to obtain the simpler $(x^3 -\frac{x^2}{2} - \frac{9x}{4} - \frac{1}{8})^2 = 0$ which has precisely three real roots. Using Example \ref{exmp:logisticquadratic} the value of $c = -7/4$ corresponds to $\mu = 1 + 2\sqrt{2}$. Since $\varphi$ is a topological conjugacy between $F_\mu$ and $Q_c$ for this value of $c$, $F_\mu$ has a period-3 point for $\mu = 1 + 2\sqrt{2}$.
+\end{exmp}
+
+Hence we have used topological conjugacy along with properties of the quadratic maps to prove results about the logistic maps. When $\mu = 4$ the logisitic maps is topologically conjugate to another common map, the tent map.
+
+\begin{exmp} \label{exmp:tent-logistic}
+    The tent map $T: [0, 1] \to [0,1]$ is defined piecewise as $T(x) = 2x$ for $0 \leq x \leq \frac{1}{2}$ and $T(x) = 2(1-x)$ for $\frac{1}{2} \leq x \leq 1$. Suppose $\varphi: [0, 1] \to [0,1]$ is defined by $\varphi(x) = \sin^2(\frac{\pi x}{2})$ which is homeomorphic on $[0, 1]$ as is a continuous, bijective and $\varphi^{-1} = \frac{2}{\pi} \sin^{-1}(\sqrt{x})$ exists and is continuous on $[0, 1]$. Clearly $F_4 \circ \varphi = 4 \sin^2\left(\frac{\pi x}{2}\right) \cdot \left(1 - \sin^2\left(\frac{\pi x}{2}\right)\right) = \sin^2\pi x$ for $x \in [0, 1]$, $\varphi \circ T = \sin^2\pi x$ for $x \in [0, \frac{1}{2}]$ and $\varphi \circ T = \sin^2 (\pi (1-x)) = \sin^2 \pi x$. Hence we have shown that $\varphi \circ T = F_4 \circ \varphi$ so $F_\mu$ and $T$ are topologically conjugate when $\mu = 4$.
+\end{exmp}
+
+Topological conjugacy preserves a wide range of topological properties of maps. A specific property that topological conjugacy preserves, which will prove useful is the following.
+
+\begin{prop}
+    Let $f: X \to X$ and $g: Y \to Y$ be topologically conjugate maps via the conjugacy $\varphi: X \to Y$. If $f$ has a dense orbit in $X$ then $g$ has a dense orbit in $Y$.
+    \begin{proof}
+        Before we begin note that, from topology, if $f: X \to Y$ is a continuous surjective function and $\overline{E} = X$ then $\overline{f(E)} = Y$. Now suppose $x \in X$ has a dense orbit in $f$, so $\overline{\mathcal{O}_f(x)} = X$. Since $\varphi$ is a homeomorphism $\varphi$ is continuous and surjective, hence $\overline{\mathcal{O}_{\varphi \circ f}(x)} = \overline{\mathcal{O}_{g \circ \varphi}(x)} = \overline{\mathcal{O}_{g}(\varphi(x))} = Y$. Hence $g$ has a dense orbit in $Y$.
+    \end{proof}
+\end{prop}
+
+Hence we can now prove that $F_4$ has periodic points that are dense in $[0, 1]$. This will prove useful later when characterising chaos.
+
+\begin{exmp} \label{exmp:logisitc-periodic-dense}
+    Let $T(x)$ denote the tent map. Let $\left[\frac{k}{2^n}, \frac{k+1}{2^n}\right] \subseteq [0, 1]$ be an interval for some $0 \leq k \leq 2^{n-1}$ where $n \in \mathbb{N}$. Moreover $T^n$ has $2^n$ fixed points and so the tent map has $2^n$ period-$n$ points. Hence there is a periodic point in each interval $\left[\frac{k}{2^n}, \frac{k+1}{2^n}\right]$ and so the periodic points of $T$ are dense in $[0, 1]$. Therefore by the conjugacy mentioned in \ref{exmp:tent-logistic} the periodic points of the logisitic map $F_4$ are dense in $[0, 1]$.
+\end{exmp}
+
+In the next section on symbolic dynamics we shall see how we can further characterise the complex dynamics of the tent map and doubling map to infer specific properties about them.
+
+\section{Symbolic Dynamics}
+Symbolic dynamics studies how the shift map effects infinite sequences of of symbols that describe the complex dynamical structure of specific discrete systems. First lets start with some preliminary definitions given by Devaney \cite[Section 1.6]{devaney}.
+
+\begin{defn}
+    Let $f: I \to I$ be a map with $x \in I$ and suppose $I = I_0 \cup I_1 \cup \cdots \cup I_n$ where $I_i$ are closed intervals. The \emph{itinerary} of $x$ is the sequence $S(x) = s_1s_2\cdots$ where $s_i$ denotes the interval $I_i$ such that $f^i(x) \in I_i$.
+\end{defn}
+
+\begin{defn}
+    The set $\Sigma_2 = \left\lbrace (s_1s_2\cdots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ is called the \emph{sequence space} on the symbols 0 and 1. The set $\Sigma_2$ consists of infinite sequences (itineries) of these symbols. Let $(s)_{i=1}^{\infty} = (s_1s_2\cdots)$ and $(t)_{i=1}^{\infty} = (t_1t_2\cdots) \in \Sigma_2$. Define the metric for this space to be $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$.
+\end{defn}
+
+\begin{defn}
+    Let $(s)_{i=1}^{\infty} = (s_1s_2s_3\cdots) \in \Sigma_2$. The \emph{shift map} $\sigma: \Sigma_2 \to \Sigma_2$ is given by $\sigma \left((s)_{i=1}^{\infty}\right) = \left((s)_{i=2}^{\infty}\right) = (s_2s_3s_4\cdots)$.
+\end{defn}
+
+\begin{prop}
+    The shift map $\sigma: \Sigma_2 \to \Sigma_2$ is continuous.
+    \begin{proof}
+        Let $\varepsilon > 0$ and suppose $\underline{s} = (s)_{i=1}^{\infty}, \ \underline{t} = (t)_{i=1}^{\infty} \in \Sigma_2$. Choose $\delta = \varepsilon$ and suppose $d(\underline{s}, \underline{t}) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta$. Then $d\left( \sigma\left(\underline{s}\right) - \sigma\left(\underline{t}\right) \right) = d\left(\left((s)_{i=2}^{\infty}\right) - \left((t)_{i=2}^{\infty}\right)\right) = \Sigma_{i=2}^{\infty}|s_i - t_i|2^{-i} \leq \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta = \varepsilon$.
+    \end{proof}
+\end{prop}
+
+\begin{defn}
+    Let $T: [0, 1] \to [0, 1]$ be the \emph{tent map}, where $T(x) = 2x$ for $0 \leq x \leq \frac{1}{2}$ and $T(x) = 2(1-x)$ for $\frac{1}{2} \leq x \leq 1$.  Assign each $x \in [0, 1]$ to an itinerary $\Sigma_2 = \left\lbrace(s_0s_1s_2\cdots) : s_i \in \left\lbrace0, 1\right\rbrace \right\rbrace$ where the $i$th term of the sequence $s_i = l$ if $x \in \left[0, \frac{1}{2} \right]$ or $s_i = r$ if $x \in \left[\frac{1}{2}, 1 \right]$.
+\end{defn}
+
+\begin{defn}
+    Let $D: [0,1] \to [0,1]$ be the \emph{doubling map}, where $D(x) = 2x \mmod 1$ or $D(x) = 2x$ for $0 \leq x \leq \frac{1}{2}$ and $D(x) = 2x - 1$ for $\frac{1}{2} \leq x \leq 1$. Assign each $x \in [0, 1]$ to an itinerary $\Sigma_2 = \left\lbrace(s_0s_1s_2\cdots) : s_i \in \left\lbrace0, 1\right\rbrace \right\rbrace$ where the $i$th term of the sequence $s_i = l$ if $x \in \left[0, \frac{1}{2} \right]$ or $s_i = r$ if $x \in \left[\frac{1}{2}, 1 \right]$.
+\end{defn}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=4.5cm]{tent}
+    \includegraphics[width=4.5cm]{doubling}
+    \caption{The tent map $T(x)$ and doubling map $D(x)$ respectively with corresponding intervals described above.}
+    \label{fig:tent-doubling}
+\end{figure}
+
+Symbolic dynamics has an elegant application to various maps such as the tent map and doubling map shown in Figure \ref{fig:tent-doubling}. Now we have outlined their itineries we may naturally question the uniqueness of their itineries and if each itinerary necessarily defines a point. We shall first investigate the doubling map. The nature of the doubling map makes binary expansions a suitable choice for expressing points in this map. For each $x \in [0, 1]$ we can write $x=\sum_{i=1}^{\infty}b_i2^{-i}$ where $b_i \in \left\lbrace 0, 1 \right\rbrace$. Our first propostion describes an important relationship between the doubling map and the shift map which we shall expolore through the use of binary expansions.
+
+\begin{prop} \label{prop:doubling-shift}
+    The doubling map $D: [0, 1] \to [0, 1]$ and the shift map $\sigma: \Sigma_2 \to \Sigma_2$ are semi-conjugate via the semi-conjugacy $\varphi: \Sigma_2 \to [0, 1]$.
+    \begin{proof}
+        Let $\underline{b} = (b_i)_{i=1}^{\infty} \in \Sigma_2$ be a sequence of binary digits and let $\underline{c} = \sigma\left((b_i)_{i=1}^{\infty}\right) = (c_i)_{i=1}^{\infty} \in \Sigma_2$ where $c_i = b_{i + 1}$ be the sequence $\underline{b}$ shifted once. Define the map $\varphi: \Sigma_2 \to [0, 1]$ where $\varphi\left((b_i)_{i=1}^{\infty}\right) = \sum_{i=1}^{\infty} b_i2^{-i} \in [0, 1]$. Let $\sigma: \Sigma_2 \to \Sigma_2$ be the shift map. The function $\varphi$ is surjective, as every point $x \in [0, 1]$ has at least one binary expansion denoted $x=\sum_{i=1}^{\infty}b_i2^{-i}$ where $b_i \in \left\lbrace 0, 1 \right\rbrace$.
+        \begin{center}
+            \begin{tikzpicture}
+                \node(lt) {$\Sigma_2$};
+                \node(rt) [right=of lt] {$\Sigma_2$};
+                \node(lb) [below=of lt] {$[0, 1]$};
+                \node(rb) [below=of rt] {$[0, 1]$};
+            
+                \draw[->] (lt.east) -- node[above] {$\sigma$} (rt.west);
+                \draw[->] (lb.east) -- node[above] {$D$} (rb.west);
+                \draw[->] (lt.south) -- node[left] {$\varphi$} (lb.north);
+                \draw[->] (rt.south) -- node[right] {$\varphi$} (rb.north);
+            \end{tikzpicture}
+        \end{center}
+        Now we need to prove the above diagram is commutative. Using an arbitrary $\underline{b} \in \Sigma_2$, $\varphi \circ \sigma\left((b_i)_{i=1}^{\infty}\right) = \varphi\left((c_i)_{i=1}^{\infty}\right) = \sum_{i=1}^{\infty} c_i2^{-i} = \sum_{i=1}^{\infty} b_{i+1}2^{-i} \in [0, 1]$. Similarly $D \circ \varphi\left((b_i)_{i=1}^{\infty}\right) = D\left(\sum_{i=1}^{\infty} b_i2^{-i}\right) = \sum_{i=1}^{\infty} 2b_i2^{-i} \mmod 1 = b_1 + \sum_{i=2}^{\infty} b_i2^{-i+1} \mmod 1 = \sum_{i=2}^{\infty} b_i2^{-i+1} = \sum_{j=1}^{\infty} b_{j+1}2^{-j} \in [0, 1]$. Hence we have shown $\varphi \circ \sigma = D \circ \varphi$. and so the doubling map $D$ and the shift map $\sigma$ are semi-conjugate via $\varphi$. We can also see $\varphi$ is not injective as $\frac{1}{2} + \sum_{i=2}^{\infty}0 \cdot 2^{-i} = \sum_{i=2}^{\infty}2^{-i} = \frac{1}{2}$ and so $\varphi$ is not a homeomorphism and hence is simply a semi-conjugacy. 
+    \end{proof}
+\end{prop}
+
+We can use this semi-conjugacy gained via symbolic dynamics to now prove results about the doubling map. 
+
+\begin{prop}
+    The periodic points of the doubling map $D: [0, 1] \to [0, 1]$ are dense.
+    \begin{proof}
+        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$. Define $t_n = (s_0\cdots s_ns_0\cdots s_n\cdots)$ to be an infinite repeating sequence where $t_{n_i} = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - s_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}2^{-i} = 2^{-n}$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\Sigma_2$ are dense. Since the doubling map is semi-conjugate by Proposition \ref{prop:doubling-shift} the periodic points of the doubling map $D$ are dense.
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    There exists a dense orbit in the doubling map $D: [0, 1] \to [0, 1]$.
+    \begin{proof}
+        Consider the sequence $\underline{s} = (0\ 1\ |\ 00\ 01\ 10\ 11\ |\ 000\ 001\ \cdots\ |\ \cdots)$ contructed by writing down all possible combinations of blocks of length one to infinity. Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary. Let $\varepsilon > 0$. By construction we can perform some $k$ number of iterations of $\sigma$ such that if $n > N + k = \frac{1}{\varepsilon} + k$ iterations of $\sigma$ such that $d(\underline{s}, \underline{t}) = \sum_{i = k}^{n}|s_i - t_i|2^{-i} + \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} = 2^{-n} < 2^{-N} < \frac{1}{N} = \varepsilon$. Hence the orbit $\underline{s}$ is dense in $\Sigma_2$. Since the doubling map is semi-conjugate by Proposition \ref{prop:doubling-shift} the doubling map has a dense orbit.
+    \end{proof}
+\end{prop}
+
 \section{Sharkovsky's Theorem and Type}\label{sec:sharkovsky}
-Sharkovsky's theorem \cite{sharkovsky} is an hugely important theorem to chaotic dynamical systems. It states that in continous maps on the real numbers periodic points of all periods can occur and that the presense of a periodic point of given period implies the existence of other periods by a total ordering called \emph{Sharkovsky's Order}. First we will introduce a theorem that proves the existence of fixed points on closed intervals of the real numbers. This theorem is a simplified version of \emph{Brouwer's fixed-point theorem} \cite{brouwer}. The full theorem is used to prove the existence of fixed points when a continuous map is applied to compact, convex sets.
+Sharkovsky's theorem \cite{sharkovsky} is a hugely important theorem to chaotic dynamical systems. It states that in continuous maps on the real numbers periodic points of all periods can occur and that the presense of a periodic point of given period implies the existence of other periods by a total ordering called \emph{Sharkovsky's Order}. First we will introduce a theorem that proves the existence of fixed points on closed intervals of the real numbers. This theorem is a simplified version of \emph{Brouwer's fixed-point theorem} \cite{brouwer}. The full theorem is used to prove the existence of fixed points when a continuous map is applied to compact, convex sets.
 \begin{thm} \label{thm:fixed-points}
     Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: I \to I$ is continuous. Then $f$ has a fixed point.
     \begin{proof}
@@ -305,7 +453,7 @@ Sharkovsky's theorem \cite{sharkovsky} is an hugely important theorem to chaotic
 A similar fixed-point theorem that we shall use in a later is as follows. This proof however states the existence of a fixed point in a specific interval $I \subseteq \mathbb{R}$.
 
 \begin{thm} \label{thm:interval-fixed-points}
-    Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: \mathbb{R} \to \mathbb{R}$ is continous with $I \subseteq f(I)$. Then $f$ has a fixed point in $I$.
+    Let $I$ be a closed interval on $\mathbb{R}$ and suppose $f: \mathbb{R} \to \mathbb{R}$ is continuous with $I \subseteq f(I)$. Then $f$ has a fixed point in $I$.
     \begin{proof}
         Let $I = [a, b]$ where $a, b \in \mathbb{R}$. Since $I \subseteq f(I)$ there exits $c, d \in I$ such that $f(c) = a$ and $f(d) = b$. Suppose $g(x) = f(x) - x$, then $g(x)$ is continuous. Also $g(c) = a - c \geq 0$ and $g(d) = b - d \leq 0$. By the Intermediate Value Theorem there exists some $x \in I$ with $a \leq x \leq b$ such that $g(x) = 0$. Hence $f(x) = x$.
     \end{proof}
@@ -323,9 +471,21 @@ First we will prove a special case of Sharkovsky's theorem. This theorem was dis
         \end{enumerate}
         To begin the proof let $a, b, c \in \mathbb{R}$ with $f(a) = b$, $f(b) = c$ and $f(c) = a$. Assume wlog that $a < b < c$. Let $I_0 = [a,b]$ and $I_1 = [b,c]$. Hence $I_1 \subseteq f(I_0)$ and $I_0 \cup I_1 \subseteq f(I_1)$. By Theorem \ref{thm:fixed-points} $f$ has a fixed point between $b$ and $c$. Similarly, $f^2$ has at least one fixed point between $a$ and $b$. Hence $f$ has a point of period 2. Now let $n \geq 2$. Define the nested sequence of intervals $A_0, A_1, \cdots, A_{n-2} \subseteq I_1$ inductively. Let $A_0 = I_1$. Since $I_1 \subseteq f(I_1)$, there exists a subinterval $A_1 \subseteq A_0$ and $f(A_1) = A_0 = I_1$. Furthermore there exists a subinterval $A_2 \subseteq A_1$ such that $f(A_2) = A_1$ and therefore $f^2(A_2) = A_0 = I_1$. Continuing we get a subinterval $A_{n-2} \subseteq A_{n-3}$ such that $f(A_{n-2}) = A_{n-3}$. By our second observation $x \in A_{n-2}$ then $f(x), f^2(x), \cdots, f^{n-2}(x) \subseteq A_0$ so $f^{n-2}(A_{n-2}) = A_0 = I_1$. As $I_0 \subseteq f(I_1)$ there exits a subinterval $A_{n-1} \subseteq A_{n-2}$ such that $f^{n-1}(A_{n-1}) = I_0$. Since $I_1 \subseteq f(I_0)$, $I_1 \subseteq f^n(A_{n-1})$ so that $f^n(A_{n-1})$ covers $A_{n-1}$. Hence by our first observation $f^n$ has a fixed point $p$ in $A_{n-1}$. The first $n-2$ iterates of $p$ are in $I_1$, the $n-1$th iterate is in $I_0$ and the $n$th is $p$. If $f^{n-1}(p)$ is in the interior of $I_0$ then $p$ has period $n$. However, if $f^{n-1}(p)$ is in the boundary of $I_0$ then $n = 2$ or $3$.
     \end{proof}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \node(lt) {$I_0$};
+            \node(rt) [right=of lt] {$I_1$};
+        
+            \draw[->] ([yshift=3pt] lt.east) -- node[above] {} ([yshift=3pt] rt.west);
+            \draw[->] ([yshift=-3pt] rt.west) -- node[above] {} ([yshift=-3pt] lt.east);
+            \draw[->] (rt) to [out=410,in=310,loop,looseness=4.8] (rt);
+        \end{tikzpicture}
+    \end{center}
+
 \end{thm}
 
-This consequences of this theorem are remarkable. If you can find a point of period three for a map $f$ then there exists periodic points of all other periods, hence periodic points exist with infinite periods. Further note that the only assumption we have made for $f$ is that it is continous and speaks to the generality of this result. This theorem however does not show the bigger picture of whats going on here, for this we need to introduce Sharkovsky's theorem, but first we need explain Sharkovsky's order.
+This consequences of this theorem are remarkable. If you can find a point of period three for a map $f$ then there exists periodic points of all other periods, hence periodic points exist with infinite periods. Further note that the only assumption we have made for $f$ is that it is continuous and speaks to the generality of this result. This theorem however does not show the bigger picture of whats going on here, for this we need to introduce Sharkovsky's theorem, but first we need explain Sharkovsky's order.
 
 \begin{defn}
     The total ordering on $\mathbb{N}$ defined below is named \emph{Sharkovsky's order}. \[ 3 \rhd 5 \rhd 7 \rhd 9 \rhd \cdots \rhd 2 \cdot 3 \rhd 2 \cdot 5 \rhd \cdots \rhd 2^2 \cdot 3 \rhd 2^2 \cdot 5 \rhd \cdots \rhd \cdots \rhd 2^3 \rhd 2^2 \rhd 2 \rhd 1 \]
@@ -354,7 +514,7 @@ The proof of this theorem will be ommited since it is outwith the scope of this 
 
 \end{exmp}
 
-Sharkovsky subsequently proved that continous maps defined on intervals of the reals can constructed to be of any type \cite{sharkovsky} \cite{sharkovsky2}. In his proof he constructs orbits for odd periods, even periods then periods that conside of powers of two separately. The construction to prove that continous interval maps of any odd type can be created is similar to a more general version of Example \ref{exmp:piecewise_sharkovsky}. This theorem is termed Sharkovsky's Realisation Theorem and is stated below. An elegant proof of this theorem will is also outlined below. This proof was discovered by Alseda, Llibre, and Misiurewicz \cite[Section 2.2]{alm} and outlined by Burns and Hasselblatt \cite[Section 7]{burns-hasselblatt} using a family of continous maps called the trunctated tent maps.
+Sharkovsky subsequently proved that continuous maps defined on intervals of the reals can constructed to be of any type \cite{sharkovsky} \cite{sharkovsky2}. In his proof he constructs orbits for odd periods, even periods then periods that conside of powers of two separately. The construction to prove that continuous interval maps of any odd type can be created is similar to a more general version of Example \ref{exmp:piecewise_sharkovsky}. This theorem is termed Sharkovsky's Realisation Theorem and is stated below. An elegant proof of this theorem will is also outlined below. This proof was discovered by Alseda, Llibre, and Misiurewicz \cite[Section 2.2]{alm} and outlined by Burns and Hasselblatt \cite[Section 7]{burns-hasselblatt} using a family of continuous maps called the trunctated tent maps.
 
 \begin{thm}
     Every tail of the Sharkovsky order is the set of periods for some continuous map of an interval into itself.
@@ -385,62 +545,119 @@ Sharkovsky subsequently proved that continous maps defined on intervals of the r
     \end{figure}
 \end{thm}
 
-\section{Topological Conjugacy}
+\section{Devaney Chaos}
 
+The term \emph{chaos} in Mathematics is vauge and has multiple definitions with no agreed definative definition. The most widely accepted definition and the one we will investigate first comes from Devaney \cite{devaney} called \emph{Devaney chaos} and takes a strictly topological approach. Before we introduce this key definition however we first need to set up some preliminary definition. This first definition helps build an understanding of the dense, complex nature of chaos.
 
-\section{Defining Chaos}
-The term \emph{chaos} in Mathematics is vauge and has multiple definitions. The main definition we will be working with comes from Devaney \cite{devaney} and takes a strictly topological approach. Before we introduce this key definition however we first need to set up some preliminary definition. This first definition helps build an understanding of the dense, complex nature of chaos.
 \begin{defn}
     A map $f: I \to I$ is \emph{topologically transitive} if for every pair of non-empty open sets $U, V \subseteq I$ there exists $k > 0$ such that $f^k(U) \cap V \neq \emptyset$.
 \end{defn}
-Stated another way, in a topologically transitive map, points in an arbitraily small neighbourhood can be mapped to any other arbitrary neighbourhood under repeated a number of applications of the mapping.
+
+Stated another way, in a topologically transitive map, points in an arbitraily small neighbourhood can be mapped to any other arbitrary neighbourhood under repeated a number of applications of the mapping. Hence the dynamical system cannot be partitioned into any number of disjoint open sets which are invarient under $f$ - i.e. if $U \in X$ then $f(U) \in U$.
+
+\begin{exmp}
+    Let $f: S^1 \to S^1$, with $f(\theta) = 2\theta$. Let $\theta_1, \theta_2 \in S^1$. Let $[\theta_1, \theta_2] = U$ define an arc between $\theta_1$ and $\theta_2$. Suppose now $|\theta_1 - \theta_2| > \frac{2\pi}{2^k}$ for some $k \in \mathbb{N}$. Then $\left\lvert f^k(\theta_1) - f^k(\theta_2)\right\rvert = \left\lvert 2^k\theta_1 - 2^k\theta_2 \right\rvert = 2^k \left\lvert \theta_1 - \theta_2 \right\rvert > 2^k \cdot \frac{2\pi}{2^k} = 2\pi$. Hence $f^k([\theta_1, \theta_2])$ covers $S^1$ so for any $V \subseteq S^1$ we obtain $f^k([\theta_1, \theta_2]) \cap V \neq \emptyset$. Hence $f$ is topologically transitive.
+\end{exmp}
+
+This next proposition links the existence of a dense orbit to a map $f$ being topologically transitive. This will become important later as there are slight variations between definitions of chaos. Some definitions ask for a dense orbit and others ask for topological transitivity.
 
 \begin{prop} \label{prop:dense-transitive}
-    Let $f: I \to I$ be a map with $x \in I$. If $\mathcal{O}(x)$ is dense then $f$ is topologically transitive.
+    Let $f: I \to I$ be a map. If there exists some $x \in I$ such that $\mathcal{O}(x)$ is dense then $f$ is topologically transitive.
     \begin{proof}
         Let $U, V \subseteq I$ with $U, V \neq \emptyset$. Let $x \in I$ such that $\overline{\mathcal{O}(x)} = I$. Then there exists $k, l \in \mathbb{N}$ such that $f^k(x) \in U$ and $f^l(x) \in V$. Assume $k > l$, then $f^k(x) \in f^{k - l}\left( \mathcal{O}_{f^l}(x) \right)$ and therefore $f^k(x) \in U \cap f^{k-l}(V)$. Hence $f$ is transitive.
     \end{proof}
 \end{prop}
 
-It can also be seen that in specific cases, such as compact subsets of $\mathbb{R}$ or $S^1$ the converse statement is also true. This next definition emphasises the erratic, uncontrollable and unstable nature of chaos.
+Here is an interesting example where the existence of a dense orbit implies topological transitivity.
 
-\begin{defn}
+\begin{exmp} \label{exmp:s1irrational}
+    Let $\lambda \in \mathbb{R}$ and $T_\lambda(\theta) = \theta + 2\pi \lambda$. Each orbit of $T_\lambda$ is dense in $S^1$ if $\lambda$ is irrational. Let $\theta \in S^1$ and suppose $\lambda$ is irrational. If $T_\lambda^n(\theta) = T_\lambda^m(\theta)$ then $(n - m)\theta \in \mathbb{Z}$ and so $n = m$. Since $S^1$ is compact every infinite subset of points on $S^1$ must have a limit. Hence if $\varepsilon > 0$ then there exists $n, m \in \mathbb{Z}$ such that $\left\lvert T_\lambda^n(\theta) - T_\lambda^m(\theta) \right\rvert < \varepsilon$. Let $k = m - n$, then $\left\lvert T_\lambda^k(\theta) - \theta \right\rvert < \varepsilon$. By definition $T_\lambda$ preserves distance in $S^1$ and since $T_\lambda^k$ maps the arc connecting $\theta$ and $T_\lambda^k(\theta)$ to the arc connecting $T_\lambda^k(\theta)$ and $T_\lambda^k(2 \theta)$ with length also less than $\varepsilon$. Therefore $\left\lbrace \theta, T_\lambda^k(\theta), T_\lambda^k(2 \theta), \cdots \right\rbrace$ partition $S^1$ into arcs of length less than $\varepsilon$. Hence this orbit is dense and so $T_\lambda$ is topologically transtitive by Proposition \ref{prop:dense-transitive}.
+\end{exmp}
+
+It can also be seen that in specific cases, such as compact subsets of $\mathbb{R}$ or $S^1$ the converse statement is also true. The two definitions however are not equivalent. To see this consider the following example.
+
+\begin{exmp}
+    Let $f: X \to X$ be a map defined on $X = \left\lbrace 0 \right\rbrace \cup \left\lbrace 1/n : n \in \mathbb{N} \right\rbrace$ where $f(0) = 0$ and $f(\frac{1}{n}) = \frac{1}{n+1}$. Let $U = \left\lbrace \frac{1}{2} \right\rbrace$ and $V = \left\lbrace 1 \right\rbrace$. Then $f^k(U) = f^k(\left\lbrace \frac{1}{2} \right\rbrace) = \left\lbrace \frac{1}{3} \right\rbrace \cap \left\lbrace 1 \right\rbrace = \emptyset, \ \forall k \in \mathbb{N}$. Hence $f$ is not topologically transitive, however $\mathcal{O}(\frac{1}{n}) = \left\lbrace \frac{1}{n}, \frac{1}{n+1}, \frac{1}{n+2}, \cdots \right\rbrace$ is dense as $\overline{\mathcal{O}\left\lbrace\frac{1}{n}\right\rbrace} = X$.
+\end{exmp}
+
+In fact the two definitions are only equivalent in compact metric spaces \cite[Section 2]{sergiy-lubomir}. In this text we will be using the more concrete definition of Devaney chaos asking for $f$ to be topologically transitive. This next definition used in Devaney's definition of chaos emphasises the erratic, uncontrollable and unstable nature of chaos.
+
+\begin{defn}\label{defn:sdic}
     A map $f: I \to I$ has \emph{sensitive dependence on initial conditions} if there exists a $\delta > 0$ such that, for all $x \in I$ and any neighbourhood $N$ of $x$, there exists $y \in N$ and $k \geq 0$ such that $\left\lvert f^k(x) - f^k(y) \right\rvert > \delta$.
 \end{defn}
 
-In other words there exist points arbitrary close to $x$ that eventually get mapped at least $\delta$ far apart under multiple applications of the map. Hence this definition states that small pertubations in the mappings input may eventually increase to become wildly different over time. However this definition is not enough on its own to characterise chaos. Here is an example of a non-chaotic discrete system with sensitive dependence on initial conditions.
+In other words there exist points arbitrary close to $x$ that eventually get mapped at least $\delta$ far apart under multiple applications of the map. Hence this definition states that small pertubations in the mappings input may eventually increase to become wildly different over time. However this definition is not enough on its own to characterise chaos. Here is two examples of discrete systems with sensitive dependence on initial conditions. The first example is not-chaotic in the sense of Devaney, however the latter is chaotic as we shall see later.
 
 \begin{exmp} \label{exmp:2x}
     Let $f: \mathbb{R} \to \mathbb{R}$ with $f(x) = 2x$. Let $\delta < 2^k \varepsilon$ and suppose $|x - y| = \varepsilon$, then $\left\lvert f^k(x) - f^k(y) \right\rvert = \left\lvert 2^k x - 2^k y \right\rvert = 2^k \left\lvert x - y \right\rvert = 2^k \varepsilon > \delta$. Hence we can always choose $k$ large enough so that this holds and so $f(x) = 2x$ has sensitive dependence on initial conditions.
 \end{exmp}
 
-This next example fufills our first definition of being topologically transitive, however is not sensitive to initial conditions. To understand this next example however, we will need to introduce the following theorem.
-
-\begin{lem} \label{thm:s1irrational}
-    Let $\lambda \in \mathbb{R}$ and $T_\lambda(\theta) = \theta + 2\pi \lambda$. Each orbit of $T_\lambda$ is dense in $S^1$ if $\lambda$ is irrational.
-    \begin{proof}
-        Let $\theta \in S^1$ and suppose $\lambda$ is irrational. If $T_\lambda^n(\theta) = T_\lambda^m(\theta)$ then $(n - m)\theta \in \mathbb{Z}$ and so $n = m$. Since $S^1$ is compact every infinite subset of points on $S^1$ must have a limit. Hence if $\varepsilon > 0$ then there exists $n, m \in \mathbb{Z}$ such that $\left\lvert T_\lambda^n(\theta) - T_\lambda^m(\theta) \right\rvert < \varepsilon$. Let $k = m - n$, then $\left\lvert T_\lambda^k(\theta) - \theta \right\rvert < \varepsilon$. By definition $T_\lambda$ preserves distance in $S^1$ and since $T_\lambda^k$ maps the arc connecting $\theta$ and $T_\lambda^k(\theta)$ to the arc connecting $T_\lambda^k(\theta)$ and $T_\lambda^k(2 \theta)$ with length also less than $\varepsilon$. Therefore $\left\lbrace \theta, T_\lambda^k(\theta), T_\lambda^k(2 \theta), \cdots \right\rbrace$ partition $S^1$ into arcs of length less than $\varepsilon$ Hence this orbit is dense.
-    \end{proof}
-\end{lem}
-
-Now using this theorem we can prove the following example.
-\begin{exmp}
-    The rotations $T: S^1 \to S^1$, $T_\lambda(\theta) = \theta + 2\pi \lambda$ where $\lambda$ is irrational are topologically transitive by Theorem \ref{thm:s1irrational} and Proposition \ref{prop:dense-transitive}. However, since the mappings are distance preserving, they are not sensitive to initial conditions.
+\begin{exmp} \label{exmp:rotations}
+    Let $f: S^1 \to S^1$, with $f(\theta) = 2\theta$. Let $\theta_1, \theta_2 \in S^1$, $\delta < 2^k \varepsilon$ and suppose $|\theta_1 - \theta_2| = \varepsilon$, then $\left\lvert f^k(\theta_1) - f^k(\theta_2)\right\rvert = \left\lvert 2^k\theta_1 - 2^k\theta_2 \right\rvert = 2^k \left\lvert \theta_1 - \theta_2 \right\rvert = 2^k \varepsilon > \delta$. Hence we can always choose a $k$ large enough so this holds and so $f$ has sensitive dependence on initial conditions.
 \end{exmp}
 
+This next example fufills our first definition of being topologically transitive, however is not sensitive to initial conditions.
+\begin{exmp}
+    The rotations $T: S^1 \to S^1$, $T_\lambda(\theta) = \theta + 2\pi \lambda$ where $\lambda$ is irrational are topologically transitive by Example \ref{exmp:s1irrational}. However, since the mappings are distance preserving, they are not sensitive to initial conditions.
+\end{exmp}
 
-The map in Example \ref{exmp:2x} is clearly a map we would never consider to be chaotic as the dynamics of this system are easily explained. Hence our definition of chaos must include more than just a sensitive dependence on initial conditions. Using these definitions we have established we can finally give an exact definition of chaos in a discrete dynamical system.
+The maps in Example \ref{exmp:2x} and Example \ref{exmp:rotations} are clearly maps we would never consider to be chaotic as the dynamics of these system are easily explained. Hence our definition of chaos must include more than just a sensitive dependence on initial conditions and topological transitivity. Now using these definitions we have carefully established we can finally give an exact definition of Devaney chaos in a discrete dynamical system.
 
 \begin{defn}
     A map $f: I \to I$ is \emph{chaotic in the sense of Devaney} on the set $I$ if all of the following hold:
     \begin{itemize}
         \item[(i)]$f$ has sensitive dependence on initial conditions.
-        \item[(ii)]$f$ is topologically transitive.
+        \item[(ii)]$f$ is topologically transitive (there exists a dense orbit in $f$).
         \item[(iii)]periodic points of $f$ are dense in $I$.
     \end{itemize}
 \end{defn}
 
-As mentioned in the Section \ref{sec:sharkovsky}, the paper \emph{'Period Three Implies Chaos'} by Li and Yorke \cite{li-yorke} first introduced the term \emph{chaos} in a mathematical context. However in this paper the did not formally define what chaos is. It turns out that the dynamical systems they termed \emph{chaotic} had two properties they were looking at, namely \emph{sensitivity to initial conditions} and \emph{infinitely many periodic orbits of different periods}. This leads us to a basic definition of \emph{Li-Yorke Chaos} which we will build upon.
+The main feature of Devaney chaos is topological transitivity. After Devaney released this definition Silverman \cite{silverman} and Vellekoop and Berglund \cite{vellekoop-berglund} later proved that on an interval map, topological transitivity implies that the other two conditions in Devaney chaos hold. Before we formally introduce this result however we need the following lemma.
+
+\begin{lem} \label{lem:noperiodic}
+    Let $f: I \to I$ be a map and $I$ an interval. Suppose $J \subseteq I$ is an interval which contains no periodic points of $f$. If $z, f^m(z), f^n(z) \in J$ where $m, n \in \mathbb{N}, \ m < n$ then either $z < f^m(z) < f^n(z)$ or $z > f^m(z) > f^n(z)$.
+    \begin{proof}
+        Suppose there exists a $z \in J$ such that $z < f^m(z)$ and $f^m(z) > f^n(z)$. Define $g(x) = f^m(x)$, so $z < g(z)$. If $g^{k+1}(x) < g(z)$ for some $k \in \mathbb{N}, \ n \geq 1$ then $g^k(z) - z$ has a positive value in $z$ and a negative value in $g(z)$ and by the Intermediate Value Theorem contain a point $c \in (z, g(z)) \subseteq J$ with $g^k(c) - c = 0$ and hence a $km$-periodic point. Therefore $z < g^k(z)$ for all positive integers $k$. Now let $k = n - m > 0$. Then $z < f^{(n - m)m}(z)$. Assuming $f^{(n-m)}(f^n(z)) < f^m(z)$ then taking $g = f^{n-m}(x)$ similarly yields $f^{(n-m)m}(f^m(z)) < f^m(z)$. However this results in the function $f^{(n-m)m}(x) - x$ having a positive and negative value in $f^m(z)$.Hence, by the Intermediate Value Theorem a $(n-m)m$-periodic point exits in $J$. A contradiction. The other case for $z > f^m(z) > f^n(z)$ can be proved similarly.
+    \end{proof}
+\end{lem}
+
+Before we prove that topological transitivity implies that the other two conditions in Devaney chaos hold we need one final result from Banks et.\ al \cite{bbcds}. This an important result, however a proof will not be included in this text for the sake of brevity.
+
+\begin{lem} \label{lem:implies-sdic}
+    If the map $f: X \to X$ is topologically transitive and has dense periodic points then $f$ has sensitive dependence on initial conditions.
+\end{lem}
+
+This brings us to the main proposition. We will only prove the reverse direction for brevity as the forward direction is outwith the scope of this project.
+
+\begin{prop}\label{prop:chaotic-transitive}
+    A map $f: I \to I$, where $I$ is an interval, is chaotic in the sense of Devaney if and only if it is topologically transitive.
+    \begin{proof}
+        For the reverse direction suppose $f$ is topologically transitive. We can use Lemma \ref{lem:implies-sdic} to prove that if the periodic points are dense in $I$ then $f$ also has sensitive dependence on initial conditions and hence is chaotic in the sense of Devaney. Suppose that the periodic points are not dense in $I$, so there exists an interval $J \subseteq I$ where $J$ contains no periodic points. Let $x \in J$ where $x$ is not an endpoint and let $N \subsetneq J$ be a neighbourhood of $x$. Also let $E = J \ N$. Since $f$ is topologically transitive on $I$ there exists a positive integer $m$ with $f^m(N) \cap E \neq \emptyset$. Hence there exists a $y \in J$ such that $f^m(y) \in E \subsetneq J$ and since $J$ contains no periodic points $y \neq f^m(y)$. Moreover, since $f$ is continuous there exists an open neighbourhood $U$ of $y$ such that $f^m(U) \cap U \neq \emptyset$. Using topological transitivity again we can find a $n > m$ and a $z \in U$ with $f^n(z) \in U$. However then $0 < m < n$ with $z \in f^n(U)$ and $z \notin f^m(U) \implies z \leq f^n(z) \leq f^m(z)$. This is a contradiction by Lemma \ref{lem:noperiodic}. Hence the periodic points of $f$ are dense and by Lemma \ref{lem:implies-sdic} $f$ is sensitive to initial conditions. Therefore $f$ is chaotic in the sense of Devaney.
+    \end{proof}
+\end{prop}
+
+As a result of this proposition, interval maps which are simply topologically transitive are chaotic in the sense of Devaney. Moreover as topological transitivity is a topological property it is preserved for topologically conjugate mappings. This makes looking for Devaney chaotic systems much easier by the following proposition.
+
+\begin{prop}
+    Suppose $f: X \to X$ and $g: Y \to Y$ are topologically conjugate interval maps under $\varphi: X \to Y$. If $f$ is topologically transitive then $g$ is chaotic in the sense of Devaney.
+    \begin{proof}
+        If $f$ is topologically transitive then $g$ is also topologically transitive as topological transitivity is preserved under topological conjugacy. Hence by Proposition \ref{prop:chaotic-transitive} the interval map $g$ is chaotic in the sense of Devaney.
+    \end{proof}
+\end{prop}
+
+Lets introduce some examples of systems that exhibit Devaney chaos using topological conjugacy and properties of some examples of dynamical systems we have already observed.
+
+\begin{exmp}
+    \textcolor{red}{The logistic map $f: [0, 1] \to [0, 1]$ defined by $f: 4x (1-x)$ was shown to be topologically conjugate to the tent map $T: [0, 1] \to [0, 1]$ through $\varphi(x) = \sin^2(\frac{\pi x}{2})$ in Example \ref{exmp:tent-logistic}. By Example \ref{exmp:logisitc-periodic-dense} the periodic points of the logitic map are dense in $[0,1]$. }
+\end{exmp}
+
+\begin{exmp}
+    Let $F_4: [0, 1] \to [0,1]$ be the logistic map, where $F_4(x) = 4x(1-x)$.
+\end{exmp}
+
+\section{Li-Yorke Chaos}
+
+Now onto our second definition of Chaos. As mentioned in the Section \ref{sec:sharkovsky}, the paper \emph{'Period Three Implies Chaos'} by Li and Yorke \cite{li-yorke} first introduced the term \emph{chaos} in a mathematical context. However in this paper the did not formally define what chaos is. It turns out that the dynamical systems they termed \emph{chaotic} had two properties they were looking at, namely \emph{sensitivity to initial conditions} and \emph{infinitely many periodic orbits of different periods}. This leads us to a basic definition of \emph{Li-Yorke Chaos} which we will build upon.
 
 \begin{defn}
     A map $f: I \to I$ is \emph{chaotic in the sense of Li-Yorke} if $f$ has a period \emph{three} orbit.
@@ -451,16 +668,23 @@ We know from Sharkovsky's Theorem that if a function has a period-3 orbit then i
 \begin{defn}
     Let $f: I \to I$ be a map with $x, y \in I$ and $\delta > 0$. The pair $(x, y)$ is a \emph{Li-Yorke pair} if $\lim_{n \to \infty}\sup \left\lvert f^n(x) - f^n(y) \right\rvert \geq \delta$ and $\lim_{n\to\infty}\inf \left\lvert f^n(x) - f^n(y) \right\rvert = 0$.
 \end{defn}
+Hence if $x, y$ is a Li-Yorke pair then $x$ and $y$ can be mapped at least $\delta$ far apart under multiple iterations of the map. We have defined this behaviour before in Definition \ref{defn:sdic}, and it can be said that $x$ and $y$ have \emph{sensitive dependence on initial conditions}. Lets now define this behaviour generally over a whole set.
 
 \begin{defn}
     A set $J \subseteq I$ is \emph{scrambled} if for all distinct $x, y \in J$, $(x, y)$ is a Li-Yorke pair.
 \end{defn}
 
-This leads us to a more concrete definition of Li-Yorke chaos.
+Now we have a notion of sensitive dependence on initial conditions that can be applied to a whole set. This leads us to a more concrete definition of Li-Yorke chaos.
 
 \begin{defn}
     A map $f: I \to I$ is \emph{chaotic in the sense of Li-Yorke} if there exists and uncountable scrambled set $J \subseteq I$.
 \end{defn}
+
+From the definitions above it is clear that Li-Yorke chaos only relies on sensitive dependence on initial conditions and for infinitely many periodic orbits of different periods. Hence Li-Yorke chaos is more general than Devaney chaos, which further requires topological transitivity.
+
+\section{Lyapunov Chaos}
+
+\section{Topological Entropy}
 
 \chapter{Higher-Dimensional Dynamical Systems}
 \section{Stability in Higher Dimensions}
