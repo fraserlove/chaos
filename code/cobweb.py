@@ -44,8 +44,8 @@ def plot_cobweb(f, r, x0, nmax=200):
     ax.set_xticks(np.arange(0, 1.2, 0.2))
     ax.set_xticks(np.arange(0, 1.2, 0.2))
     ax.set_aspect('equal')
-    ax.set_xlabel('$x$')
-    ax.set_ylabel('$y$')
+    #ax.set_xlabel('$x$')
+    #ax.set_ylabel('$y$')
     #ax.set_title('$x_0 = {:.1}, r = {:.2}$'.format(x0, r))
 
     plt.savefig('./images/cobweb_{:.1}_{:.2}.pdf'.format(x0, r), dpi=dpi * 10, bbox_inches='tight')
@@ -68,4 +68,4 @@ class AnnotatedFunction:
 # The logistic map, f(x) = rx(1-x).
 func = AnnotatedFunction(lambda x,r: r*x*(1-x), r'$rx(1-x)$')
 
-plot_cobweb(func, 3.9, 0.1)
+plot_cobweb(func, 3.1, 0.1)
