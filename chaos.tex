@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper,oneside]{memoir}
 
 % Packages
-\usepackage{geometry}
+\usepackage[a4paper,margin=2.5cm, top=1.5in, bottom=1.5in]{geometry}
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage{amsmath}
@@ -20,8 +20,6 @@
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows.meta}
 
-% Set correct spacing between lines
-\OnehalfSpacing
 % Look for images under the .images/ dir
 \graphicspath{ {./images/} }
 % Specifiy stype for bibliography
@@ -50,19 +48,23 @@
 % -------------- TITLE PAGE --------------
 \begin{titlingpage}
     \centering
-        \vspace*{3cm}
  
         \Huge
-        \textbf{Chaos in Topological Dynamical Systems}
+        \parbox{10cm}{\begin{center}{\scshape \textbf{Chaos in Topological Dynamical Systems}}\end{center}}
              
-        \vspace{1.5cm}
+        \vspace{1.25cm}
+
+        \large
+        by
+
+        \vspace{1cm}
         
         \LARGE
-        \textit{Fraser Love}
+        {\scshape \textbf{Fraser Robert Love}}
              
         \vspace{1.5cm}
              
-        \Large
+        \large
         School of Mathematics and Statistics\\
         University of St Andrews\\
 
@@ -72,115 +74,122 @@
  \end{titlingpage}
 % ------------ TITLE PAGE END ------------
 
+% Set correct spacing between lines
+\OnehalfSpacing
+
 \noindent\textit{I certify that this project report has been written by me, is a record of work carried out by me, and is essentially different from work undertaken for any other purpose or assessment.}
 
-\vspace{0cm}\hspace{12.8cm}\includegraphics[width=1.3cm]{signature}
+\begin{center}
+\includegraphics[width=1.3cm]{signature}
+\end{center}
+
+\vspace{1cm}
 
 \begin{abstract}
     \noindent A topological dynamical system is a specific type of discrete dynamical system where the set it is acting on is a compact metric space and which often give rise to complex and chaotic behaviour. But what does it mean for a topological dynamical system to be chaotic and how does chaos arise? This project explores various definitions of chaos applied to topological dynamical systems and the axioms they require. Specifically we will cover the various interpretations of chaos from Devaney, Lyapunov and Li and Yorke. This text follows a strictly analytic and topological approach within the definative bounds of a topological dynamical system. We shall encounter a wide variety of chaotic behaviors, such as topological transitivity, sensitive dependence on initial coditions, the density of periodic points, scrambled sets and topological entropy. Finally the text shall conclude by characterising various chaotic systems before the author gives their own definition of chaos.
 \end{abstract}
 
+\newpage
 \tableofcontents
 
-\chapter{An Introduction to Discrete Dynamics}
+\chapter{An Introduction to Topological Dynamics}
+This aim of this text is to introduce the reader to topological dynamical systems and explore the various interpretations of chaos and their consequences. We shall be tackling chaos through the lense of topology and topological dynamical systems. A discrete dynamical system is defined by a metric space with a corresponding continuous function, mapping the metric space to itself. The function itself is termed a map or mapping whereby points in the underlying metric space are mapped to other points in the set by the application of this function. Topological dynamical systems themselves are a subset of discrete dynamical systems, with the extra requirement that the underlying metric space be compact (i.e.\ closed and bounded). This extra condition for compactness is useful for investigating the limiting behavior of the set of iterates of the map as it is repeatedly iterated to infinity; a relevant feature in the study of chaos. The term chaos itself, specifically deterministic chaos, has various definitions in mathematics and was first coined by Li and Yorke in their ubiquitious paper `Period Three Imples Chaos' \cite{li-yorke}. These numerous definitions provide differing constituents to chaos namely: topological transitivity, existence of a dense orbit, the density of periodic points, existence of an uncountable scrambled set and sensitive dependence on initial conditions. Hence topological dynamical systems can be chaotic according to one interpretation but not another. We shall aim to compare these definitions and understand their consequences, providing examples to topological dynamical systems that exhibit each type of chaos. This text assumes the reader to be a capable student of pure mathematics with a basic understanding of topology and analysis. The focus of this text is mainly topological; for the sake of brevity content from related areas of ergodic theory, group theory, etc.\ are excluded.
 
-\section{An Introduction to Topological Dynamical Systems} \label{sec:dynsys}
+This chapter will briefly review some relevant results from topology before introducing ideas central to topological dynamics and the study of chaos in topological dynamical systems. We shall also introduce some popular topological dynamical systems that exhibit chaos, which we will be examining throughout this text. Subsequently, in Chapter 2 we will introduce notions of comparing and equivalating topological dynamical systems using the framework of topological conjugacy and symbolic dynamics. Here we will use these powerful results to prove topological results for the well k   nown tent map and logistic map using topologically conjugate maps. Furthermore, we shall begin our study of chaos via Sharkovsky's theorem. In Chapter 3 we will study the three various interpretations of chaos from Devaney, Lyapunov and Li and Yorke, analysing examples of topological dynamical systems which statisfy each definition. We shall look at the various properties topological dynamical systems require to be considered chaotic and compare the various definitions. Finally in Chapter 4 we will explore the consequences of chaos and characterise the interesting behavior of topological dynamical systems.
 
-Topological dynamical systems are a subset of discrete dynamical systems. Discrete dynamical systems themselves are eveywhere in Mathematics. A discrete dynamical system is defined by a metric space and a continuous function from this set to itself whereby points in this set are \emph{mapped} to other points in the same set by the application of this function. We will find out later how a subset of such systems exhibit dynamic, complex and irregular behaviour that we shall define as \emph{chaotic}. The term \emph{chaos}, specifically deterministic chaos, has various definitions in mathematics and was first coined by Li and Yorke in their paper 'Period Three Implies Chaos' \cite{li-yorke}. Throughout this text we will study various topological dynamical systems to gain intuition into properties that chaotic systems should display. Then we will introduce four main competing definitions of chaos, namely chaos in the sense of Devaney, Li and Yorke, and Lyapunov. We will describe how they differ by definition and give examples of topological dynamical systems which exhibit all types of chaos. We shall start with giving a definition of a topological dynamical system and introduce some preliminary definitions before building up to our central definitions of chaos.
+\section{Topological Dynamical Systems and Discrete Dynamics} \label{sec:dynsys}
+We shall start this chapter by giving the definition of a topological dynamical system, including some important defintions from topology and introducing some preliminary definitions from discrete dynamics. We shall refer back to these definitions constantly for the remainder of this text. Furthermore, prominent examples of topological dynamical systems will be presented. The reader should remember these examples as they will be integral to understanding several propositions in later chapters. Note that the definitions and results in this section apply generally to continuous maps, however have been formulated in terms of topological dynamical systems for clarity and precision. Beginning, we shall introduce some preliminary definitions from topology.
 
-\begin{defn}
-    Let $X$ be a non-empty compact metric space. A \emph{topological dynamical system} denoted $(X, f)$ is given by a continuous map $f: X \to X$. The system starts at an initial point $x \in X$ and evolves through successive iterations of the map $f$. After $k \in \mathbb{N}$ iterations of $f$, the system can be described by $f^n := f \circ f \circ \cdots \circ f$, where is is mapped to the point $f^n(x)$. By convention we take $f^0$ to be the identity map.
+\begin{defn}[Dense Set] \label{defn:dense}
+    Let $(Z, d)$ be a metric space and $X, Y \subseteq Z$ where $X \subseteq Y$. The set $X$ is \emph{dense} in $Y$ if $\overline{X} = Y$, i.e.\ if for every $x \in Y$ there exits an open neighbourhood $U$ of $x$ with $y \in U$ such that $y \in X$.
 \end{defn}
 
-\begin{exmp}
-    A widly studied topological dynamical system is the \emph{tent map} $([0, 1], T)$, where $T(x) = 2x$ for $0 \leq x \leq \frac{1}{2}$ and $T(x) = 2(1-x)$ for $\frac{1}{2} \leq x \leq 1$. The map is shown in Figure \ref{fig:tent-logistic}. Clearly if $x \in \left[0, \frac{1}{4}\right] \cup \left[\frac{3}{4}, 1\right]$ then $f(x) \in \left[0, \frac{1}{2}\right]$, however if $x \in \left[\frac{1}{4}, \frac{1}{2}\right] \cup \left[\frac{1}{2}, \frac{3}{4}\right]$ then $f(x) \in \left[\frac{1}{2}, 1\right]$. This behaviour gives rise to complex dynamics that we shall later term as chaotic.
+\begin{defn}[Compact  Space] \label{defn:compact}
+    Let $(X, d_x)$ be metric spaces. The metric space $X$ is compact if every open cover $\mathcal{U}$ of $X$ has a finite subcover $\left\lbrace U_{i(1)}, U_{i(2)}, \cdots, U_{i(n)} \right\rbrace \subseteq \mathcal{U}$, i.e.\ if $\left\lbrace U_i \right\rbrace_{i\in I}$ is a collection of open subsets of $X$, where $X \subseteq \bigcup_{i \in I}U_i$ then there exists a finite subcollection $\left\lbrace U_{i(1)}, U_{i(2)}, \cdots, U_{i(n)} \right\rbrace \subseteq \mathcal{U}$ such that $X \subseteq \bigcup_{j = 1}^{n}U_{i(j)}$.
+\end{defn}
+
+Note that on $\mathbb{R}$ with the standard metric, all closed and bounded intervals are compact. Now since we now have a notion of what it means for a metric space to be compact we can now define the main object we shall be studying in this paper, the topological dynamical system.
+
+\begin{defn}[Topological Dynamical System] \label{defn:topological-dynamical-system}
+    Let $X$ be a non-empty compact metric space. A \emph{topological dynamical system} denoted $(X, f)$ is given by a continuous map $f: X \to X$. The system starts at an initial point $x \in X$ and evolves through successive iterations of the map $f$. After $k \in \mathbb{N}$ iterations of $f$, the system can be described by $f^n := f \circ f \circ \cdots \circ f$, where $f$ is mapped to the point $f^n(x)$. By convention we take $f^0$ to be the identity map.
+\end{defn}
+
+Having defined a topological dynamical system, we can now characterise the discrete dynamics of the underlying map through the following definitions.
+
+\begin{defn}[Orbit] \label{defn:orbit}
+    Let $(X, f)$ be a topological dynamical system. The \emph{orbit} or \emph{forward orbit} of a point $x \in X$ under $f$ is the set $\mathcal{O}_f(x) = \mathcal{O}^+_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \cdots \rbrace$ of iterates of $x$ under the map $f$. If $f$ is a homeomorphism (i.e $f^{-1}$ exists and is continuous) then the \emph{backward orbit} of $x$ under $f$ is similarly defined as $\mathcal{O}^-_f(x) = \lbrace f^n(x) : n \leq 0 \rbrace = \lbrace x, f^{-1}(x), f^{-2}(x), \cdots \rbrace$.
+\end{defn}
+
+Note that in this text, unless otherwise stated, the term, orbit, will simply refer to the forward orbit, as we will mostly be dealing with forward dynamics.
+
+\begin{defn}[Periodic Point, Cycle] \label{defn:periodic-point}
+    Let $(X, f)$ be a topological dynamical system. A point $x \in X$ is \emph{fixed} if $f(x) = x$ and \emph{periodic} if $f^n(x) = x$ for some $n \in \mathbb{N}$. The \emph{period} of a point $x$ is the least positive integer $k$ such that $f^k(x) = x$. If $x$ has a period of $k$ we say that $x$ is a \emph{period-$k$} point. The set of all period-$k$ points of $f$ is denoted by $\text{Per}_n(f)$. Moreover, $f^n(x) = x \iff n = lk$, for some $l \in \mathbb{N}$. The orbit $\mathcal{O}_f(x) = \lbrace x, f(x), \cdots, f^{k-1}(x) \rbrace$ of a periodic point is a finite set of unique points, called a \emph{perodic orbit} of period $k$ or simply a \emph{k-cycle}.
+\end{defn}
+
+In most topological dynamical systems only a small subset of points are periodic. Most often a larger set of points either enter a periodic orbit after a certain number of iterations of $f$ or converge asymptotically to a periodic orbit, leading us directly into the following defintions.
+
+\begin{defn}[Eventually Periodic, Asymptotically Periodic] \label{defn:eventually-asymptotically-periodic}
+    Let $(X, f)$ be a topological dynamical system. A point $x \in X$ is \emph{eventually periodic} of period $k$ if the point $x$ is not periodic and there exists a $n > 0$ such that $f^{k+i}(x) = f^i(x)$, for $i \geq n$. The point $x \in X$ is \emph{asymptotically periodic} to a periodic point $p \in X$ if $\lim_{n \to \infty} d(f^n(x), f^n(p)) = 0$.
+\end{defn}
+
+\begin{prop} \label{prop:eventually-periodic-implies-periodic}
+    Let $(X, f)$ be a topological dynamical system. If $f$ is an invertible map, then every eventually periodic point is periodic.
+    \begin{proof}
+        Suppose $x \in X$ is eventually periodic of period $k$ in $f$. Then $f^{k + i}(x) = f^i(x)$ for some $n > 0$. By applying $i$ iterations of $f^{-1}$ we obtain, $f^{-i} \circ f^{k + i}(x) = f^{-i} \circ f^{i}(x) \implies f^k(x) = x$. Hence $x$ is periodic with period $k$.
+    \end{proof}
+\end{prop}
+
+When studying chaos in topological dynamical systems it can be useful to understand how the system behaves for an increasing number of iterations. The $\omega$-limit set, defined below as the set of limit points of a particular orbit, allows us to understand the systems behaviour asymptotically.
+
+\begin{defn}[Omega-limit Set] \label{defn:omega-limit-set}
+    Let $(X, f)$ be a topolgical dynamical system. The $\omega$\emph{-limit} set of $x \in X$, denoted $\omega(x, f)$ is the set of all limit points of the orbit $\mathcal{O}_f(x)$ given by \[\omega(x, f) := \bigcap_{n=0}^\infty\overline{\left\lbrace f^k(x) : k \geq n \right\rbrace}\] and the $\omega$\emph{-limit} set of the entire map $f$ is defined as \[\omega(f) := \bigcup_{x \in X} \omega(x, f)\]
+\end{defn}
+
+By the definition, we can immediately see that the $\omega$-limit set of a period-$k$ point or eventually periodic point of period-$k$ is simply the $k$-cycle. Furthermore, if a point is asymptotically periodic then the $\omega$-limit set is clearly a cycle and hence finite. Now we are done with defining properties of discrete dynamics lets analyse the discrete dynamics of some popular topological dynamical systems.
+
+\begin{exmp}[Tent Map] \label{exmp:tent-map}
+    Let $T_s: [0, 1] \to [0,1]$ be the \emph{tent map}, where $T_s(x) = sx$ for $x \in \left[0, \frac{1}{2}\right]$ and $T_s(x) = s(1-x)$ for $x \in \left[\frac{1}{2}, 1\right]$. Let $s \in (1, 2]$. The map $T_2$ is shown in Figure \ref{fig:tent-logistic}. Since $[0, 1]$ is a closed interval it is compact. To find the fixed points let $T_s(x) = x$. If $x \in \left[0, \frac{1}{2}\right]$ then $sx = x \implies x = 0$ is a fixed point for all $s \in (1, 2]$. If $x \in \left[\frac{1}{2}, 1\right]$ then $s(1-x) = x \implies x = \frac{s}{1 + s}$ is a fixed point for all $s \in (1, 2]$. Clearly if $x \in \left[0, \frac{1}{4}\right] \cup \left[\frac{3}{4}, 1\right]$ then $T_s(x) \in \left[0, \frac{1}{2}\right]$, however if $x \in \left[\frac{1}{4}, \frac{1}{2}\right] \cup \left[\frac{1}{2}, \frac{3}{4}\right]$ then $T_s \in \left[\frac{1}{2}, 1\right]$. This behaviour makes calculating periodic points difficult. In Chapter \ref{chap:conjugacy-symbol-dynamics} we shall develop the technique of using symbolic dynamics to better analyse this discrete dynamics of this system.
 \end{exmp}
 
-\begin{exmp}
-    Another popular family of topological dynamical systems are the \emph{logistic maps} $([0, 1], F_{\mu})$, where $F_{\mu}(x)=\mu x(1-x)$ and $\mu > 0$. Lets initially set $\mu = 2$ and hence $f(x) = 2x(1-x)$. For $x \ll 1$, $f(x) \simeq 2x$, however for $x \gg 0$, $f(x) \simeq 2(1-x) < 1$. It will be shown in Section \ref{sec:logistic_maps} that any initial $x_0 \in (0, 1)$ will be attracted towards the fixed point of $x = 1/2$. Surprisingly as the value of $\mu$ approaches a value of $4$ the logistic map displays complex, irregular behaviour which we will later define as chaotic. In Section \ref{sec:logistic_maps} we shall explore how this behaviour arises.
+\begin{exmp}[Logistic Map] \label{exmp:logitic-map}
+    Let $F_{\mu}: [0, 1] \to [0, 1]$ be the \emph{logistic map}, where $F_{\mu}(x)=\mu x(1-x)$ and $\mu > 0$. The map $F_4$ is shown in Figure \ref{fig:tent-logistic}. Since $[0, 1]$ is a closed interval it is compact. To find the fixed points let $F_{\mu}(x) = x \implies x = 0$ and $x = \frac{\mu - 1}{\mu}$ are fixed points for all $\mu > 0$. It will be shown in Section \ref{sec:logistic_maps} that for $\mu \in (0, 3)$, any $x \in (0, 1)$ will be attracted towards the fixed point of $x = \frac{\mu - 1}{\mu}$.
 \end{exmp}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=4.5cm]{tent}
-    \includegraphics[width=4.5cm]{logistic_4}
-    \caption{The first iterates of the tent map $T(x)$ and logistic map $F_{4}(x)$ respectively.}
+    \includegraphics[width=4.5cm]{tent_1.3}
+    \includegraphics[width=4.5cm]{logistic_2.85}
+    \caption{The first iterates of the tent map $T_2$ and logistic map $F_4$ respectively.}
     \label{fig:tent-logistic}
 \end{figure}
 
-We shall later show that $T$ and $F_4$ are similar topologically speaking and share various topological properties. Both of these topological dynamical systems are described by nice mathematical equations, however they are also chaotic and exhibit highly complex and irregular behaviour.
+Depending on the parameters $s$ and $\mu$ the dynamical behaviour of the tent map and logistic map can range from predicitble periodicity to chaotic. In Chapter \ref{chap:conjugacy-symbol-dynamics} we shall subsequently prove that $T_2$ and $F_4$ are similar topologically speaking and share various topological properties. Moreover both of these topological dynamical systems are described by simple mathematical equations, however we shall prove later that they are chaotic and exhibit highly complex and irregular dynamics.
 
-\section{The Discrete Dynamics of Continuous Maps}
-Here we shall introduce some important definitions central to exploring the discrete dynamics of continuous maps and therby also central to our study of chaos in topological dynamical systems. We shall rely on these definitions heavily throughout this text.
+\section{Stability of Topological Dynamical Systems}
+The stability of periodic points is integral to the emergence of chaos in a topological dynamical system. Periodic points that are stable attract nearby points and the system settles into a steady state. Unstable periodic points however cause nearby points to diverge and small pertubations can cascade into large differences. Here, we will define an notion of stability for periodic points in topological dynamical systems defined over closed intervals. This section is a preliminary for our the next section on studying the complex dynamics of the logistic family, specifically for $\mu > 3$ as the system becomes chaotic. The following results are adapted from Devaney \cite[Section 1.4]{devaney}. First lets define the notion of hyperbolicity and what it means for a periodic point to be attracting.
 
-\begin{defn}
-    Let $f: X \to X$ be a continuous map. The \emph{orbit} or \emph{forward orbit} of $x$ under $f$ is the set $\mathcal{O}_f(x) = \mathcal{O}^+_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \cdots \rbrace$ of iterates of $x$ under the map $f$. If $f$ is a homeomorphism (i.e $f^{-1}$ exists and is continuous) then the \emph{backward orbit} of $x$ under $f$ is similarly defined as $\mathcal{O}^-_f(x) = \lbrace f^n(x) : n \leq 0 \rbrace = \lbrace x, f^{-1}(x), f^{-2}(x), \cdots \rbrace$.
+\begin{defn} \label{defn:hyperbolic}
+    Let $(I, f)$ be a topological dynamical system where $f$ is a smooth map and $I$ is a closed interval. A period-$k$ point $x \in X$ is said to be \emph{hyperbolic} if $|(f^k)'(x)| \neq 1$.
 \end{defn}
 
-\begin{defn}
-    Let $f: X \to X$ be a continuous map. A point $x \in X$ is \emph{fixed} if $f(x) = x$. Hence, for a fixed point $x$ the orbit $\mathcal{O}_f(x) = \lbrace x \rbrace$.
-\end{defn}
-
-\begin{defn}
-    Let $f: X \to X$ be a continuous map. A point $x \in X$ is \emph{periodic} if $f^n(x) = x$ for some $n \in \mathbb{N}$. The \emph{period} of a point $x$ is the least positive integer $k$ such that $f^k(x) = x$. If $x$ has a period of $k$ we say that $x$ is a \emph{period-$k$} point. The set of all period-$k$ points of $f$ is denoted by $\text{Per}_n(f)$. Moreover, $f^n(x) = x \iff n = lk$, for some $l \in \mathbb{N}$. Hence $\mathcal{O}_f(x) = \lbrace x, f(x), \cdots, f^{k-1}(x) \rbrace$ is a finite set of unique points, called a \emph{k-cycle}.
-\end{defn}
-
-The period-$k$ points for a continuous map $f: X \to X$ can be found by solving $f^k(x) - x = 0$, where $x \in I$. Hence we can find fixed and periodic points in the following discrete systems.
-
-\begin{exmp}
-    Let $id: [0, 1] \to [0, 1]$ be the \emph{identity map}, where $id(x) = x$. Trivially every point $x \in [0, 1]$ is a fixed point. Now let $f: [0, 1] \to [0, 1]$ be given by $f(x) = -x$. The map $f$ has no fixed points as $f(x) \neq x, \ \forall x \in [0, 1]$. However $f^2(x) = x$, hence every point $x \in [0, 1]$ is a period-$2$ point.
-\end{exmp}
-
-\begin{exmp}
-    Let $F_{\mu} : [0, 1] \to [0, 1]$ be the family of logistic maps given by $F_{\mu}(x) = \mu x (1-x)$. Solving $F(x) - x = \mu x (1 - x) - x = \mu x^{2} + x (1 - \mu) = 0$ we find that $x = 0, \ \frac{\mu - 1}{\mu}$ are fixed points.
-\end{exmp}
-
-It turns out most topological dynamical systems infact do not have simple periodic orbits but instead either enter a periodic orbit after a certain number of iterations of $f$ or converge asymptotically to a periodic orbit. These next two definitions will allow us to define the behaviour of a larger class of topological dynamical systems.
-
-\begin{defn}
-    Let $f: X \to X$ be a continuous map. A point $x \in X$ is \emph{eventually periodic} of period $k$ if the point $x$ is not periodic and there exists a $n > 0$ such that $f^{k+i}(x) = f^i(x)$, for $i \geq n$.
-\end{defn}
-
-\begin{prop}
-    Let $f: X \to X$ be a continuous invertible map, then every eventually periodic point is periodic.
-    \begin{proof}
-        Suppose $x \in X$ is eventually periodic of period $k$ in $f$. Then $f^{k + i}(x) = f^i(x)$ for some $n > 0$. By applying $i$ iterations of $f^{-1}$ we obtain, $f^{-i} \circ f^{k + i}(x) = f^{-i} \circ f^{i}(x) \implies f^k(x) = x$. Hence $x$ is actually periodic with period $k$.
-    \end{proof}
-\end{prop}
-
-\begin{defn}
-    Let $f: X \to X$ be a continuous map and $p$ be a periodic point of period $k$. A point $x \in X$ is \emph{forward asymptotic} to $p$ if $\lim_{i \to \infty} f^{ik}(x) = p$.
-\end{defn}
-
-\begin{exmp}
-    Define $f: [-1, 1] \to [-1, 1]$ to be the map $f(x) = x^3$. If $x \in (-1, 1)$ then $x$ is forward asymptotic of period one to the fixed point at zero as $\lim_{i \to \infty} f^{i} \left(x\right)  = \lim_{i \to \infty} \left(x\right) ^{3i} = 0$.
-\end{exmp}
-
-\section{Stability of Discrete Dynamical Systems on the Real Line}
-The stability of periodic points is integral to the emergence of chaos in a discrete dynamical system. Periodic points that are stable attract nearby points and the system settles into a steady state. Unstable periodic points however cause nearby points to diverge and small pertubations can cascade into large differences. Here, we will define an notion of stability for periodic points in discrete dynamical systems along the real line. This section is a preliminary for our the next section on studying the complex dynamics of the logistic family, specifically for $\mu > 3$ as the system becomes chaotic. The following results are adapted from Devaney \cite[Section 1.4]{devaney}. First lets define the notion of hyperbolicity and what it means for a periodic point to be attracting.
-
-\begin{defn}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a continous map. Let $x \in X$ be a periodic point with period $k$. The point $x$ is said to be \emph{hyperbolic} if $|(f^k)'(x)| \neq 1$.
-\end{defn}
-
-\begin{prop} \label{prop:attractor}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and $p \in \mathbb{R}$ be a hyperbolic periodic point of period $k$ with $|(f^k)'(p)| < 1$. Then there exists an open interval $U \subseteq \mathbb{R}$ with $p \in U$ such that if $x \in U$, then \[ \lim_{n \to \infty} f^n(x) = p \]
+\begin{prop} \label{prop:attracting-point}
+    Let $(I, f)$ be a topological dynamical system where $f$ is a smooth map and $I$ is a closed interval. If $p \in I$ is a hyperbolic period-$k$ point with $|(f^k)'(p)| < 1$, then there exists an open interval $U \subseteq I$ with $p \in U$ such that if $x \in U$, then \[ \lim_{n \to \infty} f^n(x) = p \]
 
     \begin{proof}
-        Let $p$ be a period-$k$ point. By the Mean Value Theorem, for all $x \in \mathbb{R}$, there exists a $c \in \mathbb{R}$ such that \[f^k(x) - f^k(p) = f^k(x) - p = (f^k)'(c)(x-p)\] Since $f'$ is continuous at $c$, there exists $\varepsilon > 0$ such that $|(f^k)'(c)| < A < 1$ for $c \in U = [p - \varepsilon, p + \varepsilon]$ and some $A \in \mathbb{R}$. Hence for some $x \in U$ \[|f^k(x) - p| = |f^k(x) - f^k(p)| \leq A|x-p| < |x-p| \leq \varepsilon\] Thus $f^k(x) \in U = [p - \varepsilon, p + \varepsilon]$. Moreover, since $|f^k(x) - p| < |x - p|$, $f^k(x)$ is closer to $p$ than $x$ is. Applying this same argument inductively we deduce that if $n = mk$ for some $m \in \mathbb{N}$ \[|f^n(x) - p| = |f^{mk}(x) - p| \leq A^m|x - p|\] Now since $A < 1$, $\lim_{m \to \infty}A^m = 0$. Hence $f^n(x) \to p$ as $n \to \infty$. 
+        Let $p$ be a period-$k$ point. By the Mean Value Theorem, for all $x \in I$, there exists a $c \in I$ such that \[f^k(x) - f^k(p) = f^k(x) - p = (f^k)'(c)(x-p)\] Since $f'$ is continuous at $c$, there exists $\varepsilon > 0$ such that $|(f^k)'(c)| < A < 1$ for $c \in U = [p - \varepsilon, p + \varepsilon]$ and some $A \in I$. Hence for some $x \in U$ \[|f^k(x) - p| = |f^k(x) - f^k(p)| \leq A|x-p| < |x-p| \leq \varepsilon\] Thus $f^k(x) \in U = [p - \varepsilon, p + \varepsilon]$. Moreover, since $|f^k(x) - p| < |x - p|$, $f^k(x)$ is closer to $p$ than $x$ is. Applying this same argument inductively we deduce that if $n = mk$ for some $m \in \mathbb{N}$ \[|f^n(x) - p| = |f^{mk}(x) - p| \leq A^m|x - p|\] Now since $A < 1$, $\lim_{m \to \infty}A^m = 0$. Hence $f^n(x) \to p$ as $n \to \infty$. 
     \end{proof}
 \end{prop}
 
 Finally with a sense of what it means for periodic points to attract nearby points we can make the following definition.
 
 \begin{defn} \label{def:attractor}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and let $p \in \mathbb{R}$ be a hyperbolic period-$k$ point with orbit $\mathcal{O}(p) = \lbrace p, f(p), \cdots, f^k(p) \rbrace$. Then the point $p$ is called an \emph{attracting periodic point}, an \emph{attractor} or a \emph{sink} if \[|(f^k)'(p)| = \left\lvert \prod_{n = 1}^k f'(p_k) \right\rvert < 1\]
+    Let $(I, f)$ be a topological dynamical system where $f$ is a smooth map and $I$ is a closed interval. Suppose $p \in I$ is a hyperbolic period-$k$ point with orbit $\mathcal{O}(p) = \lbrace p, f(p), \cdots, f^k(p) \rbrace$. Then the point $p$ is called an \emph{attracting periodic point} or an \emph{attractor} if \[|(f^k)'(p)| = \left\lvert \prod_{n = 1}^k f'(p_k) \right\rvert < 1\]
 \end{defn}
 
-Now we have a notion of what it means for periodic points to be attracting. However we require for the hyperbolic periodic-$k$ point $p$ to have the property $|(f^k)'(p)| < 1$. Now we can ask what happens conversely when $|(f^k)'(p)| > 1$.
+Now we have a notion of what it means for periodic points to be attracting. However we require for the hyperbolic period-$k$ point $p$ to have the property $|(f^k)'(p)| < 1$. Now we can ask what happens conversely when $|(f^k)'(p)| > 1$.
 
-\begin{prop} \label{prop:repellor}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and $p \in \mathbb{R}$ be a hyperbolic periodic point of period $k$ with $|(f^k)'(p)| > 1$. Then there is an open interval $U \subseteq \mathbb{R}$ with $p \in U$ such that if $x \in U$, $x \neq p$, then there exists $n > 0$ such that $f^n(x) \notin U$.
+\begin{prop} \label{prop:repelling-point}
+    Let $(I, f)$ be a topological dynamical system where $f$ is a smooth map and $I$ is a closed interval. If $p \in I$ is a hyperbolic period-$k$ point with $|(f^k)'(p)| > 1$. Then there is an open interval $U \subseteq I$ with $p \in U$ such that if $x \in U$, $x \neq p$, then there exists $n > 0$ such that $f^n(x) \notin U$.
 
     \begin{proof}
         Let $p$ be a period-$k$ point. By the Mean Value Theorem, for all $x \in \mathbb{R}$, there exists a $c \in \mathbb{R}$ such that \[f^k(x) - f^k(p) = f^k(x) - p = (f^k)'(c)(x - p)\] Since $f'$ is continuous at $c$, there exists $\varepsilon > 0$ such that $|(f^k)'(c)| > A > 1$ for $c \in U = [p - \varepsilon, p + \varepsilon]$ and some $A \in \mathbb{R}$. Hence for some $x \in U$ \[|f^k(x) - p| = |f^k(x) - f^k(p)| \geq A|x - p| \geq |x - p| \geq \varepsilon\] Since $|f^k(x) - p| > |x - p|$, $f^k(x)$ is further away from $p$ than $x$ is. If $f^k(x) \notin U = [p - \varepsilon, p + \varepsilon]$ we are done. However if not then we can apply the same argument inductively with $n = mk$, $m \in \mathbb{N}$ to obtain \[ |f^n(x) - p| = |f^{mk}(x) - p| \geq A^m|x - p|\] Now since $A > 1$, $\lim_{m \to \infty}A^m = \infty$ and $f^n(x) \to \infty$ as $n \to \infty$. Hence, eventually $f^n(x) \notin U$ for some $n \in \mathbb{N}$.
@@ -190,81 +199,42 @@ Now we have a notion of what it means for periodic points to be attracting. Howe
 Now that we have a sense of what it means for periodic points to repel nearby points we can make the following definition.
 
 \begin{defn} \label{def:repellor}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and let $p \in \mathbb{R}$ be a hyperbolic period-$k$ point with orbit $\mathcal{O}(p) = \lbrace p, f(p), \cdots, f^k(p) \rbrace$. Then the point $p$ is called a \emph{repelling periodic point}, an \emph{repellor} or a \emph{source} if \[|(f^k)'(p)| = \left\lvert \prod_{n = 1}^k f'(p_k) \right\rvert > 1\]
+    Let $(I, f)$ be a topological dynamical system where $f$ is a smooth map and $I$ is a closed interval. Suppose $p \in I$ is a hyperbolic period-$k$ point with orbit $\mathcal{O}(p) = \lbrace p, f(p), \cdots, f^k(p) \rbrace$. Then the point $p$ is called a \emph{repelling periodic point} or a \emph{repellor} if \[|(f^k)'(p)| = \left\lvert \prod_{n = 1}^k f'(p_k) \right\rvert > 1\]
 \end{defn}
 
-With a solid understanding of what it means for a periodic point to be a repellor or an attractor we can start to look for examples of them in discrete systems.
-
-\begin{exmp}
-    Let $F_c(x) = x^2 + c$ where $c \in \mathbb{R}$ be the family of so called \emph{quadratic maps}. If $c > 1/4$ then $F_c(x)$ has no fixed points. If $c = 1/4$ then $F_c(x)$ has a unique fixed point at $x = 1/2$. If $c < 1/4$ then $F_c(x)$ has two fixed points at $x_- = (1 - \sqrt{1 - 4c}) / 2$ and $x_+ = (1 + \sqrt{1 - 4c}) / 2$. Here $F_c'(x) = 2x$ so if $c = 1/4$ then $F_c'(1/2) = 1$. Hence the fixed point $x = 1/2$ is non-hyperbolic. If $c < 1/4$ then $F_c'(x_-) = 1 - \sqrt{1 - 4c} < 1$ and $F_c'(x_+) = 1 + \sqrt{1 - 4c} > 1$, and so $x_-$ is an attractor and $x_+$ a repellor.
-\end{exmp}
-
-A natural question to now ask is just what set of points are attracted towards a stable periodic point or attractor. We can define the set of points that converge towards an attractor under sucessive iterations of a map as follows.
-
-\begin{defn}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and $p \in \mathbb{R}$ be a hyperbolic periodic point of period $k$. The \emph{stable set} or \emph{basin of attraction} of $p$ is the set \[W^s(p) = \lbrace x : \lim_{n \to \infty} f^{nk}(x) = f^r(p), \ 0 \leq r < k \rbrace\] All points $x \in W^s(p)$ are therefore asymptotically periodic to $p$ and are said to be \emph{forward asymptotic} to $p$ as $\mathcal{O}^+(x)$ is asymptotic to $p$.
-\end{defn}
-
-Furthermore, we can similarly define the set of points that are repelled from an unstable periodic point or repellor. We can define the set of points that diverge from a repellor under sucessive iterations of a map as follows.
-
-\begin{defn}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be a smooth map and $p \in \mathbb{R}$ be a hyperbolic periodic point of period $k$. The \emph{unstable set} of $p$ is the set \[W^u(p) = \lbrace x : \lim_{n \to \infty} f^{-nk}(x) = f^r(p), \ 0 \leq r < k \rbrace\] All points $x \in W^u(p)$ are said to be \emph{backward asymptotic} to $p$ as $\mathcal{O}^-(x)$ is asymptotic to $p$.
-\end{defn}
-
-\begin{exmp}
-    Let $f: \mathbb{R} \to \mathbb{R}$, $f(x) = x^3$. The stable set of the attractor at $x = 0$ is the interval $W^s(0) = (-1, 1)$. The unstable sets of the repellors at $x = 1$ and $x = -1$ is the intervals $W^u(1) = [1, \infty)$ and $W^u(-1) = (\infty, 1]$ respectively.
-\end{exmp}
+With a solid understanding of what it means for a periodic point to be a repellor or an attractor we can start to look for such points in topological dynamical systems defined over a closed interval. A family of such systems we have already came across is the family of logistic maps.
 
 \section{The Family of Logistic Maps} \label{sec:logistic_maps}
-Chaos can arise in the simplest of topological dynamical systems. The family of logisitic maps given by $F_\mu(x) = \mu x(1-x)$ is a family of non-linear topological systems which exibit chaotic phenomena. Using the definitions and theorems we have developed above we can characterise the behaviour of this family of topological systems and identify how this chaos arises. This section follows analysis performed by Devaney \cite[Section 1.5]{devaney} into the behaviour of these systems.
+Chaos can arise in the simplest of topological dynamical systems. The family of topological systems $([0, 1], F_{\mu})$ defined by the logistic maps $F_\mu(x) = \mu x(1-x)$ are non-linear topological systems which exibit chaotic phenomena. Using the definitions and theorems we have developed above we can characterise the behaviour of this family of topological systems and identify how this chaos arises. This section follows analysis performed by Devaney \cite[Section 1.5]{devaney} into the behaviour of these systems.
 
-\begin{prop} Let $F_\mu(x) = \mu x(1-x)$. \label{prop:logistic1}
+\begin{prop} \label{prop:logistic-properties}
+    The topological dynamical system $([0,1], F_{\mu})$ described by $F_\mu(x) = \mu x (1-x)$ has the following properties.
     \begin{itemize}
-        \item[(i)] $F_\mu(x)$ has fixed points at $x = 0$ and $x = x_{\mu} = \frac{\mu - 1}{\mu}$
-        \item[(ii)] Suppose $\mu > 1$. If $x \notin [0, 1]$ then $F_\mu^n(x) \to - \infty$ as $n \to \infty$.
+        \item[(i)]$F_\mu$ has fixed points at $x = 0$ and $x = x_{\mu} = \frac{\mu - 1}{\mu}$
+        \item[(ii)] If $1 < \mu < 3$ then $F_\mu$ has an attracting fixed point at $x = x_\mu = \frac{\mu - 1}{\mu}$ and a repelling fixed point at $x = 0$.
+        \item[(iii)] If $1 < \mu < 3$ then $\lim_{n \to \infty} F_\mu^n(x) = x_\mu$.
+        \item[(iv)] If $3 < \mu < 1 + \sqrt{6}$ then the fixed point $x = x_\mu = \frac{\mu - 1}{\mu}$ is now a repellor.
+        \item[(v)] If $3 < \mu < 1 + \sqrt{6}$ then a new period-2 attractor emerges at \[x_{\mu_2} = \frac{\sqrt{\mu^2 - 2\mu - 3} + \mu + 1}{2\mu}\] 
     \end{itemize}
     \begin{proof}[Proof (i)]
-        $F_{\mu}(0) = \mu \cdot 0(1 - 0) = 0$ and $F_{\mu}(x_\mu) = \mu \cdot \frac{\mu - 1}{\mu} \left(1 - \frac{\mu - 1}{\mu}\right) = \frac{\mu - 1}{\mu}$ 
+        See Example \ref{exmp:logistic-fixed-points}
     \end{proof}
     \begin{proof}[Proof (ii)]
-        If $x < 0$ then $F_\mu(x) = \mu x(1-x) < x$. Hence $F_\mu^n(x) < F_\mu^{n-1}(x)$ for all $n \in N$. Since this sequence is unbounded, by the monotone convergence theorem $F_\mu^n(x) \to - \infty$ as $n \to \infty$ If $x > 1$ then $F_\mu(x) = \mu x (1-x) < 0$. Hence by above $F_\mu(x) \to - \infty$ as $n \to \infty$.
+        By part (i) $F_\mu(x)$ has fixed points at $x = 0$ and $x_\mu = (\mu - 1) / \mu$. Here $F_\mu'(x) = \mu - 2\mu x$ so $F_\mu'(0) = \mu$ and $F_\mu'(x_\mu) = 2 - \mu$. Hence if $1 < \mu < 3$ then $|F'_\mu(0)| > 1$ and $|F'_\mu(x_\mu)| < 1$. Therefore by Definition \ref{def:attractor} and Definition \ref{def:repellor}, $x = 0$ is a repellor and $x = x_\mu$ is an attractor.
     \end{proof}
-\end{prop}
-Hence by Proposition \ref{prop:logistic1} (ii) only points $x \in [0, 1]$ give rise interesting dynamical behaviour. This behaviour becomes chaotic as $\mu $ increases. This next proposition defines the non-chaotic behaviour for small $\mu$ in the range $1 < \mu < 3$.
-
-\begin{prop} \label{prop:logistic2}
-    Let $F_\mu(x) = \mu x (1-x)$ where $1 < \mu < 3$. Then
-    \begin{itemize}
-        \item[(i)] $F_\mu$(x) has an attracting fixed point at $x = x_\mu = \frac{\mu - 1}{\mu}$ and a repelling fixed point at $x = 0$.
-        \item[(ii)] If $x \in [0, 1]$ then $\lim_{n \to \infty} F_\mu^n(x) = x_\mu$.
-    \end{itemize}
-    \begin{proof}[Proof (i)]
-        By Proposition \ref{prop:logistic1} $F_\mu(x)$ has fixed points at $x = 0$ and $x_\mu = (\mu - 1) / \mu$. Here $F_\mu'(x) = \mu - 2\mu x$ so $F_\mu'(0) = \mu$ and $F_\mu'(x_\mu) = 2 - \mu$. Hence if $1 < \mu < 3$ then $|F'_\mu(0)| > 1$ and $|F'_\mu(x_\mu)| < 1$. Therefore by Definition \ref{def:attractor} and Definition \ref{def:repellor}, $x = 0$ is a repellor and $x = x_\mu$ is an attractor.
+    \begin{proof}[Proof (iii)]
+        From Part (i) $x_\mu$ is an attracting fixed point. By Proposition \ref{prop:attractor} we obtain $\lim_{n \to \infty}F_\mu^n(x) = x_\mu.$
     \end{proof}
-    \begin{proof}[Proof (ii)]
-        From Part (i) $x_\mu$ is an attracting fixed point. By Proposition \ref{prop:attractor} we immediately obtain \[\lim_{n \to \infty}F_\mu^n(x) = x_\mu.\]
-    \end{proof}
-\end{prop}
-
-By the above result it is clear that for $1 < \mu < 3$, $F_\mu(x)$ only has two fixed points at $x = 0$ and $x_\mu$ and that all points $x \in (0, 1)$ are forward asymptotic to $x_\mu$. Hence the stable set of $F_\mu(x)$ is simply $W^s(x_\mu) = (0, 1)$. We will now begin to investigate the behaviour of $F_\mu(x)$ for $\mu > 3$.
-
-\begin{prop} \label{prop:logistic3}
-    Let $F_\mu(x) = \mu x (1-x)$ where $3 < \mu < 1 + \sqrt{6}$. Then
-    \begin{itemize}
-        \item[(i)] The fixed point $x = x_\mu = \frac{\mu - 1}{\mu}$ is now a repellor.
-        \item[(ii)] A new period-2 attractor emerges at \[x_{\mu_2} = \frac{\sqrt{\mu^2 - 2\mu - 3} + \mu + 1}{2\mu}\]
-    \end{itemize}
-    \begin{proof}[Proof (i)]
+    \begin{proof}[Proof (iv)]
         Since $\mu > 3$, $|F'_\mu(x_\mu)| = |2-\mu| > 1$. Hence by Definition \ref{def:repellor} the fixed point $x_\mu$ is a repelling fixed point.
     \end{proof}
-    \begin{proof}[Proof (ii)]
-        Solving $F^2_\mu(x) = \mu(\mu x(1-x))(1-\mu x(1-x)) = x$ we obtain the solutions $x = 0$, $x = x_\mu = \frac{\mu - 1}{\mu}$ and \[x = x^\pm_{\mu_2} = \frac{\pm\sqrt{\mu^2 - 2\mu - 3} + \mu + 1}{2\mu}\] where $x^\pm_{\mu_2}$ dentotes the solutions with the positive an negative sign respectively. Hence,
-        \begin{align*}
-        \left\lvert (F_\mu^2)'(x_{\mu_2})\right\rvert &= \left\lvert F'(x^+_{\mu_2}) F'(x^-_{\mu_2}) \right\rvert \\ &= \left\lvert \left( - \sqrt{\mu^2 - 2\mu - 3} - 1 \right) \left( \sqrt{\mu^2 - 2\mu - 3} - 1\right) \right\rvert \\ &= \left\lvert -\mu^2 + 2\mu + 4 \right\rvert
-        \end{align*}
+    \begin{proof}[Proof (v)]
+        Solving $F^2_\mu(x) = \mu(\mu x(1-x))(1-\mu x(1-x)) = x$ we find that $x = 0$, $x = x_\mu = \frac{\mu - 1}{\mu}$ and $x = x^\pm_{\mu_2} = \frac{\pm\sqrt{\mu^2 - 2\mu - 3} + \mu + 1}{2\mu}$ where $x^\pm_{\mu_2}$ dentotes the solutions with the positive an negative sign respectively. Hence, $ \left\lvert (F_\mu^2)'(x_{\mu_2})\right\rvert = \left\lvert F'(x^+_{\mu_2}) F'(x^-_{\mu_2}) \right\rvert = \left\lvert \left( - \sqrt{\mu^2 - 2\mu - 3} - 1 \right) \left( \sqrt{\mu^2 - 2\mu - 3} - 1\right) \right\rvert = \left\lvert -\mu^2 + 2\mu + 4 \right\rvert $
         Therefore if $3 < \mu < 1 + \sqrt{6}$ then $\left\lvert -\mu^2 + 2\mu + 4 \right\rvert < 1$ and so $x_{\mu_2}$ is a period-2 attractor.
     \end{proof}
 \end{prop}
+
+By the above result it is clear that for $1 < \mu < 3$, $F_\mu(x)$ only has two fixed points at $x = 0$ and $x_\mu$ and that all points $x \in (0, 1)$ are forward asymptotic to $x_\mu$. Hence the $\omega$-limit set of $F_\mu(x)$ is simply $\omega(f) = \left\lbrace 0, 1 \right\rbrace \cup x_\mu$.
 
 \begin{figure}[h]
     \centering
@@ -274,7 +244,7 @@ By the above result it is clear that for $1 < \mu < 3$, $F_\mu(x)$ only has two 
     \label{fig:cobweb_2.9_3.1}
 \end{figure}
 
-Here the attracting fixed point at $x = x_\mu$ decays into a repellor and a period-2 attractor emerges around the point $\mu_1 = 3$. This can been seen clearly in Figure \ref{fig:cobweb_2.9_3.1} which shows the long term stability of the orbit. This behaviour we have just outlined is called a \emph{bifurcation}, specifically a \emph{period-doubling bifurcation} and the point $\mu_1 = 3$ is called a \emph{bifurcation point}. The next bifurcation point happens at $\mu_2 = 1 + \sqrt{6}$ whereby the stable period-2 attractor decays into a repellor and a period-4 attractor emerges. It turns out that there are many bifurcations as $\mu$ increases towards value of four. The value of $\mu$ at which the $k$-th bifurcation occurs is denoted $\mu_k$. The bifurcations occur ever closer together in what is called a \emph{period-doubling cascade}, until the whole system becomes in some sense chaotic. Figure \ref{fig:bifurcation_2.8} shows what is called a bifurcation diagram, which plots the stable orbits of $x$ as $r$ increases. From the bifurcation diagram we can clearly see the initial bifurcation at $\mu_1 = 3$ whereby the initial attracting fixed point $x = x_\mu$ decays into a repellor and the period-2 attractor $x = x_{\mu_2}$ emerges. Again the second bifurcation at $\mu_2 = 1 + \sqrt{6}$ is shown whereby the period-2 attractor $x = x_{\mu_2}$ decays into a repellor and a period-4 attractor emerges. These bifurcations cascade as $\mu$ increases until at a certain point called the \emph{accumulation point} ($\mu_\infty = \mu \approx 3.56995$) whereby periodicity transforms suddenly into chaos as slight pertubations in the starting value $x$ cascade into large changes over a iterations of $F_\mu$. A chaotic orbit for when $\mu > \mu_\infty$ can be seen in Figure \ref{fig:cobweb_3.5_3.9}. An interesting property of the period-doubling cascade is the ratio between bifurcation interval to the next bifurcation interval between each period doubling calculated using \[\delta_k  = \frac{\mu_k - \mu_{k-1}}{\mu_{k+1}-\mu_k}\]It turns out that as $k \to \infty$ this ratio converges to a constant $\delta \approx 4.66921$ called the \emph{Feigenbaum constant}. A remarkable discovery is that this constant holds for the bifurcations of every one-dimensional map with a only one quadratic maximum. Looking back at the logistic map a rather strange result from the bifurcation diagram is the presense of small isolated intervals of stability present amongst the chaos. These intervals are referred to as \emph{islands of stability}. The point $\mu = 1 + 2\sqrt{2}$ is the start of one such interval in which a period-3 attractor emerges from the chaos. However, once again a period-doubling cascade happens and the system decends back into chaos. For $\mu > 4$ no attractors exist and the whole system becomes unstable.
+For $3 < \mu < 1 + \sqrt{6}$ the attracting fixed point at $x = x_\mu$ decays into a repellor and a period-2 attractor emerges around the point $\mu_1 = 3$. This can been seen clearly in Figure \ref{fig:cobweb_2.9_3.1} which shows the long term stability of the orbit. This behaviour we have just outlined is called a \emph{bifurcation}, specifically a \emph{period-doubling bifurcation} and the point $\mu_1 = 3$ is called a \emph{bifurcation point}. The next bifurcation point happens at $\mu_2 = 1 + \sqrt{6}$ whereby the stable period-2 attractor decays into a repellor and a period-4 attractor emerges. It turns out that there are many bifurcations as $\mu$ increases towards value of four. The value of $\mu$ at which the $k$-th bifurcation occurs is denoted $\mu_k$. The bifurcations occur ever closer together in what is called a \emph{period-doubling cascade}, until the whole system becomes in some sense chaotic. Figure \ref{fig:bifurcation_2.8} shows what is called a bifurcation diagram, which plots the stable orbits of $x$ as $r$ increases. From the bifurcation diagram we can clearly see the initial bifurcation at $\mu_1 = 3$ whereby the initial attracting fixed point $x = x_\mu$ decays into a repellor and the period-2 attractor $x = x_{\mu_2}$ emerges. Again the second bifurcation at $\mu_2 = 1 + \sqrt{6}$ is shown whereby the period-2 attractor $x = x_{\mu_2}$ decays into a repellor and a period-4 attractor emerges. These bifurcations cascade as $\mu$ increases until at a certain point called the \emph{accumulation point} ($\mu_\infty = \mu \approx 3.56995$) whereby periodicity transforms suddenly into chaos as slight pertubations in the starting value $x$ cascade into large changes over a iterations of $F_\mu$. A chaotic orbit for when $\mu > \mu_\infty$ can be seen in Figure \ref{fig:cobweb_3.5_3.9}. An interesting property of the period-doubling cascade is the ratio between bifurcation interval to the next bifurcation interval between each period doubling calculated using \[\delta_k  = \frac{\mu_k - \mu_{k-1}}{\mu_{k+1}-\mu_k}\]It turns out that as $k \to \infty$ this ratio converges to a constant $\delta \approx 4.66921$ called the \emph{Feigenbaum constant}. A remarkable discovery is that this constant holds for the bifurcations of every one-dimensional map with a only one quadratic maximum. Looking back at the logistic map a rather strange result from the bifurcation diagram is the presense of small isolated intervals of stability present amongst the chaos. These intervals are referred to as \emph{islands of stability}. The point $\mu = 1 + 2\sqrt{2}$ is the start of one such interval in which a period-3 attractor emerges from the chaos. However, once again a period-doubling cascade happens and the system decends back into chaos. For $\mu > 4$ no attractors exist and the whole system becomes unstable.
 \begin{figure}[h]
     \centering
     \includegraphics[width=14cm]{bifurcation_2.8.png}
@@ -290,13 +260,13 @@ Here the attracting fixed point at $x = x_\mu$ decays into a repellor and a peri
     \label{fig:cobweb_3.5_3.9}
 \end{figure}
 
-\chapter{Topological and Symbolic Relationships}
+\chapter{Topological and Symbolic Relationships} \label{chap:conjugacy-symbol-dynamics}
 
 \section{Topological Conjugacy}
-Topological conjugacy defines when two maps exhibit the same topolgical behaviour and can be considered equivalent. If two maps are topologically conjugate, properties we have proved for one map can be applied to the other.
+Topological conjugacy defines when two maps that exhibit the same topolgical behaviour and can be considered equivalent. If two maps are topologically conjugate, properties we have proved for one map can be applied to the other.
 
-\begin{defn}
-    Let $f: X \to X$ and $g: Y \to Y$ be continuous maps. A continuous map $\varphi: X \to Y$ is a \emph{semi-conjugacy} from $f$ to $g$ if $\varphi \circ f = g \circ \varphi$. Furthermore, the map $\varphi$ is a \emph{topological conjugacy} if $\varphi$ is also a homeomorphism i.e. $\varphi$ is a bijection with $h$ and $h^{-1}$ both continuous. If a topological conjugacy $\varphi$ exists then the system $g$ is \emph{topologically conjugate} to $f$.
+\begin{defn} \label{defn:topological-conjugacy}
+    Let $(X, f)$ and $(Y, g)$ be discrete dynamical systems. The system $(Y, g)$ is \emph{topologically semi-conjugate} to $(X, f)$ if there exists a continuous, surjective map $\varphi: X \to Y$ termed a \emph{topological conjugacy} where $\varphi \circ f = g \circ \varphi$. Furthermore if the map $\varphi$ is a homeomorphism i.e. $\varphi$ is a bijection with $\varphi$ and $\varphi^{-1}$ both continuous then $(Y, g)$ is \emph{topologically conjugate} to $(X, f)$. In this case $\varphi$ is called a \emph{topological conjugacy}.
 \end{defn}
 
 \begin{center}
@@ -315,8 +285,8 @@ Topological conjugacy defines when two maps exhibit the same topolgical behaviou
 
 Topological conjugacy can be used for infering the properties of one topological system from another. For instance if the continuous maps $f$ and $g$ are topologically conjugate through some map $\varphi$ then if $x$ is a fixed point of $f$, $\varphi(x)$ is a fixed point of $g$. This can be seen mathematically as $\varphi(x) = \varphi \circ f(x) = g \circ \varphi(x)$. This leads us directly into the following lemma.
 
-\begin{prop}
-    Let $f: X \to X$ and $g: Y \to Y$ be continuous, topologically conjugate maps via the conjugacy $\varphi: X \to Y$. If $x$ is a period-$k$ point in of $f$ then $\varphi(x)$ is a period-$k$ point of $g$.
+\begin{prop} \label{prop:conjugacy-preserves-periodic-points}
+    Let $(X, f)$ and $(Y, g)$ be discrete dynamical systems and let $\varphi: X \to Y$ be a topological conjugacy. If $x$ is a period-$k$ point of $f$ then $\varphi(x)$ is a period-$k$ point of $g$.
     \begin{proof}
         Suppose $f^k(x) = x$, then by induction $\varphi(x) = \varphi \circ f^k(x) = g^k \circ \varphi (x)$. Since $\varphi$ is invertible $f^k(x) = \varphi \circ f^k \circ \varphi^{-1}(x)$. Now suppose $g^k(\varphi(x)) = \varphi(x)$, then $x = \varphi \circ \varphi^{-1}(x) = g^k \circ \varphi \circ \varphi(x)^{-1} = \varphi \circ f^k \circ \varphi^{-1}(x) = f^k(x)$.
     \end{proof}
@@ -325,7 +295,7 @@ Topological conjugacy can be used for infering the properties of one topological
 Therefore, to understand the periodic points of one dynamical system we can analyse the the periodic points of another system which is topologically conjugate to it. This becomes useful when dealing with dynamical sytems which have particularly complex behaviour such as the logistic maps, leading us into our next proposition.
 
 \begin{prop} \label{prop:logisticquadratic}
-    The logisitic map $F_{\mu}$ and quadratic map $Q_c$ are topologically conjugate when $c = \frac{\mu}{2} - (\frac{\mu}{2})^2$.
+    The topological dynamical system $([0, 1], F_{\mu})$ described by $F_\mu(x) = \mu x(1-x)$ and the discrete dynamical system $(\mathbb{R}, Q_c)$ described by $Q_c(x) = x^2 + c$ are topologically conjugate when $c = \frac{\mu}{2} - (\frac{\mu}{2})^2$.
 
     \begin{proof}
         Let $F_{\mu} : [0, 1] \to [0, 1]$, $F_\mu(x) = \mu x(1-x)$ be the logistic map and $Q_c: \mathbb{R} \to \mathbb{R}$, $Q_c(x) = x^2 + c$ be the quadratic map with $\mu > 0$. Suppose the conjugacy is of the form $\varphi = \alpha x + \beta$. Now $\varphi \circ F_\mu = Q_c \circ \varphi \iff \alpha(\mu x(1-x)) + \beta = (\alpha x + \beta)^2 + c \iff -\mu \alpha x^2 + \alpha \mu x + \beta = \alpha ^ 2 x^2 + 2\alpha\beta x+ \beta ^ 2 + c$. Collecting terms $-\mu \alpha = \alpha ^ 2 \implies -\mu = \alpha, \ \alpha\mu = 2\alpha\beta \implies \mu = 2\beta$ and $\beta = \beta^2 + c$. Hence $\varphi = -\mu x + \frac{\mu}{2}$ is the topological conjugacy when $c = \frac{\mu}{2} - (\frac{\mu}{2})^2$.
@@ -335,16 +305,16 @@ Therefore, to understand the periodic points of one dynamical system we can anal
 Now we can use the fact that these maps are topologically conjugate to go back and prove the following interesting result about the logistic map.
 
 \begin{prop}
-    The logistic map $F_{\mu}$ have a period-$3$ point when $\mu = 1 + 2\sqrt{2}$.
+    The topological dynamical system $([0, 1], F_{\mu})$ has a period-$3$ point when $\mu = 1 + 2\sqrt{2}$.
     \begin{proof}
     Let $Q(x) = x^2 + c$. Then $Q^3(x) = Q^2(x^2 + c) = Q((x^2 + c)^2 + c) = Q(x^4 + 2cx^2 + c^2 + c) = (x^4 + 2cx^2 +c^2 + c)^2 + c = x^8 + 4cx^6 + (6c^2 + 2c)x^4 + 4c(c^2 + c)x^2 + c^4 + 2c^3 + c^2 + c$. To find period-$3$ points we set $Q^3(x) = x$. Now solving this by dividing by a factor of $x^2 -x + c$ we obtain the following solution \[x^6 + x^5 + (3c + 1)x^4 + (2c + 1)^3 + (3c^2 + 3c + 1)x^2 + (c^2 + 2c + 1)x + (c^3 + 2c^2 + c) = 0\] It can be shown that when $c = -7/4$ we can complete the square to obtain the simpler $(x^3 -\frac{x^2}{2} - \frac{9x}{4} - \frac{1}{8})^2 = 0$ which has precisely three real roots. Using Proposition \ref{prop:logisticquadratic} the value of $c = -7/4$ corresponds to $\mu = 1 + 2\sqrt{2}$. Since $\varphi$ is a topological conjugacy between $F_\mu$ and $Q_c$ for this value of $c$, $F_\mu$ has a period-3 point for $\mu = 1 + 2\sqrt{2}$.
     \end{proof}
 \end{prop}
 
-Hence we have used topological conjugacy along with properties of the quadratic maps to prove results about the logistic maps. When $\mu = 4$ the logisitic maps is topologically conjugate to another common map, the tent map.
+Hence we have used topological conjugacy along with properties of the quadratic maps to prove results about the logistic maps. When $\mu = 4$ the logisitic map is topologically conjugate to another common map, the tent map.
 
 \begin{prop} \label{prop:tent-logistic}
-    The logistic map $F_\mu$ is topologically conjugate to the tent map $T$ when $\mu = 4$.
+    The topological dynamical systems $([0, 1], F_4)$ and $([0, 1], T)$ where $T$ is the tent map are topologically conjugate.
     \begin{proof}
     The tent map $T: [0, 1] \to [0,1]$ is defined piecewise as $T(x) = 2x$ for $0 \leq x \leq \frac{1}{2}$ and $T(x) = 2(1-x)$ for $\frac{1}{2} \leq x \leq 1$. Suppose $\varphi: [0, 1] \to [0,1]$ is defined by $\varphi(x) = \sin^2(\frac{\pi x}{2})$ which is homeomorphic on $[0, 1]$ as is a continuous, bijective and $\varphi^{-1} = \frac{2}{\pi} \sin^{-1}(\sqrt{x})$ exists and is continuous on $[0, 1]$. Clearly $F_4 \circ \varphi = 4 \sin^2\left(\frac{\pi x}{2}\right) \cdot \left(1 - \sin^2\left(\frac{\pi x}{2}\right)\right) = \sin^2\pi x$ for $x \in [0, 1]$, $\varphi \circ T = \sin^2\pi x$ for $x \in [0, \frac{1}{2}]$ and $\varphi \circ T = \sin^2 (\pi (1-x)) = \sin^2 \pi x$. Hence we have shown that $\varphi \circ T = F_4 \circ \varphi$ so $F_\mu$ and $T$ are topologically conjugate when $\mu = 4$.
     \end{proof}
@@ -353,7 +323,7 @@ Hence we have used topological conjugacy along with properties of the quadratic 
 Topological conjugacy preserves a wide range of topological properties of maps. A specific property that topological conjugacy preserves, which will prove useful is the following.
 
 \begin{prop}
-    Let $f: X \to X$ and $g: Y \to Y$ be continuous, topologically conjugate maps via the conjugacy $\varphi: X \to Y$. If $f$ has a dense orbit in $X$ then $g$ has a dense orbit in $Y$.
+    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and $\varphi: X \to Y$ be a topological conjugacy. If $f$ has a dense orbit in $X$ then $g$ has a dense orbit in $Y$.
     \begin{proof}
         Before we begin note that, from topology, if $f: X \to Y$ is a continuous surjective function and $\overline{E} = X$ then $\overline{f(E)} = Y$. Now suppose $x \in X$ has a dense orbit in $f$, so $\overline{\mathcal{O}_f(x)} = X$. Since $\varphi$ is a homeomorphism $\varphi$ is continuous and surjective, hence $\overline{\mathcal{O}_{\varphi \circ f}(x)} = \overline{\mathcal{O}_{g \circ \varphi}(x)} = \overline{\mathcal{O}_{g}(\varphi(x))} = Y$. Hence $g$ has a dense orbit in $Y$.
     \end{proof}
@@ -362,7 +332,7 @@ Topological conjugacy preserves a wide range of topological properties of maps. 
 Hence we can now prove that $F_4$ has periodic points that are dense in $[0, 1]$ since $F_4$ is conjugate to the tent map $T$. This will prove useful later when characterising chaos.
 
 \begin{prop} \label{prop:logisitc-periodic-dense}
-    The logistic map $F_4$ has periodic points that are dense in $[0, 1]$.
+    The topological dynamical system $([0, 1], F_4)$ has periodic points that are dense in $[0, 1]$.
     \begin{proof}
     Let $T(x)$ denote the tent map. Let $\left[\frac{k}{2^n}, \frac{k+1}{2^n}\right] \subseteq [0, 1]$ be an interval for some $0 \leq k \leq 2^{n-1}$ where $n \in \mathbb{N}$. Moreover $T^n$ has $2^n$ fixed points and so the tent map has $2^n$ period-$n$ points. Hence there is a periodic point in each interval $\left[\frac{k}{2^n}, \frac{k+1}{2^n}\right]$ and so the periodic points of $T$ are dense in $[0, 1]$. Therefore by the conjugacy mentioned in Proposition \ref{prop:tent-logistic} the periodic points of the logisitic map $F_4$ are dense in $[0, 1]$.
     \end{proof}
@@ -371,10 +341,10 @@ Hence we can now prove that $F_4$ has periodic points that are dense in $[0, 1]$
 In the next section on symbolic dynamics we shall see how we can further characterise the complex dynamics of the tent map and doubling map to infer specific properties about them.
 
 \section{Symbolic Dynamics}
-Symbolic dynamics studies how the shift map effects infinite sequences of of symbols that describe the complex dynamical structure of specific discrete dynamical systems. More specifically it is the assignment of a sequence of discrete symbols to the orbits of topological dynamical systems. First lets start with some preliminary definitions given by Devaney \cite[Section 1.6]{devaney}.
+Symbolic dynamics studies how the shift map effects infinite sequences of symbols that describe the complex dynamical structure of specific discrete dynamical systems. More specifically it is the assignment of a sequence of discrete symbols to the orbits of topological dynamical systems. First lets start with some preliminary definitions given by Devaney \cite[Section 1.6]{devaney}.
 
 \begin{defn}
-    Let $(I, f)$ be a topological dynamical system where $I \subseteq \mathbb{R}$ is a closed interval. Let $x \in I$ and suppose $I = I_0 \cup I_1 \cup \cdots \cup I_n$ where $I_i$ are closed intervals. The \emph{itinerary} of $x$ is the sequence $S(x) = s_1s_2\cdots$ where $s_i$ denotes the interval $I_i$ such that $f^i(x) \in I_i$.
+    Let $(I, f)$ be a topological dynamical system where $I$ is a closed interval. Let $x \in I$ and suppose $I = I_0 \cup I_1 \cup \cdots \cup I_n$ where $I_i$ are closed intervals. The \emph{itinerary} of $x$ is the sequence $S(x) = s_1s_2\cdots$ where $s_i$ denotes the interval $I_i$ such that $f^i(x) \in I_i$.
 \end{defn}
 
 \begin{defn}
@@ -663,7 +633,7 @@ As a result of this proposition, topological dynamical systems which have a topo
 Lets introduce some examples of systems that exhibit Devaney chaos using topological conjugacy and properties of some examples of dynamical systems we have already observed.
 
 \begin{exmp}
-    \textcolor{red}{The logistic map $f: [0, 1] \to [0, 1]$ defined by $f: 4x (1-x)$ was shown to be topologically conjugate to the tent map $T: [0, 1] \to [0, 1]$ through $\varphi(x) = \sin^2(\frac{\pi x}{2})$ in Proposition \ref{prop:tent-logistic}. By Proposition \ref{exmp:logisitc-periodic-dense} the periodic points of the logitic map are dense in $[0,1]$. }
+    \textcolor{red}{The logistic map $f: [0, 1] \to [0, 1]$ defined by $f: 4x (1-x)$ was shown to be topologically conjugate to the tent map $T: [0, 1] \to [0, 1]$ through $\varphi(x) = \sin^2(\frac{\pi x}{2})$ in Proposition \ref{prop:tent-logistic}. By Proposition \ref{prop:logisitc-periodic-dense} the periodic points of the logitic map are dense in $[0,1]$. }
 \end{exmp}
 
 \begin{exmp}
