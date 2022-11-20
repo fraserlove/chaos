@@ -1,2 +1,3 @@
 *.synctex.gz
 *.xdv
+.DS_Store
