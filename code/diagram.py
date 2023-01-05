@@ -20,7 +20,11 @@ def plot(f, x0=0, a=0, b=1, delta=0.0001, mu=0, h=0):
     y = []
     for i in range(len(x)): y.append(f(x[i], mu, h))
 
-    ax.plot(x, y, c='#444444', lw=2, alpha=1)
+    if f.__name__ == 'doubling': # Removing continuity
+        ax.plot(x[:int(len(x)/2)], y[:int(len(x)/2)], c='#444444', lw=2, alpha=1)
+        ax.plot(x[int(len(x)/2):], y[int(len(x)/2):], c='#444444', lw=2, alpha=1)
+    else: ax.plot(x, y, c='#444444', lw=2, alpha=1)
+
     if identity: ax.plot(x, x, c='#222222', lw=1, alpha=0.4)
 
     if x0 != 0:
@@ -46,6 +50,7 @@ def plot(f, x0=0, a=0, b=1, delta=0.0001, mu=0, h=0):
     ax.grid(which='minor', alpha=0.5)
     ax.grid(which='major', alpha=0.5)
     ax.set_aspect('equal')
+    plt.axis('off')
 
     plt.savefig('./images/{}{}.pdf'.format(f.__name__, '_' + str(mu) if mu != 0 else ''), dpi=dpi * 10, bbox_inches='tight')
 
@@ -58,6 +63,9 @@ def tent(x, mu = 0, h = 0):
 def truncated_tent(x, mu = 0, h = 0):
     return min(h, mu * min(x, 1-x))
 
+def doubling(x, mu = 0, h = 0):
+    return (2 * x) % 1
+
 def piecewise(x, mu = 0, h = 0):
     # For piecewise set delta = 1, a = 0, b = 4
     match x:
@@ -68,4 +76,4 @@ def piecewise(x, mu = 0, h = 0):
         case 4: return 0
 
 # To Plot Iterates Set x0 /= 0
-plot(truncated_tent, a = 0, b = 1, h = 0.6, mu = 2)
+plot(doubling, a = 0, b = 1)
