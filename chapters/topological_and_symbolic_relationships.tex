@@ -89,7 +89,15 @@ Symbolic dynamics studies how the shift map effects infinite sequences of symbol
     Let $(X, f)$ be a topological dynamical system where $X$ is a compact set. Let $x \in X$ and suppose $X = X_0 \cup X_1 \cup \dots \cup X_n$ where $X_i$ are compact sets. The \emph{itinerary} of $x$ is the sequence $\underline{s} = (s_1s_2\dots)$ where $s_i$ denotes the set $X_i$ such that $f^i(x) \in X_i$.
 \end{defn}
 
-Properties of the itinerary reflect properties of the topological dynamical system it represents. If a point the topological dynamical system is periodic, then that same point will give a periodic itinerary. Now we shall construct a metric space in which where the underlying set contains all possible itineries of zeros and ones.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=4cm]{doubling_symbolic}
+    \includegraphics[width=4cm]{tent_symbolic}
+    \caption{Itineraries for the tent map $([0, 1], T_2)$ and the doubling map $([0, 1], D)$ respectively.}
+    \label{fig:symbolic}
+\end{figure}
+
+Figure \ref{fig:symbolic} gives an example of useful itineraries for the tent map and doubling map. Properties of the itinerary reflect properties of the topological dynamical system it represents. If a point the topological dynamical system is periodic, then that same point will give a periodic itinerary. Now we shall construct a metric space in which where the underlying set contains all possible itineries of zeros and ones.
 
 \begin{defn}[Sequence Space] \label{defn:sequence-space}
     Let $\Sigma_2 = \left\lbrace (s_1s_2\dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set of itineraries of zeros and ones. Define $(\Sigma_2, d)$ to be the \emph{sequence space} where $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$ is a metric for $(s)_{i=1}^{\infty} = (s_1s_2\dots) \in \Sigma_2$ and $(t)_{i=1}^{\infty} = (t_1t_2\dots) \in \Sigma_2$. It can be easily shown this is a metric space.
