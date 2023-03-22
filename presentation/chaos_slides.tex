@@ -1,0 +1,247 @@
+\documentclass{beamer}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+
+\setbeamertemplate{bibliography item}{}
+
+\bibliographystyle{abbrv}
+
+\title{An Introduction to Chaos in Topological Dynamical Systems}
+\author{Fraser Robert Love}
+\institute{School of Mathematics and Statistics \\ University of St Andrews}
+\date{March 27, 2023}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+\section{Topological Dynamics}
+\begin{frame}
+    \frametitle{Topological Dynamics}
+
+    \begin{block}{Definition (Topological Dynamical System).}
+        \begin{itemize}
+            \item Let $X$ be a non-empty compact metric space. A \emph{topological dynamical system}, denoted $(X, f)$, is given by a continuous map $f: X \to X$. 
+            \item The system starts at an initial point $x \in X$ and evolves through successive iterations of the map $f$.
+            \item After $k \in \mathbb{N}$ iterations of $f$, the system can be described by $f^n := f \circ f \circ \dots \circ f$, where $x$ is mapped to the point $f^n(x)$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+
+    \begin{block}{Definition (Orbit).}
+        Let $(X, f)$ be a topological dynamical system. The \emph{orbit} of $x \in X$ under $f$ is the set $\mathcal{O}_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \dots \rbrace$ of iterates of $x$ under the map $f$.
+    \end{block}
+
+    \begin{block}{Definition (Periodic Point, Cycle).}
+        \begin{itemize}
+            \item Let $(X, f)$ be a topological dynamical system. A point $x \in X$ is \emph{periodic} if $f^n(x) = x$ for some $n \in \mathbb{N}$.
+            \item The \emph{period} of a point $x$ is the least positive integer $k$ such that $f^k(x) = x$. If $x$ has a period of $k$ we say that $x$ is a \emph{period-$k$} point.
+            \item The orbit $\mathcal{O}_f(x) = \lbrace x, f(x), \dots, f^{k-1}(x) \rbrace$ of a periodic point is a finite set of unique points, called a \emph{periodic orbit} of period $k$ or simply a \emph{k-cycle}.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+
+    \begin{block}{Example (Logistic Map).}
+        Define $F_{\mu}: [0, 1] \to [0, 1]$ to be the \emph{logistic map}, where $F_{\mu}(x)=\mu x(1-x)$ and $\mu > 0$.
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=4cm]{../images/logistic_3}
+            \caption{Logistic map $F_\mu$ with $\mu = 3$.}
+            \label{fig:logistic_3}
+        \end{figure}
+
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+
+    \begin{block}{Example (Doubling Map).}
+        Define $\mathcal{D}: S^1 \to S^1$ to be the \emph{doubling map on} $S^1$, where $\mathcal{D}(z) = z^2$, or equivalently $\mathcal{D}(e^{i\theta}) = e^{2i\theta}$ for some $\theta \in \mathbb{R}$.
+
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=5cm]{../images/doubling_circle}
+            \caption{First ten iterations of the doubling map $\mathcal{D}$.}
+            \label{fig:doubling-circle}
+        \end{figure}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+    \begin{block}{Definition (Sequence Space).}
+        \begin{itemize}
+            \item Let $\Sigma_2 = \left\lbrace (s_1, s_2, \dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set sequences of zeros and ones.
+            \item Define $(\Sigma_2, d)$ to be the \emph{sequence space} where $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$ is a metric for $(s)_{i=1}^{\infty}, \ (t)_{i=1}^{\infty}  \in \Sigma_2$.
+            \item The sequence space $(\Sigma_2, d)$ is compact.
+        \end{itemize}
+    \end{block}
+    \vspace{0.5cm}
+    \begin{block}{Example (Shift Map).}
+        Let $(s)_{i=1}^{\infty} \in \Sigma_2$. The \emph{shift map} $\sigma: \Sigma_2 \to \Sigma_2$ is given by $\sigma \left((s)_{i=1}^{\infty}\right) = (s)_{i=2}^{\infty}$.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+    \begin{block}{Proposition.}
+        The shift map $\sigma: \Sigma_2 \to \Sigma_2$ is continuous.
+        \begin{proof}
+            Let $\varepsilon > 0$ and suppose $\underline{s} = (s_i)_{i=1}^{\infty}, \ \underline{t} = (t_i)_{i=1}^{\infty} \in \Sigma_2$. Choose $\delta = \varepsilon$ and suppose $d(\underline{s}, \underline{t}) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta$. Then $d\left( \sigma\left(\underline{s}\right) - \sigma\left(\underline{t}\right) \right) = d\left((s)_{i=2}^{\infty} - (t)_{i=2}^{\infty}\right) = \Sigma_{i=2}^{\infty}|s_i - t_i|2^{-i} \leq \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta = \varepsilon$.
+        \end{proof}
+    \end{block}
+    \vspace{0.5cm}
+    Hence $(\Sigma_2, \sigma)$ defines a topological dynamical system.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+    \begin{block}{Proposition.}
+        The shift map $(\Sigma_2, \sigma)$ has a dense orbit. \cite{devaney}
+    \begin{proof}
+        Consider the sequence $\underline{s} = (0, 1, 00, 01, 10, 11, 000, 001, \dots)$ of 0s and 1s sorted in len-lex order. Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary. Let $\varepsilon > 0$. By construction we can perform some $k$ number of iterations of $\sigma$ such that if $n > N + k = \frac{1}{\varepsilon} + k$ iterations of $\sigma$ such that $d(\underline{s}, \underline{t}) = \sum_{i = k}^{n}|s_i - t_i|2^{-i} + \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} = 2^{-n} < 2^{-N} < \frac{1}{N} = \varepsilon$. Hence the orbit $\underline{s}$ is dense in $\Sigma_2$.
+    \end{proof}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Dynamics}
+    \begin{block}{Proposition.}
+        The periodic points of the shift map $(\Sigma_2, \sigma)$ are dense in $\Sigma_2$. \cite{devaney}
+    \begin{proof}
+        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$. Define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_{n_i} = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - s_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}2^{-i} = 2^{-n}$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
+    \end{proof}
+    \end{block}
+\end{frame}
+
+\section{Introduction to Chaos}
+
+\begin{frame}
+    \frametitle{Introduction to Chaos}
+    \begin{itemize}
+        \item Many different definitions of chaos exist for topological dynamical systems.
+        \item Devaney chaos, Li-Yorke chaos, Topological chaos, etc.
+        \item These definitions rely on many different topological characteristics to define chaos in a natural way.
+        \item Topological transitivity / existence of a dense orbit, sensitive dependence on initial conditions, dense periodic points, existence of an uncountable scrambled-set, and positive topological entropy.
+    \end{itemize}
+\end{frame}
+
+\section{Topological Characteristics of Chaos}
+\begin{frame}
+    \frametitle{Topological Characteristics of Chaos}
+    \begin{block}{Definition (Topological Transitivity).}
+        Let $(X, f)$ be a topological dynamical system. The map $f$ is \emph{topologically transitive} if for every pair of non-empty open sets $U, V \subseteq X$ there exists $k > 0$ such that $f^k(U) \cap V \neq \emptyset$.
+    \end{block}
+    \vspace{0.3cm}
+    In a topologically transitive mapping, points in an arbitrarily small set can be mapped into any other arbitrary small set under a repeated number of iterations of the map.
+    \vspace{0.3cm}
+    \begin{block}{Proposition.}
+        Let $(X, f)$ be a topological dynamical system and suppose $X$ has no isolated points. The map $f$ is topologically transitive if and only if there exists some $x \in X$ such that $\mathcal{O}(x)$ is dense in $X$. \cite{silverman}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Characteristics of Chaos}
+    \begin{block}{Example.}
+        Let $(S^1, \mathcal{D})$ be the doubling map over $S^1$, where $\mathcal{D}(z) = z^2$. Then $\mathcal{D}$ is topologically transitive.
+        \begin{proof}
+            Let $z_1, z_2 \in S^1$. Let $(z_1, z_2) = U$ define an arc between $z_1$ and $z_2$. Suppose now $d\left(z_1, z_2\right) > \frac{2\pi}{2^k}$ for some $k \in \mathbb{N}$. Then $d\left(\mathcal{D}^k(z_1), \mathcal{D}^k(z_2)\right) = d\left( 2^k z_1, 2^k z_2 \right) = 2^k d\left( z_1, z_2 \right) > 2^k \cdot \frac{2\pi}{2^k} = 2\pi$. Hence $\mathcal{D}^k((z_1, z_2))$ covers $S^1$ so for any $V \subseteq S^1$ we obtain $\mathcal{D}^k(U) \cap V \neq \emptyset$. Hence $\mathcal{D}$ is topologically transitive.
+        \end{proof}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Characteristics of Chaos}
+    \begin{block}{Definition (Sensitive Dependence on Initial Conditions).}
+        Let $(X, f)$ be a topological dynamical system and $\varepsilon > 0$. A point $x \in X$ is \emph{$\varepsilon$-unstable} if, for every neighbourhood $U$ of $x$, there exists a point $y \in U$ and $k \geq 0$ such that $d\left(f^k(x), f^k(y)\right) \geq \varepsilon$. The map $f$ has \emph{sensitive dependence on initial conditions} if for all points $x \in X$, $x$ is $\varepsilon$-unstable.
+    \end{block}
+    \vspace{0.5cm}
+    In other words, there exist points arbitrary close to $x$ that eventually get mapped at least $\varepsilon$ far apart under multiple applications of the map.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Characteristics of Chaos}
+    \begin{block}{Example.}
+        Let $(S^1, \mathcal{D})$ be the doubling map over the $S^1$, where $\mathcal{D}(z) = z^2$. Then $\mathcal{D}$ has sensitive dependence on initial conditions.
+        \begin{proof}
+            Let $z_1, z_2 \in S^1$ and $\varepsilon < 2^k \delta$ and suppose $d(z_1, z_2) = \delta$, then $d\left(\mathcal{D}^k(z_1), \mathcal{D}^k(z_2)\right) =  d\left(2^kz_1, 2^kz_2\right) = 2^k d(z_1, z_2) = 2^k \delta > \varepsilon$. Hence we can always choose a $k$ large enough so this holds, and so $\mathcal{D}$ has sensitive dependence on initial conditions.
+        \end{proof}
+    \end{block}
+\end{frame}
+
+\section{Devaney Chaos}
+\begin{frame}
+    \frametitle{Devaney Chaos}
+    \begin{block}{Definition (Devaney Chaos).}
+        A topological dynamical system $(X, f)$ is \emph{chaotic in the sense of Devaney} if it is topologically transitive, has sensitive dependence on initial conditions, and if the periodic points of $f$ are dense in $X$.
+    \end{block}
+    \vspace{0.5cm}
+    Devaney's definition considers:
+    \begin{itemize}
+        \item Unpredictability (sensitive dependence on initial conditions).
+        \item Repetitiveness (dense periodic points).
+        \item Indecomposability (topological transitivity).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Devaney Chaos}
+    It turns out sensitive dependence on initial conditions is a redundant characteristic via the following proposition.
+    \vspace{0.5cm}
+    \begin{block}{Proposition.}
+        Let $(X, f)$ be a topological dynamical system. If the map $f$ is topologically transitive and has dense periodic points then $f$ has sensitive dependence on initial conditions. \cite{bbcds} \cite{glasner-weiss}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Devaney Chaos}
+    \begin{block}{Proposition.}
+        The shift map $(\Sigma_2, \sigma)$ is chaotic in the sense of Devaney.
+        \begin{proof}
+            We previously showed that $(\Sigma_2, \sigma)$ has a dense orbit and so is topologically transitive. We also showed that the periodic points of the shift map are dense in $\Sigma_2$. Hence, by the proposition above, we conclude that $(\Sigma_2, \sigma)$ is Devaney chaotic.
+        \end{proof}
+    \end{block}
+\end{frame}
+
+\section{Concluding Remarks}
+\begin{frame}
+    \frametitle{Concluding Remarks}
+    \begin{itemize}
+        \item We have defined chaos to be a mixture of unpredictability, repetitiveness and indecomposability.
+        \item This was achieved using the properties of topological transitivity, sensitive dependence on initial conditions and dense periodic points.
+        \item We have shown that the shift map $(\Sigma_2, \sigma)$ is a Devaney chaotic topological dynamical system.
+        \item Using symbolic dynamics and topological conjugacy we can also prove that $(F_\mu, [0, 1])$, $(\mathcal{D}, S^1)$ and many more systems exhibit Devaney chaos.
+        \item Furthermore, some of these systems also exhibit other types of chaos, such as Li-Yorke chaos and Topological chaos.
+    \end{itemize}
+\end{frame}
+
+\section{Bibliography}
+\begin{frame}
+    \frametitle{Bibliography}
+    \bibliography{../chaos}
+\end{frame}
+
+\end{document}
