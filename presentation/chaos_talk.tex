@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage[a4paper,margin=2.5cm, top=1.5in, bottom=1.5in]{geometry}
 \usepackage{enumerate}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -18,12 +19,126 @@
     \begin{itemize}
         \item In this presentation I will first give the definition of a topological dynamical system.
         \item Then I will introduce some basic topological dynamics and give examples of such systems.
-        \item Next I will discuss what exactly it means to be chaotic, before giving a formal definition of some of these characteristics.
-        \item Next I shall introduce the most widely accepted definition of chaos called Devaney chaos and explore some consequences of this definition. \item Finally we shall conclude the presentation by using propositions we have developed to prove that a specific topological dynamical system called the shift map is chaotic.
+        \item After which we shall discuss what exactly it means to be chaotic, before giving a formal definition of some of these characteristics.
+        \item Next I shall introduce the most widely accepted definition of chaos called Devaney chaos and explore some consequences of this definition.
+        \item Finally we shall conclude the presentation by using propositions we have developed to prove that a specific topological dynamical system called the shift map is chaotic.
     \end{itemize}
 
     \section{Dynamical System Definition}
     \begin{itemize}
-        \item Firstly, what is a dynamical system?
+        \item Firstly, what is a topological dynamical system? To begin with a discrete dynamical system is defined by a metric space with a corresponding continuous function, mapping the metric space into itself. The function is termed a map or mapping whereby points in the underlying metric space are mapped to other points in the set by the application of this function. Topological dynamical systems themselves are a subset of discrete dynamical systems, with the extra requirement that the underlying metric space is compact (i.e.\ complete and totally bounded). This extra condition for compactness is useful for investigating the limiting behaviour of the set of iterates of the map as it is repeatedly iterated to infinity; a relevant feature in the study of chaos.
+        \item The system initially starts at an initial point $x \in X$ and evolves through successive iterations of the map $f$.
+        \item After $k \in \mathbb{N}$ iterations of $f$, the system can be described by $f^n = f \circ f \circ \cdots \circ f$ where $x$ is mapped to the point $f^n(x)$.
+        \item We will soon give some examples of topological dynamical systems, but first lets introduce some basic definitions of in discrete and topological dynamics.
     \end{itemize}
+
+    \section{Orbit, Periodic Point, Cycle Definitions}
+    \begin{itemize}
+        \item So first lets introduce the definition of an orbit. Let $(X, f)$ be a topological dynamical system. The orbit of a point $x \in X$ under the mapping $f$ is the set of iterates of $x$ under the map $f$ - $\mathcal{O}_f(x) = \lbrace f^n(x) : n \geq 0 \rbrace = \lbrace x, f(x), f^2(x), \dots \rbrace$. 
+        \item Later on in this presentation we will introduce a topological dynamical system which has a dense orbit. Note that an orbit is dense if for every point $x$ in the orbit and $\varepsilon > 0$ we can find a point $y$ and $n \in \mathbb{N}$ such that $d(f^n(y), x) \leq \varepsilon$.
+        \item The second definition we shall introduce is that of a periodic point. The period of a point $x$ is the least positive integer $k$ such that $f^k(x) = x$. If $x$ has a period of $k$ we say that $x$ is a period-$k$ point.
+        \item The orbit $\mathcal{O}_f(x) = \lbrace x, f(x), \dots, f^{k-1}(x) \rbrace$ of a periodic point is a finite set of unique points, called a periodic orbit of period $k$ or simply a k-cycle. Note that the size of a k-cycle is simply the period of the periodic point.
+        \item Now lets introduce some examples of topological dynamical systems.
+    \end{itemize}
+
+    \section{Logistic Map}
+    \begin{itemize}
+        \item The logistic map is probably the most widely known topological dynamical system, due to its simplistic equation. It is defined as a mapping from the closed interval $[0, 1]$ to itself whereby $F_\mu = \mu x (1 - x)$ and $\mu > 0$.
+        \item Note that since $[0, 1]$ is closed it is therefore compact with respect to the usual metric. 
+        \item The figure below is the logistic map where $\mu = 3$.
+        \item It turns out that for $\mu > 3$ the number of periodic points of the logistic map cascades until at $\mu = 4$ the function becomes chaotic.
+    \end{itemize}
+
+    \section{Doubling Map}
+    \begin{itemize}
+        \item Another topological dynamical system is the doubling map $\mathcal{D}(z) = z^2$ on $S^1$ where $S^1$ is the unit circle in the complex plane.
+        \item Note that $S^1$ is a compact as it is a closed and totally bounded subset of the complex plane, hence this is a topological dynamical system.
+        \item The figure below shows the first 10 iterations of this map on the unit circle.
+    \end{itemize}
+
+    \section{Sequence Space}
+    \begin{itemize}
+        \item We shall now study a more abstract topological dynamical system in much more detail. 
+        \item At the end of this presentation we shall prove that this topological dynamical system is in fact chaotic. 
+        \item Firstly, lets introduce the sequence space. This metric space, denoted by $\Sigma_2$, is the set of all possible sequences of ones and zeros.
+        \item The metric is defined to be equal to the sum of the difference between each digit in the sequence divided by $2^i$ where $i$ is the index in the sequence.
+        \item It can be easily shown that sequence space is compact with respect to this metric. Hence we can use this metric space with a corresponding continuous mapping to define a topological dynamical system.
+    \end{itemize}
+
+    \section{The Shift Map is Continuous}
+    \begin{itemize}
+        \item The shift map is a mapping on $\Sigma_2$ which shifts each element in the sequence to the left, thereby removing the first element from the sequence.
+        \item In order to prove that $(\Sigma_2, \sigma)$ is a topological dynamical system we shall prove that the shift map is continuous with respect to the metric mentioned above.
+        \item First we shall let $\varepsilon > 0$ and take two elements $\underline{s}$ and $\underline{t} \in \Sigma_2$ such that the distance between $\underline{s}$ and $\underline{t}$ is less than $\delta$. 
+        \item Next we shall choose an $n$ such that $2^{-n} \leq \varepsilon$ and let $\delta = 2^{-(n+1)}$. 
+        \item Hence $\underline{s}$ and $\underline{t}$ agree on the first $n + 1$ symbols and $\sigma(\underline{s})$ and $\sigma(\underline{t})$ agree on the first $n$ symbols. Then the distance between $\sigma(\underline{s})$ and $\sigma(\underline{t})$ which when we apply $\sigma$ means that the distance between $(s)_{i=n+1}^{\infty}$ and $(t)_{i=n+1}^{\infty}$ is less than $2^{-n}$ which is then less than $\varepsilon$.
+        \item Hence the shift map is continuous and so $(\Sigma_2, \sigma)$ is a topological dynamical system.
+    \end{itemize}
+
+    \section{Shift Map has a Dense Orbit}
+    \begin{itemize}
+        \item Next we shall show two important topological properties about this topological dynamical system. These properties will become useful later in the presentation when we prove that the shift map is chaotic.
+        \item First lets prove that the shift map has a dense orbit.
+        \item Let $\underline{t}$ be an arbitrary member of the sequence space and let $\varepsilon > 0$.
+        \item We will consider a sequence $\underline{s}$ of zeros and ones sorted in len-lex order.
+        \item To prove that the shift map is dense we need to prove that the distance between $t$ and some iterate of $s$ is less than or equal to $\varepsilon$.
+        \item By our construction of $\underline{s}$ we can perform some $k$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree.
+        \item Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Then for $n \geq N - 1$ we have that the distance between $\sigma^k(\underline{s})$ and $\underline{t}$ is less than $2^{-N}$ which is less than $\varepsilon$.
+        \item Hence we have proved that the orbit of $\underline{s}$ is dense in $\Sigma_2$.
+    \end{itemize}
+
+    \section{Periodic Points of Shift Map are Dense}
+    \begin{itemize}
+        \item The last proposition we shall prove for the shift map is the following. We will aim to prove that the periodic points of the shift map are dense in $\Sigma_2$.
+        \item Let $\underline{s}$ be an arbitrary point in the set $\Sigma_2$.
+        \item Now define a point $t_n$ to be a periodic point whose first $n$ terms agree with $s_n$.
+        \item By construction we clearly have two points which are at most $2^{-n}$ far apart and so are at most $\varepsilon$ far apart. 
+        \item Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
+    \end{itemize}
+
+    \section{Introduction to Chaos}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Topological Transitivity, Existence of a Dense Orbit}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Doubling Map Topologically Transitive}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Sensitive Dependence on Initial Conditions}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Doubling Map Sensitive Dependence on Initial Conditions}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Devaney Chaos}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Sensitive Dependence Redundant}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Shift Map Devaney Chaotic}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
+    \section{Concluding Remarks}
+    \begin{itemize}
+        \item
+    \end{itemize}
+
 \end{document}

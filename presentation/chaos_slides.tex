@@ -9,6 +9,13 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \raisebox{1.5pt}[0pt][0pt]{\insertframenumber/\inserttotalframenumber}
+}
+
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows.meta}
 
@@ -67,7 +74,7 @@
         
         \begin{figure}[h]
             \centering
-            \includegraphics[width=4cm]{../images/logistic_3}
+            \includegraphics[width=4.5cm]{../images/logistic_3_0.1}
             \caption{Logistic map $F_\mu$ with $\mu = 3$.}
             \label{fig:logistic_3}
         \end{figure}
@@ -79,7 +86,7 @@
     \frametitle{Topological Dynamics}
 
     \begin{block}{Example (Doubling Map).}
-        Define $\mathcal{D}: S^1 \to S^1$ to be the \emph{doubling map on} $S^1$, where $\mathcal{D}(z) = z^2$, or equivalently $\mathcal{D}(e^{i\theta}) = e^{2i\theta}$ for some $\theta \in \mathbb{R}$.
+        Define $\mathcal{D}: S^1 \to S^1$ to be the \emph{doubling map on} $S^1 = \left\lbrace z \in \mathbb{C}: |z| = 1 \right\rbrace$, where $\mathcal{D}(z) = z^2$, or equivalently $\mathcal{D}(e^{i\theta}) = e^{2i\theta}$ for some $\theta \in \mathbb{R}$.
 
         \begin{figure}[h]
             \centering
@@ -94,23 +101,19 @@
     \frametitle{Topological Dynamics}
     \begin{block}{Definition (Sequence Space).}
         \begin{itemize}
-            \item Let $\Sigma_2 = \left\lbrace (s_1, s_2, \dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set sequences of zeros and ones.
+            \item Let $\Sigma_2 = \left\lbrace (s_1, s_2, \dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set sequences of ones and zeros.
             \item Define $(\Sigma_2, d)$ to be the \emph{sequence space} where $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$ is a metric for $(s)_{i=1}^{\infty}, \ (t)_{i=1}^{\infty}  \in \Sigma_2$.
             \item The sequence space $(\Sigma_2, d)$ is compact.
         \end{itemize}
-    \end{block}
-    \vspace{0.5cm}
-    \begin{block}{Example (Shift Map).}
-        Let $(s)_{i=1}^{\infty} \in \Sigma_2$. The \emph{shift map} $\sigma: \Sigma_2 \to \Sigma_2$ is given by $\sigma \left((s)_{i=1}^{\infty}\right) = (s)_{i=2}^{\infty}$.
     \end{block}
 \end{frame}
 
 \begin{frame}
     \frametitle{Topological Dynamics}
     \begin{block}{Proposition.}
-        The shift map $\sigma: \Sigma_2 \to \Sigma_2$ is continuous.
+        The \emph{shift map} $\sigma: \Sigma_2 \to \Sigma_2$ given by $\sigma \left((s)_{i=1}^{\infty}\right) = (s)_{i=2}^{\infty}$ is continuous.
         \begin{proof}
-            Let $\varepsilon > 0$ and suppose $\underline{s} = (s_i)_{i=1}^{\infty}, \ \underline{t} = (t_i)_{i=1}^{\infty} \in \Sigma_2$. Choose $\delta = \varepsilon$ and suppose $d(\underline{s}, \underline{t}) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta$. Then $d\left( \sigma\left(\underline{s}\right) - \sigma\left(\underline{t}\right) \right) = d\left((s)_{i=2}^{\infty} - (t)_{i=2}^{\infty}\right) = \Sigma_{i=2}^{\infty}|s_i - t_i|2^{-i} \leq \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta = \varepsilon$.
+            Let $\varepsilon > 0$ and choose $\underline{s} = (s_i)_{i=1}^{\infty}, \ \underline{t} = (t_i)_{i=1}^{\infty} \in \Sigma_2$ such that $d(\underline{s}, \underline{t}) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta$. Choose $n$ such that $2^{-n} \leq \varepsilon$ and let $\delta = 2^{-(n+1)}$. Hence $\underline{s}$ and $\underline{t}$ agree on the first $n+1$ symbols and $\sigma\left(\underline{s}\right)$ and $\sigma\left(\underline{t}\right)$ agree on the first $n$ symbols. Then $d\left( \sigma\left(\underline{s}\right), \sigma\left(\underline{t}\right) \right) = d\left((s)_{i=n+1}^{\infty}, (t)_{i=n+1}^{\infty}\right) = \Sigma_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq 2^{-n} \leq \varepsilon$.
         \end{proof}
     \end{block}
     \vspace{0.5cm}
@@ -121,9 +124,9 @@
     \frametitle{Topological Dynamics}
     \begin{block}{Proposition.}
         The shift map $(\Sigma_2, \sigma)$ has a dense orbit. \cite{devaney}
-    \begin{proof}
-        Consider the sequence $\underline{s} = (0, 1, 00, 01, 10, 11, 000, 001, \dots)$ of 0s and 1s sorted in len-lex order. Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary. Let $\varepsilon > 0$. By construction we can perform some $k$ number of iterations of $\sigma$ such that if $n > N + k = \frac{1}{\varepsilon} + k$ iterations of $\sigma$ such that $d(\underline{s}, \underline{t}) = \sum_{i = k}^{n}|s_i - t_i|2^{-i} + \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}|s_i - t_i|2^{-i} = 2^{-n} < 2^{-N} < \frac{1}{N} = \varepsilon$. Hence the orbit $\underline{s}$ is dense in $\Sigma_2$.
-    \end{proof}
+        \begin{proof}
+            Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary and $\varepsilon > 0$. Consider the sequence $\underline{s} = (0, 1, \{0, 0\}, \{0, 1\}, \{1, 0\}, \{1, 1\}, \{0, 0, 0\}, \{0, 0, 1\}, \dots)$ of 0s and 1s sorted in len-lex order. By construction we can perform some $k \in \mathbb{N}$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree. Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Therefore for $n \geq N - 1$ we have that, $d(\sigma^k(\underline{s}), \underline{t}) = \sum_{i = n}^{\infty}|\sigma^k(\underline{s})_i - t_i|2^{-i} \leq 2^{-(n+1)} < 2^{-N} \leq \varepsilon$. Hence the orbit of $\underline{s}$ is dense in $\Sigma_2$.
+        \end{proof}
     \end{block}
 \end{frame}
 
@@ -132,7 +135,7 @@
     \begin{block}{Proposition.}
         The periodic points of the shift map $(\Sigma_2, \sigma)$ are dense in $\Sigma_2$. \cite{devaney}
     \begin{proof}
-        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$. Define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_{n_i} = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - s_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}2^{-i} = 2^{-n}$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
+        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$ and let $\varepsilon > 0$. Pick an $n$ such that $2^{-n} \leq \varepsilon$ and define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_i = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - t_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} = \sum_{i = n+1}^{\infty}2^{-i} \leq 2^{-n} \leq \varepsilon$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
     \end{proof}
     \end{block}
 \end{frame}
@@ -233,7 +236,7 @@
         \item We have defined chaos to be a mixture of unpredictability, repetitiveness and indecomposability.
         \item This was achieved using the properties of topological transitivity, sensitive dependence on initial conditions and dense periodic points.
         \item We have shown that the shift map $(\Sigma_2, \sigma)$ is a Devaney chaotic topological dynamical system.
-        \item Using symbolic dynamics and topological conjugacy we can also prove that $(F_\mu, [0, 1])$, $(\mathcal{D}, S^1)$ and many more systems exhibit Devaney chaos.
+        \item Using symbolic dynamics and topological conjugacy we can also prove that $([0, 1], F_\mu)$, $(S^1, \mathcal{D})$ and many more systems exhibit Devaney chaos.
         \item Furthermore, some of these systems also exhibit other types of chaos, such as Li-Yorke chaos and Topological chaos.
     \end{itemize}
 \end{frame}
