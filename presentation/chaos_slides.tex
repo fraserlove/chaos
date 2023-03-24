@@ -120,26 +120,6 @@
     Hence $(\Sigma_2, \sigma)$ defines a topological dynamical system.
 \end{frame}
 
-\begin{frame}
-    \frametitle{Topological Dynamics}
-    \begin{block}{Proposition.}
-        The shift map $(\Sigma_2, \sigma)$ has a dense orbit. \cite{devaney}
-        \begin{proof}
-            Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary and $\varepsilon > 0$. Consider the sequence $\underline{s} = (0, 1, \{0, 0\}, \{0, 1\}, \{1, 0\}, \{1, 1\}, \{0, 0, 0\}, \{0, 0, 1\}, \dots)$ of 0s and 1s sorted in len-lex order. By construction we can perform some $k \in \mathbb{N}$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree. Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Therefore for $n \geq N - 1$ we have that, $d(\sigma^k(\underline{s}), \underline{t}) = \sum_{i = n}^{\infty}|\sigma^k(\underline{s})_i - t_i|2^{-i} \leq 2^{-(n+1)} < 2^{-N} \leq \varepsilon$. Hence the orbit of $\underline{s}$ is dense in $\Sigma_2$.
-        \end{proof}
-    \end{block}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Topological Dynamics}
-    \begin{block}{Proposition.}
-        The periodic points of the shift map $(\Sigma_2, \sigma)$ are dense in $\Sigma_2$. \cite{devaney}
-    \begin{proof}
-        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$ and let $\varepsilon > 0$. Pick an $n$ such that $2^{-n} \leq \varepsilon$ and define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_i = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - t_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} = \sum_{i = n+1}^{\infty}2^{-i} \leq 2^{-n} \leq \varepsilon$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
-    \end{proof}
-    \end{block}
-\end{frame}
-
 \section{Introduction to Chaos}
 
 \begin{frame}
@@ -148,7 +128,7 @@
         \item Many different definitions of chaos exist for topological dynamical systems.
         \item Devaney chaos, Li-Yorke chaos, Topological chaos, etc.
         \item These definitions rely on many different topological characteristics to define chaos in a natural way.
-        \item Topological transitivity / existence of a dense orbit, sensitive dependence on initial conditions, dense periodic points, existence of an uncountable scrambled-set, and positive topological entropy.
+        \item We will focus on Devaney chaos and the characteristics of topological transitivity / existence of a dense orbit, sensitive dependence on initial conditions and dense periodic points.
     \end{itemize}
 \end{frame}
 
@@ -168,10 +148,10 @@
 
 \begin{frame}
     \frametitle{Topological Characteristics of Chaos}
-    \begin{block}{Example.}
-        Let $(S^1, \mathcal{D})$ be the doubling map over $S^1$, where $\mathcal{D}(z) = z^2$. Then $\mathcal{D}$ is topologically transitive.
+    \begin{block}{Proposition.}
+        The shift map $(\Sigma_2, \sigma)$ is topologically transitive. \cite{devaney}
         \begin{proof}
-            Let $z_1, z_2 \in S^1$. Let $(z_1, z_2) = U$ define an arc between $z_1$ and $z_2$. Suppose now $d\left(z_1, z_2\right) > \frac{2\pi}{2^k}$ for some $k \in \mathbb{N}$. Then $d\left(\mathcal{D}^k(z_1), \mathcal{D}^k(z_2)\right) = d\left( 2^k z_1, 2^k z_2 \right) = 2^k d\left( z_1, z_2 \right) > 2^k \cdot \frac{2\pi}{2^k} = 2\pi$. Hence $\mathcal{D}^k((z_1, z_2))$ covers $S^1$ so for any $V \subseteq S^1$ we obtain $\mathcal{D}^k(U) \cap V \neq \emptyset$. Hence $\mathcal{D}$ is topologically transitive.
+            Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary and $\varepsilon > 0$. Consider the sequence $\underline{s} = (0, 1, \{0, 0\}, \{0, 1\}, \{1, 0\}, \{1, 1\}, \{0, 0, 0\}, \{0, 0, 1\}, \dots)$ of 0s and 1s sorted in len-lex order. By construction we can perform some $k \in \mathbb{N}$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree. Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Therefore for $n \geq N - 1$ we have that, $d(\sigma^k(\underline{s}), \underline{t}) = \sum_{i = n}^{\infty}|\sigma^k(\underline{s})_i - t_i|2^{-i} \leq 2^{-(n+1)} < 2^{-N} \leq \varepsilon$. Hence $\mathcal{O}(\underline{s})$ is dense in $\Sigma_2$ and so $(\Sigma_2, \sigma)$ is topologically transitive.
         \end{proof}
     \end{block}
 \end{frame}
@@ -188,10 +168,20 @@
 \begin{frame}
     \frametitle{Topological Characteristics of Chaos}
     \begin{block}{Example.}
-        Let $(S^1, \mathcal{D})$ be the doubling map over the $S^1$, where $\mathcal{D}(z) = z^2$. Then $\mathcal{D}$ has sensitive dependence on initial conditions.
+        The shift map $(\Sigma_2, \sigma)$ has sensitive dependence on initial conditions.
         \begin{proof}
-            Let $z_1, z_2 \in S^1$ and $\varepsilon < 2^k \delta$ and suppose $d(z_1, z_2) = \delta$, then $d\left(\mathcal{D}^k(z_1), \mathcal{D}^k(z_2)\right) =  d\left(2^kz_1, 2^kz_2\right) = 2^k d(z_1, z_2) = 2^k \delta > \varepsilon$. Hence we can always choose a $k$ large enough so this holds, and so $\mathcal{D}$ has sensitive dependence on initial conditions.
+            Take $\delta = 1$. Let $\underline{s} = (s)_{i=1}^{\infty} \in \Sigma_2$ and let $\varepsilon > 0$. Choose $n$ such that $2^{-n} < \varepsilon$. Pick $\underline{t} = (t)_{i=1}^{\infty} \in \Sigma_2$ such that $d(\underline{s}, \underline{t}) \leq 2^{-n} \leq \varepsilon$. Hence $\underline{s}$ and $\underline{t}$ agree on the first $n+1$ symbols. Now there exists a $k > n + 1$ such that $s_k \neq t_k$. The first term of $\sigma^k(\underline{s})$ is $s_k$ and the first term of $\sigma^k(\underline{t})$ is $t_k$. Therefore $d(\sigma^k(\underline{s}), \sigma^k(\underline{t})) = \sum_{i = 0}^{\infty}|s_{i+k} - t_{i+k}|2^{-i} \geq |s_k - t_k|2^{0} = 1 = \delta$.
         \end{proof}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Topological Characteristics of Chaos}
+    \begin{block}{Proposition.}
+        The periodic points of the shift map $(\Sigma_2, \sigma)$ are dense in $\Sigma_2$. \cite{devaney}
+    \begin{proof}
+        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$ and let $\varepsilon > 0$. Pick an $n$ such that $2^{-n} \leq \varepsilon$ and define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_i = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - t_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} = \sum_{i = n+1}^{\infty}2^{-i} \leq 2^{-n} \leq \varepsilon$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
+    \end{proof}
     \end{block}
 \end{frame}
 
@@ -212,19 +202,10 @@
 
 \begin{frame}
     \frametitle{Devaney Chaos}
-    It turns out sensitive dependence on initial conditions is a redundant characteristic via the following proposition.
-    \vspace{0.5cm}
-    \begin{block}{Proposition.}
-        Let $(X, f)$ be a topological dynamical system. If the map $f$ is topologically transitive and has dense periodic points then $f$ has sensitive dependence on initial conditions. \cite{bbcds} \cite{glasner-weiss}
-    \end{block}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Devaney Chaos}
     \begin{block}{Proposition.}
         The shift map $(\Sigma_2, \sigma)$ is chaotic in the sense of Devaney.
         \begin{proof}
-            We previously showed that $(\Sigma_2, \sigma)$ has a dense orbit and so is topologically transitive. We also showed that the periodic points of the shift map are dense in $\Sigma_2$. Hence, by the proposition above, we conclude that $(\Sigma_2, \sigma)$ is Devaney chaotic.
+            We previously showed that $(\Sigma_2, \sigma)$ is topologically transitive (has a dense orbit), has sensitive dependence on initial conditions and has dense periodic points in $\Sigma_2$. Hence $(\Sigma_2, \sigma)$ is Devaney chaotic.
         \end{proof}
     \end{block}
 \end{frame}
@@ -236,8 +217,7 @@
         \item We have defined chaos to be a mixture of unpredictability, repetitiveness and indecomposability.
         \item This was achieved using the properties of topological transitivity, sensitive dependence on initial conditions and dense periodic points.
         \item We have shown that the shift map $(\Sigma_2, \sigma)$ is a Devaney chaotic topological dynamical system.
-        \item Using symbolic dynamics and topological conjugacy we can also prove that $([0, 1], F_\mu)$, $(S^1, \mathcal{D})$ and many more systems exhibit Devaney chaos.
-        \item Furthermore, some of these systems also exhibit other types of chaos, such as Li-Yorke chaos and Topological chaos.
+        \item Using topological conjugacy we can use the fact that $(\Sigma_2, \sigma)$ is Devaney chaotic to prove that  $([0, 1], F_\mu)$, $(S^1, \mathcal{D})$ and many more systems exhibit Devaney chaos.
     \end{itemize}
 \end{frame}
 
