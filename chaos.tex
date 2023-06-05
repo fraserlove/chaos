@@ -45,28 +45,36 @@
 
 \begin{document}
 
+% Set correct spacing between lines
+\OnehalfSpacing
+
 % -------------- TITLE PAGE --------------
 \begin{titlingpage}
     \centering
+
+        \vspace{1cm}
  
         \Huge
         \parbox{10cm}{\begin{center}{\scshape \textbf{Chaos in Topological Dynamical Systems}}\end{center}}
-             
-        \vspace{1.25cm}
 
-        \large
-        by
 
-        \vspace{1cm}
+        \includegraphics[width=6cm]{uni_logo}
+
         
         \LARGE
         {\scshape \textbf{Fraser Robert Love}}
              
-        \vspace{1.5cm}
+        \vspace{0.75cm}
              
         \large
+
         School of Mathematics and Statistics\\
         University of St Andrews\\
+
+        \vspace{3cm}
+
+        A dissertation submitted for the degree of\\
+        \textit{BSc (Hons) Mathematics}\\
 
         \vfill
 
@@ -74,8 +82,7 @@
  \end{titlingpage}
 % ------------ TITLE PAGE END ------------
 
-% Set correct spacing between lines
-\OnehalfSpacing
+\vspace*{2.5cm}
 
 \noindent\textit{I certify that this project report has been written by me, is a record of work carried out by me, and is essentially different from work undertaken for any other purpose or assessment.}
 
@@ -86,14 +93,15 @@
 \vspace{1cm}
 
 \begin{abstract}
-    \noindent A topological dynamical system is comprised of a continuous mapping acting on a compact metric space. Topological dynamical systems often give rise to complex and chaotic behaviour. This project examines various definitions of chaos, specifically covering Devaney chaos, Li-Yorke chaos and topological chaos. We will explore how these definitions apply to topological dynamical systems on the interval, the unit circle, in sequence space and on compact countable sets. We shall cover important topological properties of chaos, such as topological transitivity, sensitive dependence, dense periodic points, scrambled sets, Li-Yorke pairs and topological entropy. Finally, the text shall conclude by characterising various chaotic systems and comparing the various definitions of chaos.
+    \noindent A topological dynamical system is comprised of a continuous mapping acting on a compact metric space. This project studies the complex, chaotic behaviour that can arise in these systems. Using the extra condition of compactness present in these systems, proves beneficial in analysis of chaos and the behaviour of these systems as the underlying mapping is iterated \emph{ad infinitum}. Various definitions of chaos will be examined, namely, Devaney chaos, Li-Yorke chaos and topological chaos. These definitions encompass aspects of indecomposability, repetitiveness and unpredictability; which when combined give a natural interpretation of chaos. This project shall study how these definitions specifically apply to topological dynamical systems on the interval, the unit circle, in sequence space and on compact countable sets. Numerous important topological properties of chaos will be introduced; such as topological transitivity, sensitive dependence, dense periodic points, scrambled sets, Li-Yorke pairs and positive topological entropy. Foundational tools from symbolic dynamics will be combined with topological conjugacy, to transfer these topological properties between systems. Finally, this text shall conclude by characterising various chaotic systems and comparing the definitions of chaos.
 \end{abstract}
 
 \vspace{2cm}
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
-    \noindent I would like to thank my supervisor, Dr Mike Todd for his help and guidance throughout my time researching this project.
+    \noindent I would like to express my gratitude to Prof.\ Mike Todd for his invaluable guidance and support throughout my time researching this honours project.
+    
 \end{abstract}
 
 \newpage
@@ -105,7 +113,7 @@
 \chapter{Topological and Symbolic Relationships} \label{chap:conjugacy-symbol-dynamics}
 \input{chapters/topological_and_symbolic_relationships}
 
-\chapter{Defining Chaos} \label{chap:defining-chaos}
+\chapter{Topological Characteristics and Definitions of Chaos} \label{chap:defining-chaos}
 \input{chapters/defining_chaos}
 
 \chapter{Conclusion} \label{chap:conclusion}

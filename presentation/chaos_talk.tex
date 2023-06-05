@@ -20,7 +20,7 @@
         \item In this presentation I will first give the definition of a topological dynamical system.
         \item Then I will introduce some basic topological dynamics and give examples of such systems.
         \item After which we shall discuss what exactly it means to be chaotic, before giving a formal definition of some of these characteristics.
-        \item Next I shall introduce the most widely accepted definition of chaos called Devaney chaos and explore some consequences of this definition.
+        \item Next I shall introduce the most widely accepted definition of chaos called Devaney chaos
         \item Finally we shall conclude the presentation by using propositions we have developed to prove that a specific topological dynamical system called the shift map is chaotic.
     \end{itemize}
 
@@ -29,7 +29,7 @@
         \item Firstly, what is a topological dynamical system? To begin with a discrete dynamical system is defined by a metric space with a corresponding continuous function, mapping the metric space into itself. The function is termed a map or mapping whereby points in the underlying metric space are mapped to other points in the set by the application of this function. Topological dynamical systems themselves are a subset of discrete dynamical systems, with the extra requirement that the underlying metric space is compact (i.e.\ complete and totally bounded). This extra condition for compactness is useful for investigating the limiting behaviour of the set of iterates of the map as it is repeatedly iterated to infinity; a relevant feature in the study of chaos.
         \item The system initially starts at an initial point $x \in X$ and evolves through successive iterations of the map $f$.
         \item After $k \in \mathbb{N}$ iterations of $f$, the system can be described by $f^n = f \circ f \circ \cdots \circ f$ where $x$ is mapped to the point $f^n(x)$.
-        \item We will soon give some examples of topological dynamical systems, but first lets introduce some basic definitions of in discrete and topological dynamics.
+        \item We will soon give some examples of topological dynamical systems, but first lets introduce some basic definitions from discrete and topological dynamics.
     \end{itemize}
 
     \section{Orbit, Periodic Point, Cycle Definitions}
@@ -45,7 +45,7 @@
     \begin{itemize}
         \item The logistic map is probably the most widely known topological dynamical system, due to its simplistic equation. It is defined as a mapping from the closed interval $[0, 1]$ to itself whereby $F_\mu = \mu x (1 - x)$ and $\mu > 0$.
         \item Note that since $[0, 1]$ is closed it is therefore compact with respect to the usual metric. 
-        \item The figure below is the logistic map where $\mu = 3$.
+        \item The figure below is the logistic map where $\mu = 3$. The blue lines on the graph represent an orbit, starting from an initial $x_0$. Each point where the line intersects the curve is a point in the orbit.
         \item It turns out that for $\mu > 3$ the number of periodic points of the logistic map cascades until at $\mu = 4$ the function becomes chaotic.
     \end{itemize}
 
@@ -63,19 +63,31 @@
         \item Firstly, lets introduce the sequence space. This metric space, denoted by $\Sigma_2$, is the set of all possible sequences of ones and zeros.
         \item The metric is defined to be equal to the sum of the difference between each digit in the sequence divided by $2^i$ where $i$ is the index in the sequence.
         \item It can be easily shown that sequence space is compact with respect to this metric. Hence we can use this metric space with a corresponding continuous mapping to define a topological dynamical system.
-    \end{itemize}
-
-    \section{The Shift Map is Continuous}
-    \begin{itemize}
         \item The shift map is a mapping on $\Sigma_2$ which shifts each element in the sequence to the left, thereby removing the first element from the sequence.
-        \item In order to prove that $(\Sigma_2, \sigma)$ is a topological dynamical system we shall prove that the shift map is continuous with respect to the metric mentioned above.
-        \item First we shall let $\varepsilon > 0$ and take two elements $\underline{s}$ and $\underline{t} \in \Sigma_2$ such that the distance between $\underline{s}$ and $\underline{t}$ is less than $\delta$. 
-        \item Next we shall choose an $n$ such that $2^{-n} \leq \varepsilon$ and let $\delta = 2^{-(n+1)}$. 
-        \item Hence $\underline{s}$ and $\underline{t}$ agree on the first $n + 1$ symbols and $\sigma(\underline{s})$ and $\sigma(\underline{t})$ agree on the first $n$ symbols. Then the distance between $\sigma(\underline{s})$ and $\sigma(\underline{t})$ which when we apply $\sigma$ means that the distance between $(s)_{i=n+1}^{\infty}$ and $(t)_{i=n+1}^{\infty}$ is less than $2^{-n}$ which is then less than $\varepsilon$.
-        \item Hence the shift map is continuous and so $(\Sigma_2, \sigma)$ is a topological dynamical system.
+        \item The shift map can be shown to be continuous, so $(\Sigma_2, \sigma)$ is a topological dynamical system.
     \end{itemize}
 
-    \section{Shift Map has a Dense Orbit}
+    \section{Introduction to Chaos}
+    \begin{itemize}
+        \item The term chaos has no universally accepted definition. Over the years, various different interpretations of chaos have appeared in literature. The term chaos was first defined by Li and Yorke in their paper 'Period Three Implies Chaos'.
+        \item Some different definitions of chaos include topological chaos, Li-Yorke chaos, and what we will be studying, Devaney chaos.
+        \item These definitions all rely on different topological characteristics which help us define chaos in a natural way. Some of these characteristics include topological transitivity, existence of a dense orbit, sensitive dependence on initial conditions, dense periodic points, positive topological entropy and an uncountable scrambled set.
+        \item The focus of this presentation will be Devany chaos, which has the characteristics of topological transitivity, existence of a dense orbit, sensitive dependence on initial conditions and dense periodic points. Lets now introduce the first of these characteristics: Topological transitivity.
+    \end{itemize}
+
+    \section{Topological Transitivity, Existence of a Dense Orbit}
+    \begin{itemize}
+        \item A topological dynamical system is said to be topologically transitive if for every pair of non-empty open sets $U, V \in X$ there exists a $k > 0$ such that the union of the application of $f$ to $U$, $k$ times and $V$ is non-empty.
+        \item Alternatively stated, in a topologically transitive mapping, points in an arbitrary small neighbourhood can be mapped to any other arbitrary small neighbourhood under repeated number of iterations of the map.
+        \item Hence the topological dynamical cannot be partitioned into two disjoint open sets which are invarient under the map.
+        \item Hopefully this characteristic feels somewhat chaotic, and describes the complex and irregular topology of chaos.
+        \item It can be seen in the following proposition that for a topological dynamical system with no isolated points, the system is topologically transitive if and only if there exists a dense orbit.
+        \item If you have a dense orbit then for point in $X$ with neighbourhood $U$, you can always find some iterate of a point $y$ in this neighbourhood. This is similar to the definition of being topologically transitive.
+        \item We shall not give a proof of this in this presentation, however one is given in my project.
+        \item Note that sequence space can be proved to have no isolated points, and so topological transitivity is equal to the existence of a dense orbit.
+    \end{itemize}    
+
+    \section{Shift Map is Topologically Transitive}
     \begin{itemize}
         \item Next we shall show two important topological properties about this topological dynamical system. These properties will become useful later in the presentation when we prove that the shift map is chaotic.
         \item First lets prove that the shift map has a dense orbit.
@@ -84,61 +96,64 @@
         \item To prove that the shift map is dense we need to prove that the distance between $t$ and some iterate of $s$ is less than or equal to $\varepsilon$.
         \item By our construction of $\underline{s}$ we can perform some $k$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree.
         \item Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Then for $n \geq N - 1$ we have that the distance between $\sigma^k(\underline{s})$ and $\underline{t}$ is less than $2^{-N}$ which is less than $\varepsilon$.
-        \item Hence we have proved that the orbit of $\underline{s}$ is dense in $\Sigma_2$.
+        \item Hence we have proved that the orbit of $\underline{s}$ is dense in $\Sigma_2$ and so the shift map is topologically transitive.
+        \item I.e. points in an arbitrary small neighbourhood in sequence space can be mapped to any other arbitrary small neighbourhood in sequence under repeated number of iterations of the shift map.
+    \end{itemize}
+
+    \section{Sensitive Dependence on Initial Conditions}
+    \begin{itemize}
+        \item A topologically dynamical systems is said to be $\varepsilon$ unstable if, for every neighbourhood $U$ of $x$, there exists a point $y \in U$ and $k \geq 0$ such that the distance between the $k$-th iterate of $x$ and the $k$-th iterate of $y$ are at least $\varepsilon$ apart.
+        \item A topological dynamical system is said to have sensitive dependence on initial conditions if all points in the map are $\varepsilon$ unstable.
+        \item In other words, there exist points arbitrary close to $x$ that eventually get mapped at least $\varepsilon$ far apart under multiple applications of the map. 
+        \item Hence this definition states that small perturbations between iterates may eventually increase through repeated iterations of the map to become wildly different over time; behaviour which hopefully feels notionally chaotic.
+        \item Note that the definition states that at least one point contained within each neighbourhood of $x$ gets mapped arbitrarily far apart, not all points. This is an entirely new property itself, called expansiveness.
+    \end{itemize}
+
+    \section{Shift Map Sensitive Dependence on Initial Conditions}
+    \begin{itemize}
+        \item Now lets prove that the shift map has sensitive dependence on initial conditions.
+        \item First take $\delta = 1$, let $\underline{s}$ be a point in sequence space and let $\varepsilon > 0$.
+        \item Now choose a value for $n$ such that $2^{-n} < \varepsilon$ and pick a point $\underline{t}$ such that the distance between $\underline{s}$ and $\underline{t}$ is less than $2^{-n}$ which is then less than $\varepsilon$.
+        \item Hence we can conclude that $\underline{s}$ and $\underline{t}$ must agree on the first $n+1$ symbols.
+        \item Now there exists a $k > n + 1$ such that $s_k \neq t_k$. So the first term of $\sigma^k(\underline{s})$ is $s_k$ and the first term of $\sigma^k(\underline{t})$ is $t_k$.
+        \item Since $s_k \neq t_k$ we can conclude that the distance between $\sigma^k(\underline{s})$ and $\sigma^k(\underline{t})$ equal to the sum from $i = 0$ to infinity of the difference of each of the symbols of $s_{i+k}$ and $t{i+k}$ divided by $2^i$. \item This is greater than the difference between $|s_k - t_k|$ which equals 1 (since $s_k \neq t_k$) which is equal to $\delta$.
+        \item Hence the shift map has sensitive dependence on initial conditions.
+        \item i.e. there are points in sequence space that are arbitrary close which eventually get mapped at least $\varepsilon$ far apart under multiple applications of the shift map.
     \end{itemize}
 
     \section{Periodic Points of Shift Map are Dense}
     \begin{itemize}
         \item The last proposition we shall prove for the shift map is the following. We will aim to prove that the periodic points of the shift map are dense in $\Sigma_2$.
-        \item Let $\underline{s}$ be an arbitrary point in the set $\Sigma_2$.
-        \item Now define a point $t_n$ to be a periodic point whose first $n$ terms agree with $s_n$.
-        \item By construction we clearly have two points which are at most $2^{-n}$ far apart and so are at most $\varepsilon$ far apart. 
-        \item Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
-    \end{itemize}
-
-    \section{Introduction to Chaos}
-    \begin{itemize}
-        \item
-    \end{itemize}
-
-    \section{Topological Transitivity, Existence of a Dense Orbit}
-    \begin{itemize}
-        \item
-    \end{itemize}
-
-    \section{Doubling Map Topologically Transitive}
-    \begin{itemize}
-        \item
-    \end{itemize}
-
-    \section{Sensitive Dependence on Initial Conditions}
-    \begin{itemize}
-        \item
-    \end{itemize}
-
-    \section{Doubling Map Sensitive Dependence on Initial Conditions}
-    \begin{itemize}
-        \item
+        \item This turns out to be an important property in chaotic topological dynamical systems. Naturally this property requires the topological dynamical system ot have some sense of repetition at arbitrarily small scales, something which should feel vaguely natural in a definition of chaos.
+        \item Let $\underline{s}$ be an arbitrary point in sequence space. We will then let $\varepsilon > 0$ and pick an $n$ such that $2^{-n} \leq \varepsilon$.
+        \item Now define a point $t_n$ to be a periodic point with period $n$ whose first $n$ terms agree with $s_n$. So $\underline{s}$ and $\underline{t}$ agree on the first $n$ symbols.
+        \item Then by construction the distance between $\underline{s}$ and $\underline{t}$ is less than the sum from $i = n+1$ to $\infty$ of the difference of the symbols from $\underline{s}$ and $\underline{t}$, divided by $2^i$.
+        \item This is less than the sum from $i = n+1$ to $\infty$ of $2^{-i}$ which is less than $2^{-n}$ which we have chosen to be less than $\varepsilon$.
+        \item Since $\underline{s}$ was arbitrary, we conclude that the periodic points of the shift map are dense.
     \end{itemize}
 
     \section{Devaney Chaos}
     \begin{itemize}
-        \item
-    \end{itemize}
-
-    \section{Sensitive Dependence Redundant}
-    \begin{itemize}
-        \item
+        \item Finally, using the characteristics wee have just introduces, we will give a definition of chaos.
+        \item This definition of chaos is called Devaney chaos. It is the most important widely accepted definition of chaos in literature. However there are many more definitions that are still widely accepted alternatives.
+        \item A topological dynamical system is chaotic in the sense of Devaney if it has all of the following three properties: 
+        \item is topologically transitive, has sensitive dependence on initial conditions, and if its periodic points are dense.
+        \item Devaney's interpretation of chaos includes unpredictability via sensitive dependence on initial conditions, repetitiveness through periodic points being dense, and should be indecomposability through topological transitivity.
+        \item All three of these characteristics are natural and together provide a detailed definition of chaos in a topological dynamical system.
     \end{itemize}
 
     \section{Shift Map Devaney Chaotic}
     \begin{itemize}
-        \item
+        \item Finally, can now state that the shift map is chaotic in the sense of Devaney.
+        \item To prove this statement, note that we have just shown that the shift map is topologically transitive, has sensitive dependence on initial conditions, and has dense periodic points in $\Sigma_2$.
     \end{itemize}
 
     \section{Concluding Remarks}
     \begin{itemize}
-        \item
+        \item In conclusion, we have defined chaos to be a mixture of unpredictability, repetitiveness and indecomposability.
+        \item This was achieved using properties of topological transitivity, sensitive dependence on initial conditions and dense periodic points.
+        \item We have proved these characteristics hold for the shift map. Hence proving it is Devaney chaotic.
+        \item Using topological conjugacy we can prove that the logistic map and various other systems exhibit Devaney chaos.
     \end{itemize}
 
 \end{document}

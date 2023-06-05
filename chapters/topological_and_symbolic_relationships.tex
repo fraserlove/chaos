@@ -1,7 +1,7 @@
-In this chapter, we shall explore ways in which we can infer the topological properties of topological dynamical systems by using topological and symbolic relationships. In Section \ref{sec:topological-conjugacy} we shall introduce topological conjugacy, a term used to describe when two maps exhibit the same topological behaviour. This section will include proving that various topological properties hold through topological conjugacy and introduce examples of topologically conjugate systems. In Section \ref{sec:symbolic-dynamics} we shall develop symbolic methods of characterising topological dynamical systems using infinite sequences of symbols. This proves useful for describing the topological dynamics of various topological dynamical systems where the dynamics are easier to explain using sequences of symbols. As a result, this section will allow us to prove compelling results about the tent and doubling maps. Section \ref{sec:sharkovskys-theorem-and-type} will then introduce the reader to Sharkovsky's theorem, a very important result which explains when that if a topological dynamical system  defined over intervals on $\mathbb{R}$ has a period three point, then it has points of all other periods. Furthermore, we shall then show how we can construct topological dynamical systems over closed intervals with a specific set of periods as defined by Sharkovsky's order.
+In this chapter, we shall explore ways in which we can infer the topological properties of topological dynamical systems by using topological and symbolic relationships. In Section \ref{sec:topological-conjugacy} we shall introduce topological conjugacy, a term used to describe when two maps exhibit the same topological behaviour. This section will include proving that various topological properties hold through topological conjugacy and introduce examples of topologically conjugate systems. In Section \ref{sec:symbolic-dynamics} we shall develop symbolic methods of characterising the orbits of topological dynamical systems using infinite sequences of symbols, called itineraries. This proves useful for describing the topological dynamics of various topological dynamical systems where the dynamics are easier to explain using sequences of symbols. As a result, this section will allow us to prove compelling results about the tent and doubling maps. Section \ref{sec:sharkovskys-theorem-and-type} will then introduce the reader to Sharkovsky's forcing theorem, a very important result which explains that for topological dynamical systems defined over $\mathbb{R}$, the existence of a period three point implies the existence of periodic points of all other periods. Furthermore, we shall then show how we can construct topological dynamical systems over closed intervals with a specific set of periods as defined by Sharkovsky's order.
 
 \section{Topological Conjugacy} \label{sec:topological-conjugacy}
-As mentioned above, topological conjugacy defines when two maps exhibit the same topological behaviour and can be considered equivalent. If two maps are topologically conjugate, properties we have proved for one map can be applied to the other. Hence topological conjugacy is a powerful relationship when studying the dynamics of related topological dynamical systems. Note that just as in Section \ref{sec:topological-dynamical-systems}, the definitions below apply generally to continuous maps, however, have been formulated in terms of topological dynamical systems for clarity and precision. First, let's introduce our main definition.
+As mentioned above, topological conjugacy defines when two maps exhibit the same topological behaviour and can be considered equivalent topologically speaking. If two maps are topologically conjugate, properties we have proved for one map can be applied to the other. Hence topological conjugacy is a powerful relationship for studying the dynamics of related topological dynamical systems. Note that the definitions throughout this section apply generally to continuous maps, however, have been formulated in terms of topological dynamical systems for clarity and precision. First, let's introduce our main definition.
 
 \begin{defn}[Topological Conjugacy] \label{defn:topological-conjugacy}
     Let $(X, f)$ and $(Y, g)$ be topological dynamical systems. The topological dynamical system $(Y, g)$ is \emph{topologically semi-conjugate} to $(X, f)$ if there exists a continuous, surjective map $\varphi: X \to Y$ termed a \emph{topological semi-conjugacy} where $\varphi \circ f = g \circ \varphi$. Furthermore if $\varphi$ is a homeomorphism i.e. $\varphi$ is a bijection with $\varphi$ and $\varphi^{-1}$ both continuous then $(Y, g)$ is \emph{topologically conjugate} to $(X, f)$. In this case $\varphi$ is called a \emph{topological conjugacy}.
@@ -21,12 +21,12 @@ As mentioned above, topological conjugacy defines when two maps exhibit the same
 \end{tikzpicture}
 \end{center}
 
-The diagram above is a termed commutative diagram and shows the relationship between the topological dynamical systems and the topological conjugacy. If $\varphi$ is a topological semi-conjugacy then this diagram commutes. If $\varphi$ is a just semi-conjugacy the topological dynamics of $(X, f)$ are carried over to $(Y, g)$, however, if $\varphi$ is not a homeomorphism the reverse does not hold generally. Only when $\varphi$ is homeomorphic and so a topological conjugacy do the dynamics of $(Y, g)$ carry over into $(X, f)$. Now we shall prove that the topological dynamical systems $T_2$ and $F_4$ are topologically conjugate and that $T_2$ and $D$ are topologically semi-conjugate. We shall see later in Section \ref{sec:symbolic-dynamics} that they also share the same topological dynamics.
+The diagram above is termed a commutative diagram and shows the relationship between the topological dynamical systems through the topological conjugacy $\varphi$. If $\varphi$ is a topological semi-conjugacy then this diagram commutes. Note that if $\varphi$ is a topological conjugacy then the arrows from $X$ to $Y$ are bidirectional, as $\varphi^{-1}: Y \to X$. If $\varphi$ is a just semi-conjugacy the topological dynamics of $(X, f)$ are carried over to $(Y, g)$, however, if $\varphi$ is not a homeomorphism the reverse does not hold generally. Only when $\varphi$ is homeomorphic and so a full topological conjugacy does the dynamics of $(Y, g)$ carry back over into $(X, f)$. Now we shall prove that the topological dynamical systems $T_2$ and $F_4$ are topologically conjugate, and that $T_2$ and $D$ are topologically semi-conjugate. We shall see later in Section \ref{sec:symbolic-dynamics} that they also share the same topological dynamics.
 
 \begin{prop} \label{prop:tent-logistic-conjugate}
     The tent map $([0, 1], T_2)$ and the logistic map $([0, 1], F_4)$ are topologically conjugate.
     \begin{proof}
-        Let $\varphi: [0, 1] \to [0,1]$ be defined by $\varphi(x) = \sin^2(\frac{\pi x}{2})$ which is homeomorphic on $[0, 1]$ as is continuous, bijective and $\varphi^{-1} = \frac{2}{\pi} \sin^{-1}(\sqrt{x})$ exists and is continuous on $[0, 1]$. Clearly we have, \[F_4 \circ \varphi(x) = 4 \sin^2\left(\frac{\pi x}{2}\right) \cdot \left(1 - \sin^2\left(\frac{\pi x}{2}\right)\right) = 4 \sin^2\left(\frac{\pi x}{2}\right) \cos^2\left(\frac{\pi x}{2}\right) = \sin^2\pi x, \ \text{for} \ x \in [0, 1]\] \[\varphi \circ T_2(x) = \varphi(2x) = \sin^2\pi x, \ \text{for} \ x \in \left[0, 1/2\right]\] \[\varphi \circ T_2(x) = \varphi(2(1 - x)) = \sin^2 (\pi (1-x)) = \sin^2 \pi x, \ \text{for} \ x \in [1/2, 1]\] Hence we have shown that $\varphi \circ T_2 = F_4 \circ \varphi$ so $F_4$ and $T_2$ are topologically conjugate.
+        Let $\varphi: [0, 1] \to [0,1]$ be defined by $\varphi(x) = \sin^2(\frac{\pi x}{2})$ which is homeomorphic on $[0, 1]$ as is continuous and bijective and $\varphi^{-1} = \frac{2}{\pi} \sin^{-1}(\sqrt{x})$ exists and is continuous on $[0, 1]$. Clearly we have, \[F_4 \circ \varphi(x) = 4 \sin^2\left(\frac{\pi x}{2}\right) \cdot \left(1 - \sin^2\left(\frac{\pi x}{2}\right)\right) = 4 \sin^2\left(\frac{\pi x}{2}\right) \cos^2\left(\frac{\pi x}{2}\right) = \sin^2\pi x, \ \text{for} \ x \in [0, 1]\] \[\varphi \circ T_2(x) = \varphi(2x) = \sin^2\pi x, \ \text{for} \ x \in \left[0, 1/2\right]\] \[\varphi \circ T_2(x) = \varphi(2(1 - x)) = \sin^2 (\pi (1-x)) = \sin^2 \pi x, \ \text{for} \ x \in [1/2, 1]\] Hence we have shown that $\varphi \circ T_2 = F_4 \circ \varphi$ so $F_4$ and $T_2$ are topologically conjugate.
     \end{proof}
 \end{prop}
 
@@ -37,19 +37,19 @@ The diagram above is a termed commutative diagram and shows the relationship bet
     \end{proof}
 \end{prop}
 
-Topological conjugacy preserves topological dynamical properties. For instance if topological dynamical systems $(X, f)$ and $(Y, g)$ are topologically conjugate through some map $\varphi$ then if $x$ is a fixed point of $f$, $\varphi(x)$ is a fixed point of $g$. This can be proved as $\varphi(x) = \varphi \circ f(x) = g \circ \varphi(x)$. This next lemma will prove the more general result for period-$k$ points.
+Topological conjugacy preserves topological dynamics. For instance if topological dynamical systems $(X, f)$ and $(Y, g)$ are topologically conjugate through some map $\varphi$, then if $x$ is a fixed point of $f$, $\varphi(x)$ is a fixed point of $g$. This can be proved as $\varphi(x) = \varphi \circ f(x) = g \circ \varphi(x)$. This next lemma will prove the more general result for period-$k$ points.
 
 \begin{prop} \label{prop:conjugacy-preserves-periodic-points}
-    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $x$ is a period-$k$ point of $f$ then $\varphi(x)$ is a period-$k$ point of $g$. Furthermore, if $\varphi$ is a topological conjugacy then if $\varphi(x)$ is a period-$k$ point of $g$ then $x$ is a period-$k$ point of $f.$
+    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $x$ is a period-$k$ point of $f$, then $\varphi(x)$ is a period-$k$ point of $g$. Furthermore, if $\varphi$ is a topological conjugacy, then if $\varphi(x)$ is a period-$k$ point of $g$, then $x$ is a period-$k$ point of $f.$
     \begin{proof}
-        Suppose $f^k(x) = x$, then by induction $\varphi(x) = \varphi \circ f^k(x) = g^k \circ \varphi (x)$. Since $\varphi$ is invertible $f^k(x) = \varphi \circ f^k \circ \varphi^{-1}(x)$. Now suppose $g^k(\varphi(x)) = \varphi(x)$, then $x = \varphi \circ \varphi^{-1}(x) = g^k \circ \varphi \circ \varphi(x)^{-1} = \varphi \circ f^k \circ \varphi^{-1}(x) = f^k(x)$.
+        Suppose $f^k(x) = x$, then by induction $\varphi(x) = \varphi \circ f^k(x) = g^k \circ \varphi (x)$. If $\varphi$ is invertible $f^k(x) = \varphi \circ f^k \circ \varphi^{-1}(x)$. Now suppose $g^k(\varphi(x)) = \varphi(x)$, then $x = \varphi \circ \varphi^{-1}(x) = g^k \circ \varphi \circ \varphi(x)^{-1} = \varphi \circ f^k \circ \varphi^{-1}(x) = f^k(x)$.
     \end{proof}
 \end{prop}
 
-Therefore, to understand the periodic points of one dynamical system we can analyse the periodic points of another system which is topologically conjugate to it. This becomes useful when dealing with dynamical systems which have particularly complex behaviour. This next proposition states that topological conjugacy holds for iterations of the maps $f^n$ and $g^n$.
+Therefore, to understand the periodic points of one dynamical system we can analyse the periodic points of another system which is topologically conjugate to it. This becomes useful when dealing with dynamical systems which are topologically conjugate, with one having particularly complex behaviour, and the other being relatively simple to analyse. This next proposition states that topological conjugacy holds for iterations of the maps $f^n$ and $g^n$.
 
 \begin{prop} \label{prop:conjugacy-preserved-under-iterations}
-    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and $n \in \mathbb{N}$. If $\varphi: X \to Y$ is a topological semi-conjugacy from $(X, f)$ to $(Y, g)$ then $\varphi$ is a topological semi-conjugacy from $(X, f^n)$ to $(X, g^n)$
+    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and $n \in \mathbb{N}$. If $\varphi: X \to Y$ is a topological semi-conjugacy from $(X, f)$ to $(Y, g)$ then $\varphi$ is a topological semi-conjugacy from $(X, f^n)$ to $(X, g^n)$.
     \begin{proof}
         Let $\varphi$ be a topological semi-conjugacy, so $\varphi \circ f = g \circ \varphi$. Hence, $\varphi \circ f^n = \varphi \circ f \circ f^{n-1} = g \circ \varphi \circ f \circ f^{n-2} = \dots = g^{n-1} \circ \varphi \circ f = g^n \circ \varphi$.
     \end{proof}
@@ -58,7 +58,7 @@ Therefore, to understand the periodic points of one dynamical system we can anal
 Further topological properties that conjugacy preserves are the following.
 
 \begin{prop} \label{prop:conjugacy-preserves-orbits}
-    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy with $x \in X$. If $\mathcal{O}_f(x)$ is an orbit of $f$ then $\mathcal{O}_g(\varphi(x))$ is an orbit of $g$.
+    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy with $x \in X$. If $\mathcal{O}_f(x)$ is an orbit of $f$, then $\mathcal{O}_g(\varphi(x))$ is an orbit of $g$.
     \begin{proof}
         Let $x \in X$ with $y = \varphi(x)$. By definition, $\mathcal{O}_f(x) = \left\lbrace f^n(x) : n \geq 0 \right\rbrace$. Hence applying $\varphi$ to the orbit we obtain $\varphi\left(\mathcal{O}_f(x)\right) = \left\lbrace \varphi \circ f^n(x) : n \geq 0 \right\rbrace = \left\lbrace g^n \circ \varphi(x) : n \geq 0 \right\rbrace = \mathcal{O}_g(\varphi(x))$ using Proposition \ref{prop:conjugacy-preserved-under-iterations}.
     \end{proof}
@@ -67,46 +67,46 @@ Further topological properties that conjugacy preserves are the following.
 Stated alternatively, topological conjugacy ensures orbits in $(X, f)$ are sent to orbits in $(Y, g)$. This next proposition follows directly from the proposition above.
 
 \begin{prop} \label{prop:conjugacy-preserves-dense-orbits}
-    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $f$ has a dense orbit in $X$ then $g$ has a dense orbit in $Y$.
+    Let $(X, f)$ and $(Y, g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $f$ has a dense orbit in $X$, then $g$ has a dense orbit in $Y$.
     \begin{proof}
         Before we begin, note that, from topology, if $f: X \to Y$ is a continuous, surjective function and $\overline{E} = X$ then $\overline{f(E)} = Y$. Now suppose $x \in X$ has a dense orbit in $f$, so $\overline{\mathcal{O}_f(x)} = X$. By definition, $\varphi$ is continuous and surjective, hence $\overline{\varphi(\mathcal{O}_{f}(x))} = \overline{\mathcal{O}_{g}(\varphi(x))} = Y$ by Proposition \ref{prop:conjugacy-preserves-orbits}. Hence $g$ has a dense orbit in $Y$.
     \end{proof}
 \end{prop}
 
 \begin{prop} \label{prop:conjugacy-preserves-dense-periodic-points}
-    Let $(X, f)$ and $(Y,g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $Per(f)$ are dense in $X$ then $Per(g)$ are dense in $Y$.
+    Let $(X, f)$ and $(Y,g)$ be topological dynamical systems and let $\varphi: X \to Y$ be a topological semi-conjugacy. If $Per(f)$ are dense in $X$, then $Per(g)$ are dense in $Y$.
     \begin{proof}
         Suppose $\overline{Per(f)} = X$. By continuity, $g(Y) \circ \varphi = \varphi \circ f(X) = \varphi \circ f(\overline{Per(f)}) \subseteq \varphi \circ \overline{f(Per(f))} = \overline{g(Per(g))} \circ \varphi$. Hence $g(Y) \subseteq \overline{g(Per(g))}$. Hence $Per(g)$ is dense in $Y$.
     \end{proof}
 \end{prop}
 
-Both Proposition \ref{prop:conjugacy-preserves-dense-orbits} and Proposition \ref{prop:conjugacy-preserves-dense-periodic-points} turn out to be important in proving examples of topological dynamical systems are chaotic. Concluding this section, note the wide range of topological dynamics that is preserved between topologically conjugate systems. We shall apply these results in the next section on symbolic dynamics as we further characterise complex topological dynamics.
+Both Proposition \ref{prop:conjugacy-preserves-dense-orbits} and Proposition \ref{prop:conjugacy-preserves-dense-periodic-points} turn out to be important in proving examples of topological dynamical systems are chaotic. Furthermore, note the wide range of results from topological dynamics which are preserved between topologically conjugacy systems. We shall apply these results in the next section on symbolic dynamics as we further characterise complex topological dynamics.
 
-\section{Symbolic Dynamics} \label{sec:symbolic-dynamics}
-Symbolic dynamics studies how the shift map affects infinite sequences of symbols, called itineraries, that describe the complex dynamics of specific topological dynamical systems. More specifically it is the assignment of a sequence of discrete symbols to the orbits of topological dynamical systems. This proves useful as in specific instances, like the tent map and doubling map over the unit interval, the behaviour of topological dynamical systems becomes easier to characterise using topologically conjugate, topological dynamical systems described symbolically using itineraries. In the process of applying symbolic dynamics to a topological dynamical system, we separate the underlying metric space into finitely many labelled partitions. We then generate a so-called itinerary by noting the infinite sequence of symbols obtained, describing the inclusion of a point in a partition for successive iterations of the map. This sequence is an element in the so-called sequence space, and it is in this space where we can study the discrete dynamics of the topological system. Let's now define this notion concretely.
+\section{Symbolic Dynamics and the Shift Map} \label{sec:symbolic-dynamics}
+Symbolic dynamics studies how the shift map affects infinite sequences of symbols, termed itineraries, that describe the complex dynamics of specific topological dynamical systems. More specifically it is the assignment of a sequence of discrete symbols to the orbits of topological dynamical systems. This proves useful as in specific instances where the behaviour of topological dynamical systems becomes easier to characterise using conjugate, topological dynamical systems described symbolically using itineraries. For instance in analysis of the tent map and the doubling map. In the process of applying symbolic dynamics to a topological dynamical system, we separate the underlying metric space into finitely many labelled partitions. We then generate a so-called itinerary by noting the infinite sequence of symbols obtained which describe the inclusion of a point in a partition for successive iterations of the map. This sequence is an element in the so-called sequence space, and it is in this space where we can study the discrete dynamics of the topological system. We shall now define this notion formally.
 
 \begin{defn}[Itinerary] \label{defn:itinerary}
-    Let $(X, f)$ be a topological dynamical system where $X$ is a compact set. Let $x \in X$ and suppose $X = X_0 \cup X_1 \cup \dots \cup X_n$ where $X_i$ are compact sets. The \emph{itinerary} of $x$ is the sequence $\underline{s} = (s_1s_2\dots)$ where $s_i$ denotes the set $X_i$ such that $f^i(x) \in X_i$.
+    Let $(X, f)$ be a topological dynamical system. Let $x \in X$ and suppose $X = X_0 \cup X_1 \cup \dots \cup X_n$ where $X_i$ are compact sets. The \emph{itinerary} of $x$ is the sequence $\underline{s} = (s_1, s_2, \dots)$ where $s_i$ denotes the set $X_i$ such that $f^i(x) \in X_i$.
 \end{defn}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=4cm]{doubling_symbolic}
     \includegraphics[width=4cm]{tent_symbolic}
-    \caption{Itineraries for the tent map $([0, 1], T_2)$ and the doubling map $([0, 1], D)$ respectively.}
+    \caption{Intervals which generate useful itineraries for the tent map $([0, 1], T_2)$ and the doubling map $([0, 1], D)$ respectively.}
     \label{fig:symbolic}
 \end{figure}
 
-Figure \ref{fig:symbolic} gives an example of useful itineraries for the tent map and doubling map. Properties of the itinerary reflect properties of the topological dynamical system it represents. If a point the topological dynamical system is periodic, then that same point will give a periodic itinerary. Now we shall construct a metric space in which where the underlying set contains all possible itineraries of zeros and ones.
+Figure \ref{fig:symbolic} gives an example of two compact sets for the tent map and doubling map, in which orbits generate useful orbits for analysing the dynamics of these systems. Properties of the itinerary reflect properties of the topological dynamical system it represents. If a point the topological dynamical system is periodic, then that same point will give a periodic itinerary. Now we shall construct a metric space in which where the underlying set contains all possible itineraries of zeros and ones.
 
 \begin{defn}[Sequence Space] \label{defn:sequence-space}
-    Let $\Sigma_2 = \left\lbrace (s_1s_2\dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set of itineraries of zeros and ones. Define $(\Sigma_2, d)$ to be the \emph{sequence space} where $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$ is a metric for $(s)_{i=1}^{\infty} = (s_1s_2\dots) \in \Sigma_2$ and $(t)_{i=1}^{\infty} = (t_1t_2\dots) \in \Sigma_2$. It can be easily shown this is a metric space.
+    Let $\Sigma_2 = \left\lbrace (s_1, s_2, \dots): s_i \in \left\lbrace 0, 1 \right\rbrace \right\rbrace$ be the set of itineraries of zeros and ones. Define $(\Sigma_2, d)$ to be the \emph{sequence space} where $d(s, t) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i}$ is a metric for $(s)_{i=1}^{\infty} = (s_1, s_2, \dots) \in \Sigma_2$ and $(t)_{i=1}^{\infty} = (t_1, t_2, \dots) \in \Sigma_2$. It can be easily shown this is a metric space.
 \end{defn}
 
 A useful topological dynamical system to use symbol dynamics on would be one that maps each point in a compact set to its itinerary in sequence space. Hence we have the following definition.
 
 \begin{defn}[Itinerary Map] \label{defn:itinerary-map}
-    Let $X$ be a compact set and $\Sigma_2$ be the sequence space. Suppose $x \in X$. Define $\pi : X \to \Sigma_2$ to be the \emph{itinerary map} where $\pi(x) = (s_1s_2\dots)$ i.e.\ $\pi$ maps each $x \in X$ to its itinerary.
+    Let $X$ be a compact set and $\Sigma_2$ be the sequence space. Suppose $x \in X$. Define $\pi : X \to \Sigma_2$ to be the \emph{itinerary map} where $\pi(x) = (s_1, s_2, \dots)$ i.e.\ $\pi$ maps each $x \in X$ to its itinerary.
 \end{defn}
 
 A property that we want the sequence space to have is for it to be compact. Hence we can then use it a the underlying metric space for some topological dynamical systems. Therefore, we shall now prove in the following proposition that it is compact.
@@ -127,7 +127,7 @@ Now that we have proved $(\Sigma_2, d)$ is a compact metric space, if we have an
 Thereby, the shift map removes the first element from a sequence. We shall now prove that the shift map is continuous and so $(\Sigma_2, \sigma)$ is a topological dynamical system.
 
 \begin{prop}
-    The shift map $\sigma: \Sigma_2 \to \Sigma_2$ is continuous.
+    The shift map $(\Sigma_2, \sigma)$ is continuous.
     \begin{proof}
         Let $\varepsilon > 0$ and choose $\underline{s} = (s_i)_{i=1}^{\infty}, \ \underline{t} = (t_i)_{i=1}^{\infty} \in \Sigma_2$ such that $d(\underline{s}, \underline{t}) = \Sigma_{i=1}^{\infty}|s_i - t_i|2^{-i} < \delta$. Choose $n$ such that $2^{-n} \leq \varepsilon$ and let $\delta = 2^{-(n+1)}$. Hence $\underline{s}$ and $\underline{t}$ agree on the first $n+1$ symbols and $\sigma\left(\underline{s}\right)$ and $\sigma\left(\underline{t}\right)$ agree on the first $n$ symbols. Then $d\left( \sigma\left(\underline{s}\right), \sigma\left(\underline{t}\right) \right) = d\left((s)_{i=n+1}^{\infty}, (t)_{i=n+1}^{\infty}\right) = \Sigma_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq 2^{-n} \leq \varepsilon$.
     \end{proof}
@@ -138,18 +138,18 @@ Since $(\Sigma_2, \sigma)$ defines a topological dynamical system we shall use s
 \begin{prop} \label{prop:shift-map-periodic-points-dense}
     The periodic points of the shift map $(\Sigma_2, \sigma)$ are dense in $\Sigma_2$.
     \begin{proof}
-        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$ and let $\varepsilon > 0$. Pick an $n$ such that $2^{-n} \leq \varepsilon$ and define $t_n = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_i = s_i$ for $1 \leq i \leq n$. Then $d(s, t) = \sum_{i = 0}^n|s_i - t_i|2^{-i} + \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} = \sum_{i = n+1}^{\infty}2^{-i} \leq 2^{-n} \leq \varepsilon$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Since $\underline{s}$ was arbitrary, the periodic points of $\sigma$ are dense.
+        Let $\underline{s} = (s)_{i=1}^{\infty}$ be an arbitrary point in $\Sigma_2$ and let $\varepsilon > 0$. Pick an $n$ such that $2^{-n} \leq \varepsilon$ and define $\underline{t} = (s_0, \dots, s_n, s_0, \dots, s_n, \dots)$ to be an infinite repeating sequence where $t_i = s_i$ for $1 \leq i \leq n$. Hence $\underline{s}$ and $\underline{t}$ agree on the first $n$ symbols. Therefore $d(\underline{s}, \underline{t}) = \sum_{i=n+1}^{\infty}|s_i - t_i|2^{-i} \leq \sum_{i = n+1}^{\infty}2^{-i} = 2^{-n} \leq \varepsilon$. Hence as $n \to \infty$ we have $t_n \to \underline{s}$. Therefore the periodic points of $\sigma$ are dense.
     \end{proof}
 \end{prop}
 
 \begin{prop} \label{prop:shift-map-dense-orbit}
     The shift map $(\Sigma_2, \sigma)$ has a dense orbit.
     \begin{proof}
-        Consider the sequence $\underline{s} = (0, 1, \{0, 0\}, \{0, 1\}, \{1, 0\}, \{1, 1\}, \{0, 0, 0\}, \{0, 0, 1\}, \dots)$ of 0s and 1s sorted in len-lex order. Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary and $\varepsilon > 0$. By construction we can perform some $k \in \mathbb{N}$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree. Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Therefore for $n \geq N - 1$ we have that, $d(\sigma^k(\underline{s}), \underline{t}) = \sum_{i = n}^{\infty}|\sigma^k(\underline{s})_i - t_i|2^{-i} \leq 2^{-(n+1)} < 2^{-N} \leq \varepsilon$. Hence the orbit of $\underline{s}$ is dense in $\Sigma_2$.
+        Consider the sequence $\underline{s} = (0, 1, \{0, 0\}, \{0, 1\}, \{1, 0\}, \{1, 1\}, \{0, 0, 0\}, \{0, 0, 1\}, \dots)$, i.e.\ the sequence of blocks of zeros and ones sorted in len-lex order. Note the curly braces are used here are for presentation purposes. Let $\underline{t} = (t)_{i=0}^{\infty} \in \Sigma_2$ be arbitrary and $\varepsilon > 0$. By construction of $\underline{s}$ we can perform some $k \in \mathbb{N}$ iterations of $\sigma$ such that the first $n$ symbols of $\sigma^k(\underline{s})$ and $\underline{t}$ agree. Choose $N \geq \log_2{\frac{1}{\varepsilon}}$. Therefore for $n \geq N - 1$ we have that, $d(\sigma^k(\underline{s}), \underline{t}) = \sum_{i = n}^{\infty}|\sigma^k(\underline{s})_i - t_i|2^{-i} \leq 2^{-(n+1)} < 2^{-N} \leq \varepsilon$. Hence $\mathcal{O}(\underline{s})$ is dense in $\Sigma_2$
     \end{proof}
 \end{prop}
 
-Symbolic dynamics has an elegant application to various maps such as the tent map and doubling map. We shall first investigate the doubling map, then we can later apply these results to the tent map. The nature of the doubling map $D: [0, 1] \to [0, 1]$ makes binary expansions a suitable choice for expressing points in this map. For each $x \in [0, 1]$ we can write $x=\sum_{i=1}^{\infty}b_i2^{-i}$ where $b_i \in \left\lbrace 0, 1 \right\rbrace$. This next proposition describes an important relationship between the doubling map and the shift map which we shall explore through the use of binary expansions.
+Symbolic dynamics has an elegant application to various maps such as the tent map and doubling map. We shall first investigate the doubling map, then we can later apply these results to the tent map using the topological semi-conjugacy we constructed in Proposition \ref{prop:tent-doubling-semi-conjugate}. The nature of the doubling map $D: [0, 1] \to [0, 1]$ makes binary expansions a suitable choice for expressing points in this map. For each $x \in [0, 1]$ we can write $x=\sum_{i=1}^{\infty}b_i2^{-i}$ where $b_i \in \left\lbrace 0, 1 \right\rbrace$. Then applying $D$ to any point $x \in [0, 1]$ is equivalent to applying $\sigma$ to the binary expansion of $x$, which has the same function as doubling $x$. This next proposition describes this important relationship between the doubling map and the shift map, which we shall further explore through the use of binary expansions.
 
 \begin{prop} \label{prop:doubling-shift-semi-conjugate}
     The doubling map $([0, 1], D)$ and the shift map $(\Sigma_2, \sigma)$ are semi-conjugate via the semi-conjugacy $\varphi: \Sigma_2 \to [0, 1]$ given by $\varphi\left((b_i)_{i=1}^{\infty}\right) = \sum_{i=1}^{\infty} b_i2^{-i}$.
@@ -183,33 +183,32 @@ Intuitively this makes sense as the doubling map acts as a shift on the binary e
 
 \begin{center}
     \begin{tikzpicture}
-        \node(l1) {$\Sigma_2$};
-        \node(r1) [right=of l1] {$\Sigma_2$};
-        \node(l2) [below=of l1] {$[0, 1]$};
-        \node(r2) [below=of r1] {$[0, 1]$};
-        \node(l3) [below=of l2] {$[0, 1]$};
-        \node(r3) [below=of r2] {$[0, 1]$};
-        \node(l4) [below=of l3] {$[0, 1]$};
-        \node(r4) [below=of r3] {$[0, 1]$};
+        \node(t1) {$\Sigma_2$};
+        \node(d1) [below=of t1] {$\Sigma_2$};
+        \node(t2) [right=of t1] {$[0, 1]$};
+        \node(d2) [right=of d1] {$[0, 1]$};
+        \node(t3) [right=of t2] {$[0, 1]$};
+        \node(d3) [right=of d2] {$[0, 1]$};
+        \node(t4) [right=of t3] {$[0, 1]$};
+        \node(d4) [right=of d3] {$[0, 1]$};
     
-        \draw[->] (l1.east) -- node[above] {$\sigma$} (r1.west);
-        \draw[->] (l2.east) -- node[above] {$D$} (r2.west);
-        \draw[->] (l1.south) -- node[left] {$\varphi_1$} (l2.north);
-        \draw[->] (r1.south) -- node[right] {$\varphi_1$} (r2.north);
+        \draw[->] (t1.south) -- node[left] {$\sigma$} (d1.north);
+        \draw[->] (t2.south) -- node[left] {$D$} (d2.north);
+        \draw[->] (t3.south) -- node[left] {$T_2$} (d3.north);
+        \draw[->] (t4.south) -- node[left] {$F_4$} (d4.north);
 
-        \draw[->] (l3.east) -- node[above] {$T_2$} (r3.west);
-        \draw[->] (l2.south) -- node[left] {$\varphi_2$} (l3.north);
-        \draw[->] (r2.south) -- node[right] {$\varphi_2$} (r3.north);
-
-        \draw[->] (l4.east) -- node[above] {$F_4$} (r4.west);
-        \draw[->] (l3.south) -- node[left] {$\varphi_3$} (l4.north);
-        \draw[->] (r3.south) -- node[right] {$\varphi_3$} (r4.north);
+        \draw[->] (t1.east) -- node[above] {$\varphi_1$} (t2.west);
+        \draw[->] (d1.east) -- node[above] {$\varphi_1$} (d2.west);
+        \draw[->] (t2.east) -- node[above] {$\varphi_2$} (t3.west);
+        \draw[->] (d2.east) -- node[above] {$\varphi_2$} (d3.west);
+        \draw[<->] (t3.east) -- node[above] {$\varphi_3$} (t4.west);
+        \draw[<->] (d3.east) -- node[above] {$\varphi_3$} (d4.west);
     \end{tikzpicture}
 \end{center}
 
-The power of topological conjugacy and symbolic dynamics is clear from Proposition \ref{prop:logisitc-tent-doubling-periodic-dense}. It shows how we can use symbolic dynamics to build properties about a simple topological dynamical system like the shift map, then use topological conjugacy to show that these properties hold for more complex dynamical systems. Proposition \ref{prop:logisitc-tent-doubling-periodic-dense} will be extremely useful when generating examples of chaotic topological dynamical systems in Chapter \ref{chap:defining-chaos}.
+The power of topological conjugacy and symbolic dynamics is clear from Proposition \ref{prop:logisitc-tent-doubling-periodic-dense} and is neatly illustrated in the commutative diagram above. It shows how we can use symbolic dynamics to build properties about topological dynamical system which are easily described symbolically (e.g.\ the shift map), then use topological conjugacy to show that these properties hold for more complex dynamical systems. Proposition \ref{prop:logisitc-tent-doubling-periodic-dense} will be extremely useful when generating examples of chaotic topological dynamical systems in Chapter \ref{chap:defining-chaos}.
 
-\section{Sharkovsky's Theorem and Type}\label{sec:sharkovskys-theorem-and-type}
+\section{Sharkovsky's Forcing and Realisation Theorems}\label{sec:sharkovskys-theorem-and-type}
 Sharkovsky's forcing theorem, often abbreviated to Sharkovsky's theorem \cite{sharkovsky}, is a consequential theorem in the study of topological dynamics. The theorem only applies to topological dynamical systems defined over closed intervals, however, is still a powerful result. It states that if such a topological dynamical system has a period three point then periodic points of all other periods occur. Moreover the presence of a periodic point of given period implies the existence of other periods given by a total ordering called Sharkovsky's Order. Note that for the sake of brevity we shall note be proving Sharkovsky's theorem in this text. However, we shall prove a special case of Sharkovsky's theorem proved by Li and Yorke in their paper \emph{`Period Three Implies Chaos'} \cite{li-yorke} in which the existence of a period three point implies the existence of periodic points of all other periods. Note that as mentioned in the introduction this was the first paper that coined the term chaos in am mathematical context. First, we will introduce a theorem that proves the existence of fixed points on closed intervals. This theorem is a simplified version of Brouwer's fixed-point theorem \cite{brouwer}. The full theorem is used to prove the existence of fixed points in a topological dynamical system where the underlying set is a subset of $\mathbb{R}^n$ and has the condition of being convex. Since Sharkovsky's theorem only requires the simplified theorem, we shall once again only prove this specialised case.
 
 \begin{thm}[Brouwer's Fixed Point Theorem] \label{thm:interval-fixed-points}
