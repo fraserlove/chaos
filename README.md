@@ -2,7 +2,7 @@
 
 A dissertation submitted for the degree of BSc (Hons) Mathematics for Fraser Robert Love from the School of Mathematics and Statistics, University of St Andrews.
 
-![alt text](https://fraser.love/content/images/2023/08/bifurcation-modified.png)
+![alt text](https://fraser.love/content/images/2023/08/bifurcation.png)
 
 ## Abstract
 A topological dynamical system is comprised of a continuous mapping acting on a compact metric space. This project studies the complex, chaotic behaviour that can arise in these systems. Using the extra condition of compactness present in these systems, proves beneficial
