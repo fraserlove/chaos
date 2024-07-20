@@ -1,6 +1,6 @@
 # Chaos in Topological Dynamical Systems
 
-A dissertation submitted for the degree of BSc (Hons) Mathematics for Fraser Robert Love from the School of Mathematics and Statistics, University of St Andrews.
+A dissertation studying the complex, chaotic behaviour that can arise in topological dynamical systems. Submitted to fill the requirements of BSc (Hons) Mathematics at the School of Mathematics and Statistics, University of St Andrews.
 
 ![alt text](images/bifurcation-inverted.png)
 
