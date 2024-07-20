@@ -1,8 +1,8 @@
 # Chaos in Topological Dynamical Systems
 
-A dissertation studying the complex, chaotic behaviour that can arise in topological dynamical systems. Submitted to fill the requirements of BSc (Hons) Mathematics at the School of Mathematics and Statistics, University of St Andrews.
-
 ![alt text](images/bifurcation-inverted.png)
+
+A dissertation studying the complex, chaotic behaviour that can arise in topological dynamical systems. Submitted to fill the requirements of BSc (Hons) Mathematics at the School of Mathematics and Statistics, University of St Andrews.
 
 ## Abstract
 A topological dynamical system is comprised of a continuous mapping acting on a compact metric space. This project studies the complex, chaotic behaviour that can arise in these systems. Using the extra condition of compactness present in these systems, proves beneficial
