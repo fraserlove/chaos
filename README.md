@@ -28,19 +28,19 @@ in analysis of chaos and the behaviour of these systems as the underlying mappin
 
 ## Installation and Usage of Python Scripts
 1. **Create a Python Virtual Environment:**
-```bash
+```sh
 python -m venv .venv
 source .venv/bin/activate
 ```
 
 2. **Install Dependencies via PIP:**
 
-```bash
+```sh
 pip install -r requirements.txt
 ```
 
 3. **Run Any Script:**
-```bash
+```sh
 cd code
 python diagram.py
 ```
